@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './app'
-import './reset.css'
-import './styles.css'
-import * as serviceWorker from './service-worker'
+import './css/reset.css'
+import './css/styles.css'
+import * as serviceWorker from './other/service-worker'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import {Router} from '@reach/router'
 
-import Splash from './splash'
+import Splash from './common/splash'
 import Introduction from './pages/introduction'
 import Examples from './pages/examples'
 
-import Footer from './footer'
+import Footer from './common/footer'
 
 export default function App() {
   return (

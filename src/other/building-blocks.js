@@ -1,21 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import SectionHeader from './common/section-header'
 
-export default function BuildingBlocks() {
-  return (
-    <>
-      <SectionHeader>
-        building
-        <br />
-        blocks
-      </SectionHeader>
-      <BlocksGrid />
-    </>
-  )
-}
-
-function BlocksGrid() {
+export default function BlocksGrid() {
   return (
     <Grid>
       <UseChainCell>useChain</UseChainCell>
