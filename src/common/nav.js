@@ -53,7 +53,7 @@ const NavContainer = styled.nav`
   left: 20px;
   width: 260px;
 
-  background: #f0f3ff;
+  background: rgba(54, 54, 69, 0.05);
   border-radius: 20px;
 `
 
@@ -67,7 +67,7 @@ const MainMenuUl = styled.ul`
   }
 
   li a.active {
-    color: #0067df;
+    color: #ff4f4f;
   }
 
   li {
@@ -83,7 +83,7 @@ const SubMenuUl = styled.ul`
   }
 
   li a.active {
-    color: #0067df;
+    color: #ff4f4f;
   }
 
   li {

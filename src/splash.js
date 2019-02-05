@@ -33,7 +33,7 @@ export default function Splash() {
 
 const Container = styled.div`
   position: relative;
-  background: #0067df;
+  background: #363645;
   color: white;
   width: 100%;
   height: calc(100% - 100px);
@@ -64,7 +64,7 @@ const QuickNav = styled.div`
   margin-top: 20px;
   & a {
     display: inline-block;
-    background: #000;
+    background: #ff6d6d;
     color: white;
     text-decoration: none;
     font-weight: 18px;

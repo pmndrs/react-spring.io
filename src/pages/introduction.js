@@ -99,7 +99,7 @@ export const PageContainer = styled.article`
   }
 
   a {
-    color: #0067df;
+    color: #ff4f4f;
     text-decoration: none;
   }
 `
