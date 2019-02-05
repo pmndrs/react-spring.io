@@ -11,7 +11,7 @@ export default function DownArrowSVG() {
       <g
         fill="none"
         fillRule="evenodd"
-        stroke="#fff"
+        stroke="#000"
         strokeLinecap="square"
         strokeWidth="2.8"
         transform="translate(2 1)"

@@ -63,7 +63,7 @@ export default function LogoSVG({width = 140}) {
           <circle
             cx="69.375"
             cy="69.375"
-            fill="rgba(240, 243, 255, 0.2)"
+            fill="rgba(240, 243, 255, 1.0)"
             r="69.375"
           />
           <path

@@ -10,14 +10,13 @@ export default function Splash() {
         <Column>
           <TitleContainer>
             <Title>react-spring</Title>
-            <Tagline>
-              bring your components to life with performant spring animation
-              primitives
-            </Tagline>
+            <Tagline>bring your components to life with simple spring animation primitives</Tagline>
             <QuickNav>
-              <a href="#">source</a>
-              <a href="#">documentation</a>
               <a href="#">examples</a>
+              <a href="#">documentation</a>
+              <a href="https://github.com/react-spring/react-spring" target="_blank">
+                source
+              </a>
             </QuickNav>
           </TitleContainer>
         </Column>
@@ -46,12 +45,7 @@ const Container = styled.div`
   overflow: hidden;
 
   background-size: 40px 40px;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.1) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
 `
 
 const Column = styled.div`
@@ -97,11 +91,12 @@ const TitleContainer = styled.div`
 const Title = styled.h1`
   font-size: 65px;
   font-weight: 600;
+  line-height: 65px;
 `
 
 const Tagline = styled.p`
   font-size: 20px;
-  line-height: 29px;
+  line-height: 26px;
   font-weight: 400;
   margin-top: 12px;
 `

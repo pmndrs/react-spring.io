@@ -24,22 +24,24 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background-color: #000;
-  color: #fff;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  background-color: #fff;
+  color: #111;
+  min-width: 900px;
+  font-weight: 400;
+  font-kerning: normal;
+
+  line-height: 1.5;
+  letter-spacing: -0.002em;
+  font: 15px/22px 'Inter', system-ui, sans-serif;
+  font-kerning: normal;
 }
 
-@import url('https://rsms.me/inter/inter-ui.css');
+@import url('https://rsms.me/inter/inter.css');
 html {
-  font-family: 'Inter UI', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 @supports (font-variation-settings: normal) {
   html {
-    font-family: 'Inter UI var alt', sans-serif;
+    font-family: 'Inter var', sans-serif;
   }
 }

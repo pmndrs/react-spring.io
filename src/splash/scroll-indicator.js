@@ -8,7 +8,6 @@ export default function ScrollIndicator() {
   return (
     <ScrollPercentage>
       {({percentage, inView}) => {
-        console.log(percentage, inView)
         const classes = cx({
           'can-fade': true,
           'is-hidden': percentage > 0.2
@@ -22,9 +21,9 @@ export default function ScrollIndicator() {
             </ArrowContainer>
             <LabelContainer className={classes}>
               <Label>
-                building
+                get
                 <br />
-                blocks
+                started
               </Label>
             </LabelContainer>
           </Container>
@@ -38,7 +37,6 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100px;
-  background: #000;
 
   & > .can-fade {
     transition: opacity 250ms ease-in-out;
@@ -94,6 +92,6 @@ const LabelContainer = styled.div`
 const Label = styled.h3`
   font-size: 20px;
   text-align: right;
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
+  color: #000;
 `

@@ -15,7 +15,7 @@ const Cap = styled.div`
   left: 0;
   width: 100%;
   height: 30px;
-  background: #000;
+  background: #fff;
   border-radius: 0 0 20px 20px;
 `
 const Container = styled.div`
@@ -23,5 +23,5 @@ const Container = styled.div`
   width: 100%;
   min-height: 300px;
   background: #202020;
-  margin-top: 100px;
+  margin-top: 40px;
 `
