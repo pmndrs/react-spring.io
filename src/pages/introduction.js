@@ -189,11 +189,11 @@ const ContentColumn = styled.aside`
   }
 `
 
-export default function IntroductionPage() {
+export default function IntroductionPage({path}) {
   return (
     <PageLayout>
       <NavColumn>
-        <Nav />
+        <Nav currentPath={path} />
       </NavColumn>
       <ContentColumn>
         <section>
@@ -312,14 +312,12 @@ export default function IntroductionPage() {
             , or in crypto:
           </p>
           <p>
-            <div>
-              <code style={{display: 'inline-block'}}>
-                (<strong>BTC</strong>) 36fuguTPxGCNnYZSRdgdh6Ea94brCAjMbH
-              </code>
-              <code style={{display: 'inline-block', marginTop: '10px'}}>
-                (<strong>ETH</strong>) 0x6E3f79Ea1d0dcedeb33D3fC6c34d2B1f156F2682
-              </code>
-            </div>
+            <code style={{display: 'inline-block'}}>
+              (<strong>BTC</strong>) 36fuguTPxGCNnYZSRdgdh6Ea94brCAjMbH
+            </code>
+            <code style={{display: 'inline-block', marginTop: '10px'}}>
+              (<strong>ETH</strong>) 0x6E3f79Ea1d0dcedeb33D3fC6c34d2B1f156F2682
+            </code>
           </p>
           <p>You can also support this project by becoming a sponsor. Your logo will show up here with a link to your website.</p>
 

@@ -1,46 +1,58 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from '@reach/router'
+import cx from 'classnames'
 
-export default function Nav() {
+function MenuLink({label, to, currentPath}) {
+  const classes = cx({
+    'is-active': to === currentPath
+  })
+  return (
+    <Link to={to} className={classes}>
+      {label}
+    </Link>
+  )
+}
+
+export default function Nav({currentPath}) {
+  console.log(currentPath)
   return (
     <NavContainer>
       <MainMenuUl>
         <li>
-          <a href="#" className="active">
-            Introduction
-          </a>
+          <MenuLink to="/" label="Introduction" currentPath={currentPath} />
         </li>
         <li>
-          <a href="#">Examples</a>
+          <MenuLink to="/examples" label="Examples" currentPath={currentPath} />
         </li>
         <li>
-          <a href="#">Basics</a>
+          <MenuLink to="/docs/basics" label="Basics" currentPath={currentPath} />
         </li>
         <li>
-          <a href="#">Shared API</a>
+          <MenuLink to="/docs/shared-api" label="Shared API" currentPath={currentPath} />
         </li>
         <li>
-          <a href="#">Primitives</a>
+          <MenuLink to="/docs/primitives" label="Primitives" currentPath={currentPath} />
           <SubMenuUl>
             <li>
-              <a href="#">useSpring</a>
+              <MenuLink to="/docs/primitives/use-spring" label="useSpring" currentPath={currentPath} />
             </li>
             <li>
-              <a href="#">useSprings</a>
+              <MenuLink to="/docs/primitives/use-springs" label="useSprings" currentPath={currentPath} />
             </li>
             <li>
-              <a href="#">useTrail</a>
+              <MenuLink to="/docs/primitives/use-trail" label="useTrail" currentPath={currentPath} />
             </li>
             <li>
-              <a href="#">useTransition</a>
+              <MenuLink to="/docs/primitives/use-transition" label="useTransition" currentPath={currentPath} />
             </li>
             <li>
-              <a href="#">useChain</a>
+              <MenuLink to="/docs/primitives/use-chain" label="useChain" currentPath={currentPath} />
             </li>
           </SubMenuUl>
         </li>
         <li>
-          <a href="#">About</a>
+          <MenuLink to="/about" label="About" currentPath={currentPath} />
         </li>
       </MainMenuUl>
     </NavContainer>
@@ -66,7 +78,7 @@ const MainMenuUl = styled.ul`
     color: #000;
   }
 
-  li a.active {
+  li a.is-active {
     color: #ff4f4f;
   }
 
@@ -82,7 +94,7 @@ const SubMenuUl = styled.ul`
     color: #000;
   }
 
-  li a.active {
+  li a.is-active {
     color: #ff4f4f;
   }
 
