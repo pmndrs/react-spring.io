@@ -15,3 +15,11 @@ export const Image = styled('a')`
   background-repeat: no-repeat;
   background-position: center center;
 `
+
+export const FencedCode = function({language = 'javascript', children}) {
+  return (
+    <pre>
+      <code className={`language-${language}`}>{children}</code>
+    </pre>
+  )
+}

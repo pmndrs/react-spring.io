@@ -3,15 +3,8 @@ import {Link} from '@reach/router'
 import NavPage from '../../common/nav-page'
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
+import {FencedCode} from '../../common/components'
 const StyledComponentsCodeMD = raw('./basics/styled-components-code.md')
-
-function FencedCode({language = 'javascript', children}) {
-  return (
-    <pre>
-      <code className={`language-${language}`}>{children}</code>
-    </pre>
-  )
-}
 
 export default function BasicsDocsPage({path}) {
   return (
