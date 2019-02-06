@@ -5,7 +5,7 @@ import cx from 'classnames'
 
 function MenuLink({label, to, currentPath}) {
   const classes = cx({
-    'is-active': to === currentPath
+    'is-active': to === '/' + currentPath
   })
   return (
     <Link to={to} className={classes}>

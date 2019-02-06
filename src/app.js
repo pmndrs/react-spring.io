@@ -10,6 +10,7 @@ import UseSpring from './pages/docs/use-spring'
 import UseSprings from './pages/docs/use-springs'
 import UseChain from './pages/docs/use-chain'
 import UseTrail from './pages/docs/use-trail'
+import UseTransition from './pages/docs/use-transition'
 
 import Footer from './common/footer'
 
@@ -26,6 +27,7 @@ export default function App() {
         <UseSprings path="docs/primitives/use-springs" />
         <UseChain path="docs/primitives/use-chain" />
         <UseTrail path="docs/primitives/use-trail" />
+        <UseTransition path="docs/primitives/use-transition" />
       </Router>
       <Footer />
     </>
