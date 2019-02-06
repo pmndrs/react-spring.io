@@ -106,7 +106,7 @@ const ContentColumn = styled.aside`
     margin: 0 auto;
 
     margin-block-start: 1em;
-    margin-block-end: 1em;
+    margin-block-end: 0em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 
@@ -114,7 +114,7 @@ const ContentColumn = styled.aside`
   }
 
   p {
-    width: 100%;
+    width: auto;
 
     display: block;
     margin-block-start: 1em;
