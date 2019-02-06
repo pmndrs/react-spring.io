@@ -7,7 +7,7 @@ import {FencedCode} from '../../common/components'
 const BasicExampleCodeMD = raw('./use-chain/basic-example-code.md')
 const TimeStepsFrameCodeMD = raw('./use-chain/time-steps-frame-code.md')
 
-export default function UseSpringPage({path}) {
+export default function UseChain({path}) {
   return (
     <NavPage currentPath={path}>
       <section>
