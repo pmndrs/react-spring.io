@@ -215,4 +215,23 @@ const ContentColumn = styled.aside`
     font-weight: 600;
     color: white;
   }
+
+  table th {
+    font-weight: 600;
+  }
+
+  table td,
+  table th {
+    border: 1px solid #dfe2e5;
+    padding: 6px 13px;
+  }
+
+  table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
 `
