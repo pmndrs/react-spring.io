@@ -1,16 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const H1 = styled.h1`
-  font-size: 50px;
-  line-height: 54px;
-  font-weight: 600;
-  text-align: right;
-  width: calc(50% - 1vw);
-  margin-top: 100px;
+export const Grid = styled.div`
+  display: grid;
+  grid-gap: ${props => props.gap || '20px'};
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+  width: 100%;
 `
-export const H2 = styled.h2`
-  font-size: 30px;
-  line-height: 34px;
-  font-weight: 600;
+
+export const Image = styled('a')`
+  background-image: url(${props => props.url});
+  background-size: ${props => props.size || 'contain'};
+  background-repeat: no-repeat;
+  background-position: center center;
 `

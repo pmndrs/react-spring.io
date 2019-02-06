@@ -1,9 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
 
-import Nav from '../common/nav'
+import NavPage from '../common/nav-page'
+import {Grid, Image} from '../common/components'
 
-export default function ExamplesPage(props) {
-  console.log(props)
-  return <Nav currentPath={props.path} />
+export default function ExamplesPage({path}) {
+  return (
+    <NavPage currentPath={path}>
+      <section>
+        <h1>✌️</h1>
+      </section>
+    </NavPage>
+  )
 }

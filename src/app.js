@@ -4,6 +4,7 @@ import {Router} from '@reach/router'
 import Splash from './common/splash'
 import Introduction from './pages/introduction'
 import Examples from './pages/examples'
+import Basics from './pages/docs/basics'
 
 import Footer from './common/footer'
 
@@ -14,6 +15,7 @@ export default function App() {
       <Router id="router">
         <Introduction path="/" default />
         <Examples path="/examples" />
+        <Basics path="/docs/basics" />
       </Router>
       <Footer />
     </>
