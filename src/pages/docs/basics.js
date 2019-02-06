@@ -65,7 +65,7 @@ export default function BasicsDocsPage({path}) {
 
       <section>
         <h3>Finally, tie the animated values to your view</h3>
-        <FencedCode>{`return <animated.div style={props}>I will fade in</animated.div>`}</FencedCode>
+        <FencedCode language="jsx">{`return <animated.div style={props}>I will fade in</animated.div>`}</FencedCode>
         <p>
           In the view part of your component you simply wire these props in. Make sure to extend the native element you want to animate using <code>animated</code>. If your target
           is the web then <code>animated</code> contains all valid html elements (divs, spans, svgs, etc). If you want to animate React components, styled-components, or elements
