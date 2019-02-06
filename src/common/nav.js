@@ -70,7 +70,7 @@ const NavContainer = styled.nav`
 `
 
 const MainMenuUl = styled.ul`
-  padding: 20px;
+  padding: 20px 30px;
   li a {
     font-size: 16px;
     font-weight: 600;

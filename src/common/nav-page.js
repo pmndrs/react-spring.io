@@ -127,8 +127,8 @@ const ContentColumn = styled.aside`
     font-weight: 600;
   }
 
-  p code,
-  li code {
+  p > code,
+  li > code {
     background: #f4f6f9;
     margin: 0 3px;
     border-radius: 3px;
@@ -159,27 +159,60 @@ const ContentColumn = styled.aside`
   pre {
     display: block;
     width: 100%;
+    max-width: 640px; // 600px max text column + 20px padding
+
     background: #363645;
     color: #fff;
-    margin: 0 3px;
     border-radius: 3px;
     font-family: monospace;
     padding: 15px 20px;
     font-size: 1em;
     border: 1px solid rgba(0, 0, 0, 0.02);
     overflow: scroll;
-
-    max-width: 640px; // 600px max text column + 20px padding
   }
 
   ul {
     padding: 0px;
-    // margin: 1em 0px;
   }
 
   li {
     list-style-type: circle;
     margin: 5px 0;
     line-height: 1.8em;
+  }
+
+  // TODO extract CodeTable component
+  .code-table {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    min-height: 200px;
+    margin-bottom: 1em;
+    pre {
+      width: 65%;
+      margin: 0 5px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .code-table > div:first-of-type {
+    flex: 1.5;
+  }
+  .code-table > div:last-of-type {
+    flex: 1;
+    overflow: hidden;
+    background: #f0f0f0;
+    color: rgba(45, 55, 71, 1);
+    border-radius: 3px;
+  }
+  .code-table > div:last-child {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f6f9;
+    font-size: 4em;
+    font-weight: 600;
+    color: white;
   }
 `
