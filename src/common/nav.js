@@ -5,7 +5,7 @@ import cx from 'classnames'
 
 function MenuLink({label, to, currentPath}) {
   const classes = cx({
-    'is-active': to === '/' + currentPath
+    'is-active': to === currentPath
   })
   return (
     <Link to={to} className={classes}>
@@ -32,7 +32,7 @@ export default function Nav({currentPath}) {
           <MenuLink to="/docs/shared-api" label="Shared API" currentPath={currentPath} />
         </li>
         <li>
-          <MenuLink to="/docs/primitives" label="Primitives" currentPath={currentPath} />
+          <MenuLink to="/docs/primitives" label="Hooks API" currentPath={currentPath} />
           <SubMenuUl>
             <li>
               <MenuLink to="/docs/primitives/use-spring" label="useSpring" currentPath={currentPath} />
@@ -50,6 +50,29 @@ export default function Nav({currentPath}) {
               <MenuLink to="/docs/primitives/use-chain" label="useChain" currentPath={currentPath} />
             </li>
           </SubMenuUl>
+        </li>
+        <li>
+          <MenuLink to="/docs/primitives" label="Render Props API" currentPath={currentPath} />
+          <SubMenuUl>
+            <li>
+              <MenuLink to="/docs/props/spring" label="Spring" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/trail" label="Trail" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/transition" label="Transition" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/keyframes" label="Keyframes" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/parallax" label="Parallax" currentPath={currentPath} />
+            </li>
+          </SubMenuUl>
+        </li>
+        <li>
+          <MenuLink to="/log" label="Change Log" currentPath={currentPath} />
         </li>
         <li>
           <MenuLink to="/about" label="About" currentPath={currentPath} />

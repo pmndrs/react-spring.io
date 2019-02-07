@@ -156,6 +156,14 @@ const ContentColumn = styled.aside`
     text-decoration: none;
   }
 
+  mark {
+    background: #fffcd3;
+    margin: 0 3px;
+    border-radius: 3px;
+    padding: 2px 5px;
+    border: 1px solid #f5f1bc;
+  }
+
   pre {
     display: block;
     width: 100%;

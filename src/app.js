@@ -11,6 +11,12 @@ import UseSprings from './pages/docs/use-springs'
 import UseChain from './pages/docs/use-chain'
 import UseTrail from './pages/docs/use-trail'
 import UseTransition from './pages/docs/use-transition'
+//props api
+import Spring from './pages/prop-docs/spring'
+import Transition from './pages/prop-docs/transition'
+import Trail from './pages/prop-docs/trail'
+import Keyframes from './pages/prop-docs/keyframes'
+import Parallax from './pages/prop-docs/parallax'
 
 import Footer from './common/footer'
 
@@ -23,11 +29,17 @@ export default function App() {
         <Examples path="/examples" />
         <Basics path="/docs/basics" />
         <API path="/docs/shared-api" />
-        <UseSpring path="docs/primitives/use-spring" />
-        <UseSprings path="docs/primitives/use-springs" />
-        <UseChain path="docs/primitives/use-chain" />
-        <UseTrail path="docs/primitives/use-trail" />
-        <UseTransition path="docs/primitives/use-transition" />
+        <UseSpring path="/docs/primitives/use-spring" />
+        <UseSprings path="/docs/primitives/use-springs" />
+        <UseChain path="/docs/primitives/use-chain" />
+        <UseTrail path="/docs/primitives/use-trail" />
+        <UseTransition path="/docs/primitives/use-transition" />
+
+        <Spring path="/docs/props/spring" />
+        <Transition path="/docs/props/transition" />
+        <Trail path="/docs/props/trail" />
+        <Keyframes path="/docs/props/keyframes" />
+        <Parallax path="/docs/props/parallax" />
       </Router>
       <Footer />
     </>
