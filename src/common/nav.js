@@ -15,7 +15,6 @@ function MenuLink({label, to, currentPath}) {
 }
 
 export default function Nav({currentPath}) {
-  console.log(currentPath)
   return (
     <NavContainer>
       <MainMenuUl>

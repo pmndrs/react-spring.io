@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useSpring, animated} from 'react-spring/hooks'
+import {useSpring, animated} from 'react-spring'
 import {useGesture} from 'react-with-gesture'
 
 export default function LogoSVG({width = 140}) {

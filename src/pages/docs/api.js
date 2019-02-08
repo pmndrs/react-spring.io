@@ -3,6 +3,7 @@ import NavPage from '../../common/nav-page'
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 import {FencedCode} from '../../common/components'
+import Demo from '../../examples/components/Demo'
 
 const SpringConfigTableMD = raw('./api/spring-config-table.md')
 const PresetsCodeMD = raw('./api/presets-code.md')
@@ -18,9 +19,7 @@ export default function APIDocsPage({path}) {
         <h2>Configs</h2>
         <p>Spring are configurable and can be tuned.</p>
         <ParseMD contents={SpringConfigTableMD} />
-        <p>
-          <mark>TODO: demo here</mark>
-        </p>
+        <Demo import={import('../../examples/demos/configs')} />
       </section>
 
       <section>

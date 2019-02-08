@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
-import {useSpring, config} from 'react-spring/hooks'
+import {useSpring, config} from 'react-spring'
 
 const Context = React.createContext()
 

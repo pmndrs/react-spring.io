@@ -6,6 +6,10 @@ import raw from 'raw.macro'
 import {animated} from 'react-spring'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-legacy'
+
 const InterpolationCodeMD = raw('./spring/interpolation-code.md')
 const PresetsTableMD = raw('../docs/api/presets-table.md')
 const SpringConfigTableMD = raw('../docs/api/spring-config-table.md')
@@ -196,13 +200,22 @@ export default function SpringPage({path}) {
         <ParseMD contents={SpringPropsTableMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
-      </section>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('springs'))
+            .map(data => (
+              <Demo
+                key={data.name}
+                {...data}
+                link={`https://github.com/drcmda/react-spring/blob/v7.2.10/examples/demos/${data.name}`}
+                import={import('../../examples/demos-legacy/' + data.name)}
+              />
+            ))}
+        </DemoGrid>
+      </div>
     </NavPage>
   )
 }

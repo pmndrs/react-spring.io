@@ -5,6 +5,10 @@ import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/compo
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-legacy'
+
 const TrailPropsTableMD = raw('./trail/trail-props-table.md')
 
 export default function TrailPage({path}) {
@@ -108,13 +112,22 @@ export default function TrailPage({path}) {
         <ParseMD contents={TrailPropsTableMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
-      </section>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('trails'))
+            .map(data => (
+              <Demo
+                key={data.name}
+                {...data}
+                link={`https://github.com/drcmda/react-spring/blob/v7.2.10/examples/demos/${data.name}`}
+                import={import('../../examples/demos-legacy/' + data.name)}
+              />
+            ))}
+        </DemoGrid>
+      </div>
     </NavPage>
   )
 }

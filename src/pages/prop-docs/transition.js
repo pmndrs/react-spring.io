@@ -6,6 +6,10 @@ import {animated} from 'react-spring'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
 import ParseMD from '../../utils/parse-md'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-legacy'
+
 const TransitionPropsTableMD = raw('./transition/transition-props-table.md')
 
 export default function TransitionPage({path}) {
@@ -153,7 +157,7 @@ export default function TransitionPage({path}) {
           , so its slots (initial, from, enter, leave and update) can take the same types that Keyframe slots can take, namely: objects, functions, object-arrays. This gives you
           the ability to handle complex multistage, chained or scripted animations.
         </p>
-
+        <br />
         <iframe
           src="https://codesandbox.io/embed/jjkj3x9o55?fontsize=13&editorsize=60&hidenavigation=1&codemirror=1"
           style={{width: '100%', height: 500, border: 0, borderRadius: 4, overflow: 'hidden'}}
@@ -173,13 +177,21 @@ export default function TransitionPage({path}) {
         <ParseMD contents={TransitionPropsTableMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
-
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
-      </section>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('transitions'))
+            .map(data => (
+              <Demo
+                key={data.name}
+                {...data}
+                link={`https://github.com/drcmda/react-spring/blob/v7.2.10/examples/demos/${data.name}`}
+                import={import('../../examples/demos-legacy/' + data.name)}
+              />
+            ))}
+        </DemoGrid>
+      </div>
     </NavPage>
   )
 }

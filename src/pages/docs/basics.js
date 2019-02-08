@@ -4,7 +4,7 @@ import NavPage from '../../common/nav-page'
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
-import {animated} from 'react-spring/hooks'
+import {animated} from 'react-spring'
 import Demo from '../../examples/components/Demo'
 
 const StyledComponentsCodeMD = raw('./basics/styled-components-code.md')

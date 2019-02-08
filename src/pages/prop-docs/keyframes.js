@@ -4,6 +4,10 @@ import {FencedCode} from '../../common/components'
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-legacy'
+
 const CreateCodeMD = raw('./keyframes/create-code.md')
 const UseCodeMD = raw('./keyframes/use-code.md')
 const ShortcutFnCodeMD = raw('./keyframes/shortcut-fn-code.md')
@@ -69,13 +73,22 @@ export default function KeyframesPage({path}) {
         <ParseMD contents={KeyframesPropsTableMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
-      </section>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('keyframes'))
+            .map(data => (
+              <Demo
+                key={data.name}
+                {...data}
+                link={`https://github.com/drcmda/react-spring/blob/v7.2.10/examples/demos/${data.name}`}
+                import={import('../../examples/demos-legacy/' + data.name)}
+              />
+            ))}
+        </DemoGrid>
+      </div>
     </NavPage>
   )
 }
