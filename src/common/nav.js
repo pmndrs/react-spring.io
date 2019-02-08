@@ -69,6 +69,15 @@ export default function Nav({currentPath}) {
             <li>
               <MenuLink to="/docs/props/parallax" label="Parallax" currentPath={currentPath} />
             </li>
+            <li>
+              <MenuLink to="/docs/props/performance" label="Better Performance" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/gotchas" label="Gotchas" currentPath={currentPath} />
+            </li>
+            <li>
+              <MenuLink to="/docs/props/platforms" label="Other Platforms" currentPath={currentPath} />
+            </li>
           </SubMenuUl>
         </li>
         <li>

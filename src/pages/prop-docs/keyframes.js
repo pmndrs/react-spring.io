@@ -8,6 +8,7 @@ const CreateCodeMD = raw('./keyframes/create-code.md')
 const UseCodeMD = raw('./keyframes/use-code.md')
 const ShortcutFnCodeMD = raw('./keyframes/shortcut-fn-code.md')
 const ShortcutArrCodeMD = raw('./keyframes/shortcut-arr-code.md')
+const KeyframesPropsTableMD = raw('./keyframes/keyframes-props-table.md')
 
 export default function KeyframesPage({path}) {
   return (
@@ -59,8 +60,13 @@ export default function KeyframesPage({path}) {
         <h2>Props</h2>
 
         <p>
-          <mark>TODO: recreate props table</mark>
+          <mark>
+            The resulting component accepts <em>all</em> spring properties
+          </mark>
+          : native, from, immediate, onRest, and so on.
         </p>
+        <br />
+        <ParseMD contents={KeyframesPropsTableMD} />
       </section>
 
       <section>

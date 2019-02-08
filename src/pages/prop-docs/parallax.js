@@ -5,6 +5,8 @@ import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 
 const BasicCodeMD = raw('./parallax/basic-code.md')
+const ParallaxPropsTableMD = raw('./parallax/parallax-props-table.md')
+const ParallaxLayerPropsTableMD = raw('./parallax/parallax-props-table.md')
 
 export default function ParallaxPage({path}) {
   return (
@@ -39,9 +41,13 @@ export default function ParallaxPage({path}) {
       <section>
         <h2>Props</h2>
 
-        <p>
-          <mark>TODO: recreate props table</mark>
-        </p>
+        <h3>Parallax</h3>
+        <br />
+        <ParseMD contents={ParallaxPropsTableMD} />
+
+        <h3>ParallaxLayer</h3>
+        <br />
+        <ParseMD contents={ParallaxLayerPropsTableMD} />
       </section>
     </NavPage>
   )

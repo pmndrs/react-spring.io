@@ -4,6 +4,9 @@ import {Link} from '@reach/router'
 import raw from 'raw.macro'
 import {animated} from 'react-spring'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
+import ParseMD from '../../utils/parse-md'
+
+const TransitionPropsTableMD = raw('./transition/transition-props-table.md')
 
 export default function TransitionPage({path}) {
   return (
@@ -162,8 +165,12 @@ export default function TransitionPage({path}) {
         <h2>Props</h2>
 
         <p>
-          <mark>TODO: recreate props table</mark>
+          <mark>
+            Transition accepts <em>all</em> spring properties
+          </mark>
+          : native, from, immediate, onRest, and so on.
         </p>
+        <ParseMD contents={TransitionPropsTableMD} />
       </section>
 
       <section>

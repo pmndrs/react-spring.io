@@ -9,6 +9,7 @@ import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/compo
 const InterpolationCodeMD = raw('./spring/interpolation-code.md')
 const PresetsTableMD = raw('../docs/api/presets-table.md')
 const SpringConfigTableMD = raw('../docs/api/spring-config-table.md')
+const SpringPropsTableMD = raw('./spring/spring-props-table.md')
 
 export default function SpringPage({path}) {
   return (
@@ -192,10 +193,7 @@ export default function SpringPage({path}) {
 
       <section>
         <h2>Props</h2>
-
-        <p>
-          <mark>TODO: recreate props table here</mark>
-        </p>
+        <ParseMD contents={SpringPropsTableMD} />
       </section>
 
       <section>

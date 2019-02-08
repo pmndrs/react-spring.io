@@ -2,6 +2,10 @@ import React from 'react'
 import NavPage from '../../common/nav-page'
 import {animated} from 'react-spring'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
+import ParseMD from '../../utils/parse-md'
+import raw from 'raw.macro'
+
+const TrailPropsTableMD = raw('./trail/trail-props-table.md')
 
 export default function TrailPage({path}) {
   return (
@@ -95,8 +99,13 @@ export default function TrailPage({path}) {
         <h2>Props</h2>
 
         <p>
-          <mark>TODO: recreate props table</mark>
+          <mark>
+            Trail accepts <em>all</em> spring properties
+          </mark>
+          : native, from, immediate, onRest, and so on.
         </p>
+
+        <ParseMD contents={TrailPropsTableMD} />
       </section>
 
       <section>

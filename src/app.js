@@ -17,6 +17,9 @@ import Transition from './pages/prop-docs/transition'
 import Trail from './pages/prop-docs/trail'
 import Keyframes from './pages/prop-docs/keyframes'
 import Parallax from './pages/prop-docs/parallax'
+import Gotchas from './pages/prop-docs/gotchas'
+import OtherPlatforms from './pages/prop-docs/other-platforms'
+import Performance from './pages/prop-docs/performance'
 
 import Footer from './common/footer'
 
@@ -40,6 +43,9 @@ export default function App() {
         <Trail path="/docs/props/trail" />
         <Keyframes path="/docs/props/keyframes" />
         <Parallax path="/docs/props/parallax" />
+        <Performance path="/docs/props/performance" />
+        <Gotchas path="/docs/props/gotchas" />
+        <OtherPlatforms path="/docs/props/platforms" />
       </Router>
       <Footer />
     </>
