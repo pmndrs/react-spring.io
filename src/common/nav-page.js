@@ -166,17 +166,17 @@ const ContentColumn = styled.aside`
 
   pre {
     display: block;
-    width: 100%;
-    max-width: 640px; // 600px max text column + 20px padding
+    width: auto;
+    max-width: 100%;
+    padding: 15px 20px;
 
     background: #363645;
     color: #fff;
-    border-radius: 3px;
     font-family: monospace;
-    padding: 15px 20px;
     font-size: 1em;
     border: 1px solid rgba(0, 0, 0, 0.02);
-    overflow: scroll;
+    border-radius: 3px;
+    overflow: auto;
   }
 
   ul {
