@@ -22,9 +22,6 @@ export default function Nav({currentPath}) {
           <MenuLink to="/" label="Introduction" currentPath={currentPath} />
         </li>
         <li>
-          <MenuLink to="/examples" label="Examples" currentPath={currentPath} />
-        </li>
-        <li>
           <MenuLink to="/docs/basics" label="Basics" currentPath={currentPath} />
         </li>
         <li>
@@ -78,6 +75,9 @@ export default function Nav({currentPath}) {
               <MenuLink to="/docs/props/platforms" label="Other Platforms" currentPath={currentPath} />
             </li>
           </SubMenuUl>
+        </li>
+        <li>
+          <MenuLink to="/examples" label="Examples" currentPath={currentPath} />
         </li>
         <li>
           <MenuLink to="/log" label="Change Log" currentPath={currentPath} />

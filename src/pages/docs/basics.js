@@ -58,7 +58,7 @@ export default function BasicsDocsPage({path}) {
         <h3>Next, define your spring</h3>
         <FencedCode>{`const props = useSpring({ opacity: 1, from: { opacity: 0 } })`}</FencedCode>
         <p>
-          A spring simply animates values from one state to another. Updates are accumulative, sorings remember all the values you ever pass. You can use arbitrary names. There are
+          A spring simply animates values from one state to another. Updates are accumulative, springs remember all the values you ever pass. You can use arbitrary names. There are
           a couple of reserved keywords like "from" (for base values). <Link to="/docs/shared-api">You can learn about the api here</Link>. The received props are not static
           values! These props are self-updating, you cannot use them in regular divs and such.
         </p>
@@ -215,10 +215,10 @@ return <AnimatedDonut percent={props.value} />`}
         <p>
           In cases where you need to clamp or extrapolate, each animated value can `interpolate` inside the view, which is a powerful tool to have. The interpolate function either
           takes a function or a an object which forms a range. Interpolations can also form chains which allows you to route one calculation into another or reuse them.{' '}
-          <Link to="/docs/shared-api">Look into the shared-api</Link> for a object description.
+          <Link to="/docs/shared-api">Look into the shared-api</Link> for an object description.
         </p>
 
-        <p>You may wonder why you wouldn't interpolate always inside the spring. View interpolation can be a little faster, and it takes up less space.</p>
+        <p>You may wonder why you wouldn't always interpolate inside the spring. View interpolation can be a little faster, and it takes up less space.</p>
 
         <ParseMD contents={ViewInterpolationCodeMD} />
       </section>
