@@ -8,7 +8,7 @@ import {Grid, Image} from '../common/components'
 export default function IntroductionPage({path}) {
   return (
     <NavPage currentPath={path}>
-      <section>
+      <section id="intro">
         <h1>✌️</h1>
         <p className="large">
           <strong>react-spring</strong> is a spring-physics based animation library that should cover most of your UI related animation needs. It gives you tools flexible enough to

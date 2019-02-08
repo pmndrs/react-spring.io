@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LogoSVG from './splash/logo-svg'
 import ScrollIndicator from './splash/scroll-indicator'
+import {Link} from '@reach/router'
 
 export default function Splash() {
   return (
@@ -12,11 +13,9 @@ export default function Splash() {
             <Title>react-spring</Title>
             <Tagline>bring your components to life with simple spring animation primitives</Tagline>
             <QuickNav>
-              <a href="#">examples</a>
-              <a href="#">documentation</a>
-              <a href="https://github.com/react-spring/react-spring" target="_blank">
-                source
-              </a>
+              <Link to="/examples">examples</Link>
+              <Link to="/#intro">documentation</Link>
+              <a href="https://github.com/react-spring/react-spring">source</a>
             </QuickNav>
           </TitleContainer>
         </Column>
@@ -61,7 +60,7 @@ const Column = styled.div`
 `
 
 const QuickNav = styled.div`
-  margin-top: 20px;
+  margin-top: 18px;
   & a {
     display: inline-block;
     background: #ff6d6d;
@@ -72,7 +71,7 @@ const QuickNav = styled.div`
     padding: 10px 15px;
     border-radius: 18px;
     margin-top: 8px;
-    margin-left: 8px;
+    margin-left: 12px;
     &:first-child {
       margin-left: 0;
     }
@@ -98,5 +97,5 @@ const Tagline = styled.p`
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
-  margin-top: 12px;
+  margin-top: 16px;
 `
