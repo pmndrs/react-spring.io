@@ -4,6 +4,10 @@ import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 import {FencedCode} from '../../common/components'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-hooks'
+
 const BasicExampleCodeMD = raw('./use-chain/basic-example-code.md')
 const TimeStepsFrameCodeMD = raw('./use-chain/time-steps-frame-code.md')
 
@@ -33,9 +37,13 @@ export default function UseChain({path}) {
       <section>
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('useChain'))
+            .map(data => (
+              <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
+            ))}
+        </DemoGrid>
       </section>
     </NavPage>
   )

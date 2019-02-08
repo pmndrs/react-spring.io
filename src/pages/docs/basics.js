@@ -5,6 +5,7 @@ import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
 import {animated} from 'react-spring/hooks'
+import Demo from '../../examples/components/Demo'
 
 const StyledComponentsCodeMD = raw('./basics/styled-components-code.md')
 const ViewInterpolationCodeMD = raw('./basics/view-interpolation-code.md')
@@ -226,6 +227,8 @@ return <AnimatedDonut percent={props.value} />`}
         <h2>Emulating css-keyframes</h2>
         <ParseMD contents={EmulatingCSSKeyframesCodeMD} />
       </section>
+
+      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../../examples/demos/keyframes')} />
     </NavPage>
   )
 }

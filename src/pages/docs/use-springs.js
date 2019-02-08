@@ -3,6 +3,10 @@ import NavPage from '../../common/nav-page'
 import {Link} from '@reach/router'
 import {FencedCode} from '../../common/components'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-hooks'
+
 export default function UseSpringsPage({path}) {
   return (
     <NavPage currentPath={path}>
@@ -46,9 +50,13 @@ set(index => ({ opacity: 0 }))`}</FencedCode>
       <section>
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('useSprings'))
+            .map(data => (
+              <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
+            ))}
+        </DemoGrid>
       </section>
     </NavPage>
   )
