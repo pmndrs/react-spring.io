@@ -11,7 +11,7 @@ export default function ExamplesPage({path}) {
   return (
     <NavPage currentPath={path}>
       <section>
-        <h1>✌️</h1>
+        <h1>Examples</h1>
       </section>
 
       <div id="demos">

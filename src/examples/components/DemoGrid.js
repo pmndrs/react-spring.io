@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 
-export default function DemoGrid({ children, ...props }) {
+export default function DemoGrid({children, ...props}) {
   const [intersects, set] = useState(false)
   return <Container {...props}>{children}</Container>
 }
@@ -12,7 +12,7 @@ const Container = styled('div')`
   height: ${props => (props.fullscreen ? '100%' : 'auto')};
   display: grid;
   grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   padding: ${props => (props.padding !== void 0 ? props.padding : 40)}px;
   user-select: none;
 
