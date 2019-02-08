@@ -32,11 +32,11 @@ export default function App() {
         <Examples path="/examples" />
         <Basics path="/docs/basics" />
         <API path="/docs/shared-api" />
-        <UseSpring path="/docs/primitives/use-spring" />
-        <UseSprings path="/docs/primitives/use-springs" />
-        <UseChain path="/docs/primitives/use-chain" />
-        <UseTrail path="/docs/primitives/use-trail" />
-        <UseTransition path="/docs/primitives/use-transition" />
+        <UseSpring path="/docs/hooks/use-spring" />
+        <UseSprings path="/docs/hooks/use-springs" />
+        <UseChain path="/docs/hooks/use-chain" />
+        <UseTrail path="/docs/hooks/use-trail" />
+        <UseTransition path="/docs/hooks/use-transition" />
 
         <Spring path="/docs/props/spring" />
         <Transition path="/docs/props/transition" />

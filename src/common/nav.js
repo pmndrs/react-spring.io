@@ -32,27 +32,27 @@ export default function Nav({currentPath}) {
           <MenuLink to="/docs/shared-api" label="Shared API" currentPath={currentPath} />
         </li>
         <li>
-          <MenuLink to="/docs/primitives" label="Hooks API" currentPath={currentPath} />
+          <MenuLink to="/docs/hooks" label="Hooks API" currentPath={currentPath} />
           <SubMenuUl>
             <li>
-              <MenuLink to="/docs/primitives/use-spring" label="useSpring" currentPath={currentPath} />
+              <MenuLink to="/docs/hooks/use-spring" label="useSpring" currentPath={currentPath} />
             </li>
             <li>
-              <MenuLink to="/docs/primitives/use-springs" label="useSprings" currentPath={currentPath} />
+              <MenuLink to="/docs/hooks/use-springs" label="useSprings" currentPath={currentPath} />
             </li>
             <li>
-              <MenuLink to="/docs/primitives/use-trail" label="useTrail" currentPath={currentPath} />
+              <MenuLink to="/docs/hooks/use-trail" label="useTrail" currentPath={currentPath} />
             </li>
             <li>
-              <MenuLink to="/docs/primitives/use-transition" label="useTransition" currentPath={currentPath} />
+              <MenuLink to="/docs/hooks/use-transition" label="useTransition" currentPath={currentPath} />
             </li>
             <li>
-              <MenuLink to="/docs/primitives/use-chain" label="useChain" currentPath={currentPath} />
+              <MenuLink to="/docs/hooks/use-chain" label="useChain" currentPath={currentPath} />
             </li>
           </SubMenuUl>
         </li>
         <li>
-          <MenuLink to="/docs/primitives" label="Render Props API" currentPath={currentPath} />
+          <MenuLink to="/docs/hooks" label="Render Props API" currentPath={currentPath} />
           <SubMenuUl>
             <li>
               <MenuLink to="/docs/props/spring" label="Spring" currentPath={currentPath} />
