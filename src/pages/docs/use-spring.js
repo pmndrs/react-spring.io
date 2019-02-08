@@ -5,6 +5,10 @@ import {Link} from '@reach/router'
 import raw from 'raw.macro'
 import {FencedCode} from '../../common/components'
 
+import DemoGrid from '../../examples/components/DemoGrid'
+import Demo from '../../examples/components/Demo'
+import examples from '../../examples/components/examples-hooks'
+
 const CreateScriptCodeMD = raw('./use-spring/create-script-code.md')
 const CreateChainCodeMD = raw('./use-spring/create-chain-code.md')
 
@@ -89,9 +93,13 @@ const props = useSpring({ to: { opacity: 1, color: 'red' } })`}
       <section>
         <h2>Demos</h2>
 
-        <p>
-          <mark>TODO: demos here</mark>
-        </p>
+        <DemoGrid padding={0}>
+          {examples
+            .filter(data => data.tags.includes('useSpring'))
+            .map(data => (
+              <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
+            ))}
+        </DemoGrid>
       </section>
     </NavPage>
   )
