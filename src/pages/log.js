@@ -1,6 +1,8 @@
 import React from 'react'
 
 import NavPage from '../common/nav-page'
+import {FencedCode} from '../common/components'
+import {Link} from '@reach/router'
 
 export default function LogPage({path}) {
   return (
@@ -8,9 +10,38 @@ export default function LogPage({path}) {
       <section>
         <h1>Change Log</h1>
 
-        <h2>react-spring 8.0</h2>
+        <h2>react-spring 8.1</h2>
         <p>
-          <mark>TODO</mark>
+          <a href="https://twitter.com/0xca0a/status/1093146801467781120">https://twitter.com/0xca0a/status/1093146801467781120</a>
+        </p>
+
+        <h3>Breaking changes</h3>
+
+        <p>Migrating from 7.x to 8.0 is painless. The only breaking change is the default export. If you have previously done something like this:</p>
+        <FencedCode>{`import { Spring, animated, ... } from 'react-spring'`}</FencedCode>
+        <p>Then you will now do:</p>
+        <FencedCode>{`import { Spring, animated, ... } from 'react-spring/renderprops'`}</FencedCode>
+        <p>And if you have previously used hooks like so:</p>
+        <FencedCode>{`import { useSpring, animated, ... } from 'react-spring/hooks'`}</FencedCode>
+        <p>You will now do:</p>
+        <FencedCode>{`import { useSpring, animated, ... } from 'react-spring'`}</FencedCode>
+        <p>The lib comes with the following exports:</p>
+        <FencedCode>{`web (web/hooks, default for react-dom)
+native (react-native/hooks, default for react-native)
+renderprops-web (previously "web")
+renderprops-native (previously "native")
+renderprops-addons (previously "addons")
+renderprops-konva (previously "konva")
+renderprops-universal (previously "universal")`}</FencedCode>
+        <p>For commonjs, add ".cjs"</p>
+        <p>Both render-props and hooks will be kept and maintained for the forseeable future.</p>
+
+        <p>
+          <h4>useTransition</h4>
+        </p>
+        <FencedCode>{`useTransition(items, keys, config)`}</FencedCode>
+        <p>
+          See: <Link to="/docs/props/transition">useTransition</Link>
         </p>
       </section>
 
