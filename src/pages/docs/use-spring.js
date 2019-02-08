@@ -90,7 +90,7 @@ const props = useSpring({ to: { opacity: 1, color: 'red' } })`}
         <ParseMD contents={CreateChainCodeMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
 
         <DemoGrid padding={0}>
@@ -100,7 +100,7 @@ const props = useSpring({ to: { opacity: 1, color: 'red' } })`}
               <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
             ))}
         </DemoGrid>
-      </section>
+      </div>
     </NavPage>
   )
 }

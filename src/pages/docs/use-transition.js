@@ -48,7 +48,7 @@ export default function UseTransition({path}) {
         <ParseMD contents={MultiStageTransitionCOdeMD} />
       </section>
 
-      <section>
+      <div id="demos">
         <h2>Demos</h2>
         <DemoGrid padding={0}>
           {examples
@@ -57,7 +57,7 @@ export default function UseTransition({path}) {
               <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
             ))}
         </DemoGrid>
-      </section>
+      </div>
     </NavPage>
   )
 }
