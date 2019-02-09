@@ -108,7 +108,7 @@ export default function Nav({currentPath}) {
           <MenuLink to="/examples" label="Examples" currentPath={currentPath} />
         </li>
         <li>
-          <MenuLink to="/log" label="Change Log" currentPath={currentPath} />
+          <MenuLink to="/log" label="Changelog" currentPath={currentPath} />
         </li>
         <li>
           <MenuLink to="/about" label="About" currentPath={currentPath} />

@@ -8,7 +8,7 @@ export default function LogPage({path}) {
   return (
     <NavPage currentPath={path}>
       <section>
-        <h1>Change Log</h1>
+        <h1>Changelog</h1>
 
         <h2>react-spring 8.1</h2>
         <p>
