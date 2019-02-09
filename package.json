@@ -17,6 +17,7 @@
     "d3-scale": "^2.1.2",
     "d3-shape": "^1.2.2",
     "delay": "^4.1.0",
+    "intersection-observer": "^0.5.1",
     "lodash-es": "^4.17.11",
     "lorem-ipsum": "^1.0.6",
     "prop-types": "^15.6.2",

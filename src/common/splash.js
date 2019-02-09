@@ -42,6 +42,7 @@ const Container = styled.div`
   justify-content: center;
   border-radius: 0 0 20px 20px;
   overflow: hidden;
+  padding: 20px;
 
   background-size: 40px 40px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);

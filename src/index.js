@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+import IntersectionObserver from 'intersection-observer' // eslint-disable-line no-unused-vars
 import App from './app'
 import './css/reset.css'
 import './css/styles.css'
