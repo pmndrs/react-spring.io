@@ -1,13 +1,13 @@
 import React from 'react'
 import {Link} from '@reach/router'
-import NavPage from '../../common/nav-page'
-import ParseMD from '../../utils/parse-md'
+import NavPage from '../common/nav-page'
+import ParseMD from '../utils/parse-md'
 import raw from 'raw.macro'
-import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
+import {FencedCode, RewindSpringProvider, RewindSpring} from '../common/components'
 import {animated} from 'react-spring'
-import DemoGrid from '../../examples/components/DemoGrid'
-import Demo from '../../examples/components/Demo'
-import examples from '../../examples/components/examples-hooks'
+import DemoGrid from '../examples/components/DemoGrid'
+import Demo from '../examples/components/Demo'
+import examples from '../examples/components/examples-hooks'
 
 const Content1 = raw('./md/useTransition-1.md')
 const Content2 = raw('./md/useTransition-2.md')
@@ -100,7 +100,7 @@ return transitions.map(({ item, key, props }) =>
         {examples
           .filter(data => data.tags.includes('useTransition'))
           .map(data => (
-            <Demo key={data.name} {...data} import={import('../../examples/demos/' + data.name)} />
+            <Demo key={data.name} {...data} import={import('../examples/demos/' + data.name)} />
           ))}
       </DemoGrid>
     </NavPage>

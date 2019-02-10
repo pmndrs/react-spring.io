@@ -4,5 +4,5 @@ export default function NavPage({currentPath, children}) {
   useEffect(() => {
     if (window.Prism) window.Prism.highlightAll()
   }, [])
-  return children
+  return <div className="markdown-body">{children}</div>
 }

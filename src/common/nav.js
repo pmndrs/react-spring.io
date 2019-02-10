@@ -42,13 +42,12 @@ function MenuHeader({label, expanded, ...rest}) {
 function CollapsibleMenu({label, pathPrefix, currentPath, children}) {
   const [bind, {height}] = useMeasure()
   const [expanded, setExpanded] = React.useState(currentPath.startsWith(pathPrefix))
-  console.log(expanded)
   const props = useSpring({height: expanded ? height : 0})
   const handleClick = React.useCallback(e => {
     e.preventDefault()
     setExpanded(prevExpanded => !prevExpanded)
   })
-  
+
   return (
     <>
       <MenuHeader expanded={expanded} label={label} onClick={handleClick} />

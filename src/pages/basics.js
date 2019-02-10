@@ -1,10 +1,10 @@
 import React from 'react'
-import NavPage from '../../common/nav-page'
-import ParseMD from '../../utils/parse-md'
+import NavPage from '../common/nav-page'
+import ParseMD from '../utils/parse-md'
 import raw from 'raw.macro'
-import {FencedCode, RewindSpringProvider, RewindSpring} from '../../common/components'
+import {FencedCode, RewindSpringProvider, RewindSpring} from '../common/components'
 import {animated} from 'react-spring'
-import Demo from '../../examples/components/Demo'
+import Demo from '../examples/components/Demo'
 
 const content1 = raw('./md/basics-1.md')
 const content2 = raw('./md/basics-2.md')
@@ -86,7 +86,7 @@ return <AnimatedDonut percent={props.value} />`}
         </div>
       </RewindSpringProvider>
       <ParseMD contents={content2} />
-      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../../examples/demos/keyframes')} />
+      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../examples/demos/keyframes')} />
     </NavPage>
   )
 }
