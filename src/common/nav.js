@@ -2,6 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from '@reach/router'
 import cx from 'classnames'
+import {useSpring, animated} from 'react-spring'
+import ResizeObserver from 'resize-observer-polyfill'
+
+function useMeasure() {
+  const ref = React.useRef()
+  const [bounds, set] = React.useState({left: 0, top: 0, width: 0, height: 0})
+  const [ro] = React.useState(() => new ResizeObserver(([entry]) => set(entry.contentRect)))
+  React.useEffect(() => {
+    if (ref.current) ro.observe(ref.current)
+    return () => ro.disconnect()
+  }, [])
+  return [{ref}, bounds]
+}
 
 function MenuLink({label, to, currentPath, ...rest}) {
   const classes = cx({
@@ -27,20 +40,26 @@ function MenuHeader({label, expanded, ...rest}) {
 }
 
 function CollapsibleMenu({label, pathPrefix, currentPath, children}) {
+  const [bind, {height}] = useMeasure()
   const [expanded, setExpanded] = React.useState(currentPath.startsWith(pathPrefix))
+  console.log(expanded)
+  const props = useSpring({height: expanded ? height : 0})
   const handleClick = React.useCallback(e => {
     e.preventDefault()
     setExpanded(prevExpanded => !prevExpanded)
   })
+  
   return (
     <>
       <MenuHeader expanded={expanded} label={label} onClick={handleClick} />
-      {expanded ? children : null}
+      <animated.div style={{overflow: 'hidden', ...props}}>
+        <div {...bind}>{children}</div>
+      </animated.div>
     </>
   )
 }
 
-export default function Nav({currentPath}) {
+export default function Nav({ currentPath }) {
   return (
     <NavContainer>
       <MainMenuUl>
@@ -48,14 +67,11 @@ export default function Nav({currentPath}) {
           <MenuLink to="/" label="Introduction" currentPath={currentPath} />
         </li>
         <li>
-          <MenuLink to="/docs/basics" label="Basics" currentPath={currentPath} />
-        </li>
-        <li>
-          <MenuLink to="/docs/shared-api" label="Shared API" currentPath={currentPath} />
-        </li>
-        <li>
-          <CollapsibleMenu pathPrefix="/docs/hooks" label="Hooks API" currentPath={currentPath}>
+          <CollapsibleMenu pathPrefix="/docs/hooks" label="Hooks api" currentPath={currentPath}>
             <SubMenuUl>
+              <li>
+                <MenuLink to="/docs/hooks/basics" label="Basics" currentPath={currentPath} />
+              </li>
               <li>
                 <MenuLink to="/docs/hooks/use-spring" label="useSpring" currentPath={currentPath} />
               </li>
@@ -71,11 +87,14 @@ export default function Nav({currentPath}) {
               <li>
                 <MenuLink to="/docs/hooks/use-chain" label="useChain" currentPath={currentPath} />
               </li>
+              <li>
+                <MenuLink to="/docs/hooks/examples" label="Examples" currentPath={currentPath} />
+              </li>
             </SubMenuUl>
           </CollapsibleMenu>
         </li>
         <li>
-          <CollapsibleMenu pathPrefix="/docs/props" label="Render Props API" currentPath={currentPath}>
+          <CollapsibleMenu pathPrefix="/docs/props" label="Render-props api" currentPath={currentPath}>
             <SubMenuUl>
               <li>
                 <MenuLink to="/docs/props/spring" label="Spring" currentPath={currentPath} />
@@ -105,13 +124,10 @@ export default function Nav({currentPath}) {
           </CollapsibleMenu>
         </li>
         <li>
-          <MenuLink to="/examples" label="Examples" currentPath={currentPath} />
+          <MenuLink to="/api" label="Common api" currentPath={currentPath} />
         </li>
         <li>
           <MenuLink to="/log" label="Changelog" currentPath={currentPath} />
-        </li>
-        <li>
-          <MenuLink to="/about" label="About" currentPath={currentPath} />
         </li>
       </MainMenuUl>
     </NavContainer>
@@ -156,7 +172,7 @@ const MainMenuUl = styled.ul`
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-bottom: 2px;
   }
 
@@ -170,6 +186,7 @@ const MainMenuUl = styled.ul`
   }
 `
 const SubMenuUl = styled.ul`
+  overflow: hidden;
   li a {
     font-size: 16px;
     font-weight: 400;

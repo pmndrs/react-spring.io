@@ -21,7 +21,7 @@ export const Image = styled('a')`
 
 export const FencedCode = function({language = 'javascript', children}) {
   return (
-    <pre>
+    <pre style={{width: '100%'}}>
       <code className={`language-${language}`}>{children}</code>
     </pre>
   )
@@ -39,7 +39,11 @@ export const RewindSpringProvider = function({children}) {
     onRest: () => set(!flip)
   })
 
-  return <Context.Provider value={animatedProps} children={children} />
+  return (
+    <div className="markdown-body">
+      <Context.Provider value={animatedProps} children={children} />
+    </div>
+  )
 }
 
 export const RewindSpring = function({children, style}) {

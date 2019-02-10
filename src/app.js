@@ -1,11 +1,11 @@
 import React from 'react'
-import {Router} from '@reach/router'
-
+import {Router, Location} from '@reach/router'
+import styled from 'styled-components'
 import Splash from './common/splash'
 import Introduction from './pages/introduction'
 import Examples from './pages/examples'
 import Basics from './pages/docs/basics'
-import API from './pages/docs/api'
+import Api from './pages/docs/api'
 import UseSpring from './pages/docs/use-spring'
 import UseSprings from './pages/docs/use-springs'
 import UseChain from './pages/docs/use-chain'
@@ -21,33 +21,60 @@ import OtherPlatforms from './pages/prop-docs/other-platforms'
 import Performance from './pages/prop-docs/performance'
 import Log from './pages/log'
 import Footer from './common/footer'
+import Nav from './common/nav'
 
 export default function App() {
   return (
     <>
       <Splash />
-      <Router id="router">
-        <Introduction path="/" default />
-        <Examples path="/examples" />
-        <Basics path="/docs/basics" />
-        <API path="/docs/shared-api" />
-        <UseSpring path="/docs/hooks/use-spring" />
-        <UseSprings path="/docs/hooks/use-springs" />
-        <UseChain path="/docs/hooks/use-chain" />
-        <UseTrail path="/docs/hooks/use-trail" />
-        <UseTransition path="/docs/hooks/use-transition" />
-
-        <Spring path="/docs/props/spring" />
-        <Transition path="/docs/props/transition" />
-        <Trail path="/docs/props/trail" />
-        <Keyframes path="/docs/props/keyframes" />
-        <Parallax path="/docs/props/parallax" />
-        <Performance path="/docs/props/performance" />
-        <Gotchas path="/docs/props/gotchas" />
-        <OtherPlatforms path="/docs/props/platforms" />
-        <Log path="/log" />
-      </Router>
+      <PageContainer>
+        <Main>
+          <NavColumn>
+            <Location>{props => <Nav currentPath={props.location.pathname} />}</Location>
+          </NavColumn>
+          <ContentColumn>
+            <Router id="router">
+              <Introduction path="/" default />
+              <Examples path="/docs/hooks/examples" />
+              <Basics path="/docs/hooks/basics" />
+              <Api path="/api" />
+              <UseSpring path="/docs/hooks/use-spring" />
+              <UseSprings path="/docs/hooks/use-springs" />
+              <UseChain path="/docs/hooks/use-chain" />
+              <UseTrail path="/docs/hooks/use-trail" />
+              <UseTransition path="/docs/hooks/use-transition" />
+              <Spring path="/docs/props/spring" />
+              <Transition path="/docs/props/transition" />
+              <Trail path="/docs/props/trail" />
+              <Keyframes path="/docs/props/keyframes" />
+              <Parallax path="/docs/props/parallax" />
+              <Performance path="/docs/props/performance" />
+              <Gotchas path="/docs/props/gotchas" />
+              <OtherPlatforms path="/docs/props/platforms" />
+              <Log path="/log" />
+            </Router>
+          </ContentColumn>
+        </Main>
+      </PageContainer>
       <Footer />
     </>
   )
 }
+
+export const PageContainer = styled.article``
+
+export const Main = styled.main`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+`
+
+const NavColumn = styled.aside`
+  padding: 20px;
+  width: 300px;
+`
+
+const ContentColumn = styled.aside`
+  width: 60vw;
+  padding: 0 40px;
+`

@@ -45,3 +45,30 @@ html {
     font-family: 'Inter var', sans-serif;
   }
 }
+
+.code-table {
+  display: flex;
+  width: 100%!important;
+}
+.code-table {
+  margin-bottom: 1em;
+}
+.code-table > pre:first-of-type {
+  flex: 1.5;
+  margin: 0;
+}
+.code-table > div:last-of-type {
+  flex: 1;
+}
+.code-table > div:last-child {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f9;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
+segoe ui, arial, sans-serif;
+  font-size: 4em;
+  font-weight: 600;
+  color: white;
+}
