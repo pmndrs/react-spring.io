@@ -11,8 +11,6 @@ import Demo from '../../examples/components/Demo'
 import examples from '../../examples/components/examples-legacy'
 
 const InterpolationCodeMD = raw('./spring/interpolation-code.md')
-const PresetsTableMD = raw('../docs/api/presets-table.md')
-const SpringConfigTableMD = raw('../docs/api/spring-config-table.md')
 const SpringPropsTableMD = raw('./spring/spring-props-table.md')
 
 export default function SpringPage({path}) {
@@ -157,8 +155,6 @@ export default function SpringPage({path}) {
           <li>scrollTop/scrollLeft ([native only](/perf), since these aren't actual dom properties)</li>
         </ul>
 
-        <ParseMD contents={InterpolationCodeMD} />
-
         <p>
           Of course the only properties that the browser can animate relatively cheaply are{' '}
           <a href="https://www.html5rocks.com/en/tutorials/speed/high-performance-animations" target="_blank">
@@ -180,13 +176,9 @@ export default function SpringPage({path}) {
 
 <Spring config={config.default} />`}</FencedCode>
 
-        <ParseMD content={PresetsTableMD} />
-
         <p>You can of course set configs for yourself.</p>
 
         <FencedCode language="jsx">{`<Spring config={{ tension: 0, friction: 2, precision: 0.1 }} />`}</FencedCode>
-
-        <ParseMD content={SpringConfigTableMD} />
 
         <p>It is also possible to set configs key by key.</p>
 
