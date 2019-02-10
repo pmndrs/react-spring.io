@@ -41,7 +41,6 @@ return trans.map(({ item, props, key }) => (
   <animated.div
     key={key} style={props}>{item}</animated.div>
 ))`}</FencedCode>
-            />
             <RewindSpring>
               {x => (
                 <>
