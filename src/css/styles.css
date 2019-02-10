@@ -48,7 +48,7 @@ html {
 
 .code-table {
   display: flex;
-  width: 100%!important;
+  width: 100% !important;
 }
 .code-table {
   margin-bottom: 1em;
@@ -66,8 +66,7 @@ html {
   align-items: center;
   justify-content: center;
   background: #f4f6f9;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
-segoe ui, arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   font-size: 4em;
   font-weight: 600;
   color: white;

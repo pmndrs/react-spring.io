@@ -18,13 +18,12 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
 * @license MIT 2016-2018
 */
 
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   color: #ccc;
-  background: rgb(40, 41, 54);
+  background: #363645;
   text-shadow: none;
-  font-family: PT Mono, Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
-    monospace;
+  font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -42,32 +41,32 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection {
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
   text-shadow: none;
   background-color: #5a5f80;
 }
 
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection,
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection {
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
   text-shadow: none;
   background-color: #5a5f80;
 }
 
 @media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     text-shadow: none;
   }
 }
 
 /* Code blocks */
-pre[class*="language-"] {
-  background: rgba(40, 41, 54, 1) !important;
+pre[class*='language-'] {
+  background: #363645 !important;
   border-radius: 0.5em;
   padding: 1em;
   margin: 0.5em 0;
@@ -75,50 +74,45 @@ pre[class*="language-"] {
   height: auto;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: rgba(40, 41, 54, 1);
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #363645;
+  background: red;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code[class*='language-'] {
   padding: 4px 7px;
   border-radius: 0.3em;
   white-space: normal;
 }
 
-.limit-300
-{
+.limit-300 {
   height: 300px !important;
 }
 
-.limit-400
-{
+.limit-400 {
   height: 400px !important;
 }
 
-.limit-500
-{
+.limit-500 {
   height: 500px !important;
 }
 
-.limit-600
-{
+.limit-600 {
   height: 600px !important;
 }
 
-.limit-700
-{
+.limit-700 {
   height: 700px !important;
 }
 
-.limit-800
-{
+.limit-800 {
   height: 800px !important;
 }
 
 .token.comment {
-  color: rgba(98, 114, 164, 1);
+  color: #dadada;
 }
 
 .token.prolog {
@@ -379,7 +373,7 @@ div.code-toolbar > .toolbar span {
   color: #ccc;
   font-size: 0.8em;
   padding: 0.5em;
-  background: rgba(98, 114, 164, 1);
+  background: #8be9fd;
   border-radius: 0.5em;
 }
 
