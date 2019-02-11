@@ -2,6 +2,20 @@
 
 This library represents a modern approach to animation. It is very much inspired by Christopher Chedeau's [animated](https://github.com/animatedjs/animated) and Cheng Lou's [react-motion](https://github.com/chenglou/react-motion). It inherits animated's powerful interpolations and performance, as well as react-motion's ease of use. But while animated is mostly imperative and react-motion mostly declarative, react-spring bridges both. You will be surprised how easy static data is cast into motion with small, explicit utility functions that don't necessarily affect how you form your views.
 
+## Installation
+
+```text
+npm install react-spring
+```
+
+## Platforms
+
+react-spring is cross platform, it supports the web, react-native, react-native-web and practically any other platform.
+
+## Browser support
+
+The library comes as an es-module compiled for evergreen browsers with the following browserlist config: [`>1%, not dead, not ie 11, not op_mini all`](https://browserl.ist/?q=%3E1%25%2C+not+dead%2C+not+ie+11%2C+not+op_mini+all). If you need to support legacy targets or deal with targets that don't support modules, you can use the commonJS export by simply appending `.cjs` to your imports.
+
 ## Why springs and not durations
 
 The principle you will be working with is called a `spring`, it *does not have a defined curve or a set duration*. In that it differs greatly from the animation you are probably used to. We think of animation in terms of time and curves, but that in itself causes most of the struggle we face when trying to make elements on the screen move naturally, because nothing in the real world moves like that.

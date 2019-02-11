@@ -1,11 +1,5 @@
 # Basics
 
-## Installation
-
-```text
-npm install react-spring
-```
-
 ## Primitives
 
 There are 5 hooks in react-spring currently:

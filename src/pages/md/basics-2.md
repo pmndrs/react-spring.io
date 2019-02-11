@@ -68,7 +68,25 @@ return (
 )
 ```
 
-## Emulating css-keyframes
+## Additional notes
+
+### Animating "auto"
+
+Hooks differ from renderprops in that they don't know the view. Therefore handling "auto" is out of scope of the hooks api. This may sound like a regression, but consider that measuring auto with hooks is easier than ever before, and it makes patterns possible that were very hard to realize before, for [instance nesting auto content](https://twitter.com/0xca0a/status/1094683974679621633). Look for [react-resize-aware](https://github.com/FezVrasta/react-resize-aware), [react-measure](https://github.com/souporserious/react-measure), etc.
+
+```jsx
+const [bind, { height }] = useMeasure()
+const props = useSpring({ height })
+return (
+  <animated.div style={{ overflow: 'hidden', ...props }}>
+    <div {...bind}>content</div>
+  </animated.div>
+)
+```
+
+### Emulating css-keyframes
+
+Sometimes you want to go through a series of states, like css keyframes, you can use interpolations for this.
 
 ```jsx
 /*
