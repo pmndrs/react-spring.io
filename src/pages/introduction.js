@@ -11,21 +11,6 @@ const content1 = raw('./md/introduction-1.md')
 export default function IntroductionPage({path}) {
   return (
     <NavPage currentPath={path}>
-      <h1>Introduction</h1>
-      <p align="middle">
-        <a href="https://codesandbox.io/embed/n9vo1my91p" style={{margin: 10}}>
-          <img src="https://i.imgur.com/tg1mN1F.gif" width="410" />
-        </a>
-        <a href="https://codesandbox.io/embed/j0y0vpz59" style={{margin: 10}}>
-          <img src="https://i.imgur.com/OxGLHeT.gif" width="280" />
-        </a>
-        <a href="https://codesandbox.io/embed/r5qmj8m6lq" style={{margin: 10}}>
-          <img src="https://i.imgur.com/ifdCBvG.gif" width="90" />
-        </a>
-      </p>
-      <p align="middle">
-        <i>These demos are real, click them!</i>
-      </p>
       <ParseMD contents={content1} />
       <YouTubeEmbed src="https://www.youtube.com/embed/1tavDv5hXpo?controls=0&amp;start=370" />
       <h2>People say</h2>
