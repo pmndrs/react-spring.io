@@ -35,7 +35,7 @@ return (
           <RewindSpring>
             {x => (
               <animated.svg
-                style={{width: 120, height: 120, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
+                style={{margin: 20, width: 80, height: 80, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
                 viewBox="0 0 45 44"
                 strokeWidth="2"
                 fill="white"
@@ -56,7 +56,7 @@ return (
             {`const props = useSpring({ number: 1, from: { number: 0 } })
 return <animated.span>{props.number}</animated.span>`}
           </FencedCode>
-          <RewindSpring>{x => <animated.div style={{fontFamily: 'monospace'}}>{x.interpolate(n => n.toFixed(2))}</animated.div>}</RewindSpring>
+          <RewindSpring>{x => <animated.div>{x.interpolate(n => n.toFixed(2))}</animated.div>}</RewindSpring>
         </div>
         <p>or generic React-component props.</p>
         <div className="code-table">
@@ -69,7 +69,7 @@ return <AnimatedDonut percent={props.value} />`}
           <RewindSpring>
             {x => (
               <animated.svg
-                style={{width: 120, height: 120, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
+                style={{margin: 20, width: 80, height: 80, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
                 viewBox="0 0 51 51"
                 strokeWidth="2.5"
                 fill="white"
@@ -86,7 +86,7 @@ return <AnimatedDonut percent={props.value} />`}
         </div>
       </RewindSpringProvider>
       <ParseMD contents={content2} />
-      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../examples/demos/keyframes')} />
+      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../examples/demos/hooks/keyframes')} />
     </NavPage>
   )
 }

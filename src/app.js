@@ -11,14 +11,14 @@ import UseSprings from './pages/use-springs'
 import UseChain from './pages/use-chain'
 import UseTrail from './pages/use-trail'
 import UseTransition from './pages/use-transition'
-import Spring from './pages/prop-docs/spring'
+/*import Spring from './pages/prop-docs/spring'
 import Transition from './pages/prop-docs/transition'
 import Trail from './pages/prop-docs/trail'
 import Keyframes from './pages/prop-docs/keyframes'
 import Parallax from './pages/prop-docs/parallax'
 import Gotchas from './pages/prop-docs/gotchas'
 import OtherPlatforms from './pages/prop-docs/other-platforms'
-import Performance from './pages/prop-docs/performance'
+import Performance from './pages/prop-docs/performance'*/
 import Log from './pages/log'
 import Footer from './common/footer'
 import Nav from './common/nav'
@@ -43,14 +43,14 @@ export default function App() {
               <UseChain path="/docs/hooks/use-chain" />
               <UseTrail path="/docs/hooks/use-trail" />
               <UseTransition path="/docs/hooks/use-transition" />
-              <Spring path="/docs/props/spring" />
+              {/*<Spring path="/docs/props/spring" />
               <Transition path="/docs/props/transition" />
               <Trail path="/docs/props/trail" />
               <Keyframes path="/docs/props/keyframes" />
               <Parallax path="/docs/props/parallax" />
               <Performance path="/docs/props/performance" />
               <Gotchas path="/docs/props/gotchas" />
-              <OtherPlatforms path="/docs/props/platforms" />
+              <OtherPlatforms path="/docs/props/platforms" />*/}
               <Log path="/log" />
             </Router>
           </ContentColumn>

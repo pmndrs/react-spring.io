@@ -46,7 +46,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "rm -rf src/examples && cp -R node_modules/react-spring-examples src/examples"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -56,5 +57,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "optionalDependencies": {
+    "react-spring-examples": "https://github.com/react-spring/react-spring-examples"
+  }
 }

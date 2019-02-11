@@ -12,7 +12,7 @@ export default function APIDocsPage({path}) {
   return (
     <NavPage currentPath={path}>
       <ParseMD contents={content1} />
-      <Demo import={import('../examples/demos/configs')} />
+      <Demo import={import('../examples/demos/hooks/configs')} />
       <ParseMD contents={content2} />
     </NavPage>
   )

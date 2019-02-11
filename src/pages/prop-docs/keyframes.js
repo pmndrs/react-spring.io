@@ -4,9 +4,9 @@ import {FencedCode} from '../../common/components'
 import ParseMD from '../../utils/parse-md'
 import raw from 'raw.macro'
 
-import DemoGrid from '../../examples/components/DemoGrid'
-import Demo from '../../examples/components/Demo'
-import examples from '../../examples/components/examples-legacy'
+import DemoGrid from 'react-spring-examples/components/DemoGrid'
+import Demo from 'react-spring-examples/components/Demo'
+import examples from 'react-spring-examples/components/examples-renderprops'
 
 const CreateCodeMD = raw('./keyframes/create-code.md')
 const UseCodeMD = raw('./keyframes/use-code.md')
@@ -84,7 +84,7 @@ export default function KeyframesPage({path}) {
                 key={data.name}
                 {...data}
                 link={`https://github.com/drcmda/react-spring/blob/v7.2.10/examples/demos/${data.name}`}
-                import={import('../../examples/demos-legacy/' + data.name)}
+                import={import('react-spring-examples/demos/' + data.name)}
               />
             ))}
         </DemoGrid>

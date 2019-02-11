@@ -415,7 +415,7 @@
 }
 
 .markdown-body .rounded-1 {
-  border-radius: 3px !important;
+  border-radius: 5px !important;
 }
 
 .markdown-body .bg-white {
@@ -555,7 +555,7 @@
   background-color: #fafbfc;
   border: 1px solid #c6cbd1;
   border-bottom-color: #959da5;
-  border-radius: 3px;
+  border-radius: 5px;
   box-shadow: inset 0 -1px 0 #959da5;
   color: #444d56;
   display: inline-block;
@@ -692,7 +692,7 @@
 
 .markdown-body code {
   background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 85%;
   margin: 0;
   padding: 0.2em 0.4em;
@@ -723,11 +723,14 @@
 
 .markdown-body .highlight pre,
 .markdown-body pre {
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 85%;
   line-height: 1.55;
   overflow: auto;
   padding: 16px;
+
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 38px;
+  margin: 30px 0 30px 0;
 }
 
 .markdown-body pre code {
