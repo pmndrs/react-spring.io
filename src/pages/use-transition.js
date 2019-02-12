@@ -19,14 +19,14 @@ export default function UseTransitionPage({path}) {
       <RewindSpringProvider>
         <p>You can transition arrays,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`const [items, set] = useState([1,2,3,4])
+          <FencedCode language="jsx">{`const [items, set] = useState([...])
 const transitions = useTransition(items, item => item.key, {
   from: { transform: 'translate3d(0,-40px,0)' },
   enter: { transform: 'translate3d(0,0px,0)' },
   leave: { transform: 'translate3d(0,-40px,0)' },
 })
 return transitions.map(({ item, props, key }) =>
-  <animated.div key={key} style={props}>{item}</animated.div>
+  <animated.div key={key} style={props}>{item.text}</animated.div>
 )`}</FencedCode>
           <RewindSpring>
             {x => (
