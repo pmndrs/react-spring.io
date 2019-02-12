@@ -71,3 +71,34 @@ html {
   font-weight: 600;
   color: white;
 }
+
+#intro-demos {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+
+  margin: 2em auto;
+  max-width: 900px;
+}
+
+#intro-demos .demo-cell {
+  padding-right: 10px;
+}
+
+#intro-demos .demo-cell img {
+  width: 100%;
+  margin-right: 10px;
+}
+
+#intro-demos .demo-cell img.laptop {
+  max-width: 410px;
+}
+
+#intro-demos .demo-cell img.tablet {
+  max-width: 280px;
+}
+
+#intro-demos .demo-cell img.phone {
+  max-width: 90px;
+}

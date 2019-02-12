@@ -1,16 +1,22 @@
 # Introduction
 
-<p align="middle">
-  <a href="https://codesandbox.io/embed/n9vo1my91p" style="margin: 10px;">
-    <img src="https://i.imgur.com/tg1mN1F.gif" width="410" />
+<div id="intro-demos">
+  <div class="demo-cell">
+    <a href="https://codesandbox.io/embed/n9vo1my91p" >
+      <img src="https://i.imgur.com/tg1mN1F.gif" class="laptop"/>
+    </a>
+  </div>
+  <a href="https://codesandbox.io/embed/j0y0vpz59" >
+    <div class="demo-cell">
+      <img src="https://i.imgur.com/OxGLHeT.gif"  class="tablet"/>
+    </div>
   </a>
-  <a href="https://codesandbox.io/embed/j0y0vpz59" style="margin: 10px;">
-    <img src="https://i.imgur.com/OxGLHeT.gif" width="280" />
+  <a href="https://codesandbox.io/embed/r5qmj8m6lq" >
+    <div class="demo-cell">
+      <img src="https://i.imgur.com/ifdCBvG.gif" class="phone"/>
+    </div>
   </a>
-  <a href="https://codesandbox.io/embed/r5qmj8m6lq" style="margin: 10px;">
-    <img src="https://i.imgur.com/ifdCBvG.gif" width="90" />
-  </a>
-</p>
+</div>
 
 <p align="middle">
   <i>These demos are real, click them!</i>
