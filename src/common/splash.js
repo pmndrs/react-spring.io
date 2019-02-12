@@ -92,6 +92,7 @@ const Title = styled.h1`
   font-size: 65px;
   font-weight: 600;
   line-height: 65px;
+  color: white;
 `
 
 const Tagline = styled.p`
