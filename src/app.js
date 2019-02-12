@@ -37,7 +37,7 @@ export default function App() {
               <Introduction path="/" default />
               <Examples path="/docs/hooks/examples" />
               <Basics path="/docs/hooks/basics" />
-              <Api path="/api" />
+              <Api path="/docs/hooks/api" />
               <UseSpring path="/docs/hooks/use-spring" />
               <UseSprings path="/docs/hooks/use-springs" />
               <UseChain path="/docs/hooks/use-chain" />

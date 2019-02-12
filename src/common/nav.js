@@ -39,9 +39,9 @@ function MenuHeader({label, expanded, ...rest}) {
   )
 }
 
-function CollapsibleMenu({label, pathPrefix, currentPath, children}) {
+function CollapsibleMenu({label, pathPrefix, currentPath, children, open}) {
   const [bind, {height}] = useMeasure()
-  const [expanded, setExpanded] = React.useState(currentPath.startsWith(pathPrefix))
+  const [expanded, setExpanded] = React.useState((open && currentPath === '/') || currentPath.startsWith(pathPrefix))
   const props = useSpring({height: expanded ? height : 0})
   const handleClick = React.useCallback(e => {
     e.preventDefault()
@@ -58,7 +58,7 @@ function CollapsibleMenu({label, pathPrefix, currentPath, children}) {
   )
 }
 
-export default function Nav({ currentPath }) {
+export default function Nav({currentPath}) {
   return (
     <NavContainer>
       <MainMenuUl>
@@ -66,10 +66,13 @@ export default function Nav({ currentPath }) {
           <MenuLink to="/" label="Introduction" currentPath={currentPath} />
         </li>
         <li>
-          <CollapsibleMenu pathPrefix="/docs/hooks" label="Hooks api" currentPath={currentPath}>
+          <CollapsibleMenu pathPrefix="/docs/hooks" label="Hooks api" currentPath={currentPath} open>
             <SubMenuUl>
               <li>
                 <MenuLink to="/docs/hooks/basics" label="Basics" currentPath={currentPath} />
+              </li>
+              <li>
+                <MenuLink to="/docs/hooks/api" label="Common api" currentPath={currentPath} />
               </li>
               <li>
                 <MenuLink to="/docs/hooks/use-spring" label="useSpring" currentPath={currentPath} />
@@ -123,9 +126,6 @@ export default function Nav({ currentPath }) {
           </CollapsibleMenu>
         </li>
         <li>
-          <MenuLink to="/api" label="Common api" currentPath={currentPath} />
-        </li>
-        <li>
           <MenuLink to="/log" label="Changelog" currentPath={currentPath} />
         </li>
       </MainMenuUl>
@@ -140,7 +140,6 @@ const NavContainer = styled.nav`
   width: 260px;
   max-height: calc(100vh - 40px);
   overflow: auto;
-
   background: rgba(54, 54, 69, 0.05);
   border-radius: 20px;
 `
@@ -163,10 +162,8 @@ const MainMenuUl = styled.ul`
     width: 0;
     height: 0;
     border-style: solid;
-
     border-width: 4px 6px 4px 0;
     border-color: transparent #6a6a7b transparent transparent;
-
     border-radius: 1px;
     display: inline-block;
     vertical-align: middle;

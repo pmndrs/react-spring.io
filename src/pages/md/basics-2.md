@@ -2,17 +2,17 @@
 
 Springs take pretty much everything, they don't just handle numbers.
 
-* colors (names, rgb, rgba, hsl, hsla, gradients)
-* absolute lengths (cm, mm, in, px, pt, pc)
-* relative lengths (em, ex, ch, rem, vw, vh, vmin, vmax, %)
-* angles (deg, rad, grad, turn)
-* flex and grid units (fr, etc)
-* all HTML attributes
+* Colors (names, rgb, rgba, hsl, hsla, gradients)
+* Absolute lengths (cm, mm, in, px, pt, pc)
+* Relative lengths (em, ex, ch, rem, vw, vh, vmin, vmax, %)
+* Angles (deg, rad, grad, turn)
+* Flex and grid units (fr, etc)
+* All HTML attributes
 * SVG paths (as long as the number of points matches, otherwise use [custom interpolation](https://codesandbox.io/embed/lwpkp46om))
-* arrays
-* string patterns (transform, border, boxShadow, etc)
-* non-animatable string values (visibility, pointerEvents, etc)
-* scrollTop/scrollLeft
+* Arrays
+* String patterns (transform, border, boxShadow, etc)
+* Non-animatable string values (visibility, pointerEvents, etc)
+* ScrollTop/scrollLeft
 
 ```jsx
 const props = useSpring({

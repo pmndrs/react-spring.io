@@ -28,7 +28,7 @@ npm install react-spring
 
 ## Platforms
 
-react-spring is cross platform, it supports the web, react-native, react-native-web and practically any other platform (use the `/universal` export in that case).
+react-spring is cross platform, it supports the web, react-native, react-native-web and practically any other platform (use the `/universal` export in that case, which does not carry native elements and color-interpolations).
 
 ## Browser support
 
@@ -36,7 +36,7 @@ The library comes as an es-module compiled for evergreen browsers with the follo
 
 ## Size
 
-With everything included you end up with currently `10.7KB` (web), `9.7KB` (react-native) or `6.9KB` (universal export). The size will ultimately depend on your build-chain and can decrease a lot with tree-shaking.
+Everything included you end up with currently `10.7KB` (web), `9.7KB` (react-native) or `6.9KB` (/universal export). The size will ultimately depend on your build-chain and can decrease with tree-shaking. For instance, just importing useSpring without color-interpolations (using the /universal export) you will get `4.7KB`.
 
 ## Why springs and not durations
 

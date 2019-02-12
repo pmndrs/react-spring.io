@@ -13,9 +13,9 @@ export default function Splash() {
             <Title>react-spring</Title>
             <Tagline>bring your components to life with simple spring animation primitives</Tagline>
             <QuickNav>
-              <Link to="/examples">examples</Link>
-              <Link to="/#intro">documentation</Link>
+              <a href="https://spectrum.chat/react-spring">community</a>
               <a href="https://github.com/react-spring/react-spring">source</a>
+              <a href="https://twitter.com/0xca0a">twitter</a>
             </QuickNav>
           </TitleContainer>
         </Column>

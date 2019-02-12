@@ -257,7 +257,7 @@
 }
 
 .markdown-body a {
-  color: #ff4f4f;
+  color: #2196f3;
   text-decoration: none;
 }
 
@@ -610,7 +610,7 @@
 
 .markdown-body ol,
 .markdown-body ul {
-  padding-left: 2em;
+  padding-left: 0;
 }
 
 .markdown-body ol ol,
@@ -623,7 +623,14 @@
 
 .markdown-body li {
   word-wrap: break-all;
-  list-style-type: circle;
+  list-style-type: none;
+}
+
+.markdown-body li::before {
+  content: "● ";
+  color: rgb(206, 212, 222);
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .markdown-body li > p {
@@ -652,7 +659,7 @@
 }
 
 .markdown-body table {
-  display: block;
+  display: table;
   overflow: auto;
   width: 100%;
 }
