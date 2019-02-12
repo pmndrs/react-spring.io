@@ -119,9 +119,6 @@ export default function Nav({currentPath}) {
               <li>
                 <MenuLink to="/docs/props/gotchas" label="Gotchas" currentPath={currentPath} />
               </li>
-              <li>
-                <MenuLink to="/docs/props/platforms" label="Other Platforms" currentPath={currentPath} />
-              </li>
             </SubMenuUl>
           </CollapsibleMenu>
         </li>

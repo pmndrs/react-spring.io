@@ -1,7 +1,5 @@
 # Basics
 
-## Primitives
-
 There are 5 hooks in react-spring currently:
 
 * `useSpring` a single spring, moves data from a -> b

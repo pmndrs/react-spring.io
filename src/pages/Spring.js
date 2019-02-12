@@ -4,38 +4,46 @@ import ParseMD from '../utils/parse-md'
 import raw from 'raw.macro'
 import {FencedCode, RewindSpringProvider, RewindSpring} from '../common/components'
 import {animated} from 'react-spring'
+import DemoGrid from '../examples/components/DemoGrid'
 import Demo from '../examples/components/Demo'
+import examples from '../examples/components/examples-renderprops'
 
-const content1 = raw('./md/basics-1.md')
-const content2 = raw('./md/basics-2.md')
+const content1 = raw('./md/Spring-1.md')
+const content2 = raw('./md/Spring-2.md')
 
-export default function BasicsDocsPage({path}) {
+export default function UseSpringPage({path}) {
   return (
     <NavPage currentPath={path}>
       <ParseMD contents={content1} />
+
       <RewindSpringProvider>
-        <p>Although you can use them as such.</p>
         <div className="code-table">
           <FencedCode>
-            {`const props = useSpring({ opacity: 1, from: { opacity: 0 } })
-return <animated.h1 style={props}>hello</animated.h1>`}
+            {`<Spring
+  from={{ opacity: 0 }}
+  to={{ opacity: 1 }}>
+  {props => <div style={props}>hello</div>}
+</Spring>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>hello</animated.div>}</RewindSpring>
         </div>
         <p>Do with them whatever you like, animate attributes for instance,</p>
         <div className="code-table">
           <FencedCode>
-            {`const props = useSpring({ x: 100, from: { x: 0 } })
-return (
-  <animated.svg strokeDashoffset={props.x}>
-    <path d="..." />
-  </animated.svg>
-)`}
+            {`<Spring
+  from={{ x: 100 }}
+  to={{ x: 0 }}>
+  {props => (
+    <svg strokeDashoffset={props.x}>
+      <path d="..." />
+    </svg>
+  )}
+</Spring>`}
           </FencedCode>
           <RewindSpring>
             {x => (
               <animated.svg
-                style={{margin: 20, width: 80, height: 80}}
+                style={{margin: 20, width: 80, height: 80, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
                 viewBox="0 0 45 44"
                 strokeWidth="2"
                 fill="white"
@@ -50,47 +58,30 @@ return (
             )}
           </RewindSpring>
         </div>
-        <p>innerText,</p>
+        <p>or innerText,</p>
         <div className="code-table">
           <FencedCode>
-            {`const props = useSpring({ number: 1, from: { number: 0 } })
-return <animated.span>{props.number}</animated.span>`}
+            {`<Spring
+  from={{ number: 0 }}
+  to={{ number: 1 }}>
+  {props => <div>{props.number}</div>}
+</Spring>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div>{x.interpolate(n => n.toFixed(2))}</animated.div>}</RewindSpring>
-        </div>
-        <p>scrollTop/scrollLeft,</p>
-        <div className="code-table">
-          <FencedCode>
-            {`const props = useSpring({ scroll: 100, from: { scroll: 0 } })
-return <animated.div scrollTop={props.scroll} />`}
-          </FencedCode>
-          <RewindSpring>
-            {x => (
-              <animated.div style={{position: 'relative', width: '100%', height: 60, overflow: 'auto', fontSize: '0.5em'}} scrollTop={x.interpolate({output: [0, 350]})}>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-                <div style={{width: '100%', height: 50, textAlign: 'center'}}>hello</div>
-              </animated.div>
-            )}
-          </RewindSpring>
         </div>
         <p>or generic React-component props.</p>
         <div className="code-table">
           <FencedCode>
-            {`const AnimatedDonut = animated(Donut)
-// ...
-const props = useSpring({ value: 100, from: { value: 0 } })
-return <AnimatedDonut percent={props.value} />`}
+            {`<Spring
+  from={{ value: 0 }}
+  to={{ value: 100 }}>
+  {props => <Donut value={props.value} />}
+</Spring>`}
           </FencedCode>
           <RewindSpring>
             {x => (
               <animated.svg
-                style={{margin: 20, width: 80, height: 80}}
+                style={{margin: 20, width: 80, height: 80, opacity: x.interpolate({range: [0, 0.05, 1], output: [0, 1, 1]})}}
                 viewBox="0 0 51 51"
                 strokeWidth="2.5"
                 fill="white"
@@ -106,8 +97,16 @@ return <AnimatedDonut percent={props.value} />`}
           </RewindSpring>
         </div>
       </RewindSpringProvider>
+
       <ParseMD contents={content2} />
-      <Demo link="https://codesandbox.io/s/88lmnl6w88" import={import('../examples/demos/hooks/keyframes')} />
+
+      <DemoGrid padding={0}>
+        {examples
+          .filter(data => data.tags.includes('springs'))
+          .map(data => (
+            <Demo key={data.name} {...data} import={import('../examples/demos/' + data.name)} />
+          ))}
+      </DemoGrid>
     </NavPage>
   )
 }

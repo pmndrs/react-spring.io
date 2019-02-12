@@ -12,6 +12,7 @@ All properties of the [shared-api](/api) apply.
 | trail    | number | Delay in ms before the animation starts, adds up for each enter/update and leave |
 | unique   | bool/fn | If this is true, items going in and out with the same key will be re-used |
 | reset    | bool/fn | Used in combination with "unique" and makes entering items start from scratch |
+| onDestroyed | fn | Called when objects have disappeared for good |
 
 ## Additional notes
 

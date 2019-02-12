@@ -9588,7 +9588,7 @@ react-dev-utils@^7.0.1:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-react-dom@^16.8.0-alpha.1, react-dom@^16.8.1:
+react-dom@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.1.tgz#ec860f98853d09d39bafd3a6f1e12389d283dbb4"
   integrity sha512-N74IZUrPt6UiDjXaO7UbDDFXeUXnVhZzeRLy/6iqqN1ipfjrhR60Bp5NuBK+rv3GMdqdIuwIl22u1SYwf330bg==
@@ -9763,8 +9763,8 @@ react-slick@~0.23.2:
     resize-observer-polyfill "^1.5.0"
 
 "react-spring-examples@https://github.com/react-spring/react-spring-examples":
-  version "1.0.4"
-  resolved "https://github.com/react-spring/react-spring-examples#414eed96532c81bca07ca9412ed7666e05ac8b45"
+  version "1.0.7"
+  resolved "https://github.com/react-spring/react-spring-examples#ee8d5793cd33fffa341c1b83bb21378699d76fab"
   dependencies:
     "@babel/runtime" "^7.3.1"
     flubber "^0.4.2"
@@ -9801,7 +9801,7 @@ react-slick@~0.23.2:
     react-motion "^0.5.2"
     react-router-dom "^4.3.1"
 
-react-spring@^8.0.0-beta.4, react-spring@^8.0.5:
+react-spring@^8.0.5:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.5.tgz#4e9f9ba7a2ee7c0c3a4d3c920604c8703c036302"
   integrity sha512-n8G4NWfbye26SUT9lmU43q70nhIfojD2LSV0gafvYK6jFIAAlP52k5aK6EYs1xxRPRs+1r+ndcPveXYOwEEl2g==
@@ -9823,7 +9823,7 @@ react-with-gesture@^4.0.2:
   resolved "https://registry.yarnpkg.com/react-with-gesture/-/react-with-gesture-4.0.2.tgz#fe547b7497e7fa6bd1671aff515092aa974e4163"
   integrity sha512-aCUw0sq0lPZk7Mf+duUZmvc0qCO5NSImUg8wEXK4Dca08te8HPBAgkrEVR6HNtggeu16gu2DmxQQ7gCkAXVulA==
 
-react@^16.8.0-alpha.1, react@^16.8.1:
+react@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.1.tgz#ae11831f6cb2a05d58603a976afc8a558e852c4a"
   integrity sha512-wLw5CFGPdo7p/AgteFz7GblI2JPOos0+biSoxf1FPsGxWQZdN/pj6oToJs1crn61DL3Ln7mN86uZ4j74p31ELQ==

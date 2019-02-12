@@ -7,27 +7,27 @@ import {FencedCode, RewindSpringProvider, RewindSpring} from '../common/componen
 import {animated} from 'react-spring'
 import DemoGrid from '../examples/components/DemoGrid'
 import Demo from '../examples/components/Demo'
-import examples from '../examples/components/examples-hooks'
+import examples from '../examples/components/examples-renderprops'
 
-const content1 = raw('./md/useTransition-1.md')
-const content2 = raw('./md/useTransition-2.md')
+const content1 = raw('./md/Transition-1.md')
+const content2 = raw('./md/Transition-2.md')
 
-export default function UseTransitionPage({path}) {
+export default function TransitionPage({path}) {
   return (
     <NavPage currentPath={path}>
       <ParseMD contents={content1} />
       <RewindSpringProvider>
         <p>You can transition arrays,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`const [items, set] = useState([1,2,3,4])
-const transitions = useTransition(items, item => item.key, {
-  from: { transform: 'translate3d(0,-40px,0)' },
-  enter: { transform: 'translate3d(0,0px,0)' },
-  leave: { transform: 'translate3d(0,-40px,0)' },
-})
-return transitions.map(({ item, props, key }) =>
-  <animated.div key={key} style={props}>{item}</animated.div>
-)`}</FencedCode>
+          <FencedCode language="jsx">{`const items = [...]
+  
+  <Transition
+    items={items} keys={item => item.key}
+    from={{ transform: 'translate3d(0,-40px,0)' }}
+    enter={{ transform: 'translate3d(0,0px,0)' }}
+    leave={{ transform: 'translate3d(0,-40px,0)' }}>
+    {item => props => <div style={props}>{item.text}</div>}
+  </Transition>`}</FencedCode>
           <RewindSpring>
             {x => (
               <>
@@ -69,13 +69,17 @@ return transitions.map(({ item, props, key }) =>
         </div>
         <p>toggle between components,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`const [toggle, set] = useState(false)
-const transitions = useTransition(toggle, null, { ... })
-return transitions.map(({ item, key, props }) => 
-  toggle
-    ? <animated.div style={props}>😄</animated.div>
-    : <animated.div style={props}>🤪</animated.div>
-)`}</FencedCode>
+          <FencedCode language="jsx">{`<Transition
+  items={toggle}
+  from={{ position: 'absolute', opacity: 0 }}
+  enter={{ opacity: 1 }}
+  leave={{ opacity: 0 }}>
+  {toggle =>
+    toggle
+      ? props => <div style={props}>😄</div>
+      : props => <div style={props}>🤪</div>
+  }
+</Transition>`}</FencedCode>
           <RewindSpring>
             {x => (
               <>
@@ -87,18 +91,20 @@ return transitions.map(({ item, key, props }) =>
         </div>
         <p>mount/unmount single-component reveals,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`const [show, set] = useState(false)
-const transitions = useTransition(show, null, { ... })
-return transitions.map(({ item, key, props }) =>
-  item && <animated.div style={props}>✌️</animated.div>
-)`}</FencedCode>
+          <FencedCode language="jsx">{`<Transition
+  items={show}
+  from={{ opacity: 0 }}
+  enter={{ opacity: 1 }}
+  leave={{ opacity: 0 }}>
+  {show => show && (props => <div style={props}>✌️</div>)}
+</Transition>`}</FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>✌️</animated.div>}</RewindSpring>
         </div>
       </RewindSpringProvider>
       <ParseMD contents={content2} />
       <DemoGrid padding={0}>
         {examples
-          .filter(data => data.tags.includes('useTransition'))
+          .filter(data => data.tags.includes('transitions'))
           .map(data => (
             <Demo key={data.name} {...data} import={import('../examples/demos/' + data.name)} />
           ))}
