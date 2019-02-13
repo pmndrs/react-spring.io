@@ -81,7 +81,7 @@ You can of course set configs for yourself.
 | precision                 | 0.01        | precision
 | velocity                  | 0           | initial velocity
 | delay                     | 0           | delay
-| duration                  | undefined    | if > than 0 will switch to a duration-based animation instead of spring physics
+| duration                  | undefined    | Duration in seconds. If > than 0 will switch to a duration-based animation instead of spring physics
 | easing                    | t => t      | linear by default, you can use any easing you want, for instance d3-ease
 
 It is also possible to set configs key by key.
