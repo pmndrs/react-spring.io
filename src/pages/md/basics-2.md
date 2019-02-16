@@ -40,7 +40,7 @@ You may wonder why you wouldn't always interpolate inside of the spring. View in
 import { useSpring, animated, interpolate } from 'react-spring'
 
 const { o, xyz, color } = useSpring({
-  from: { o: 0, xyz: [0, 0, 0], color: 'red' }
+  from: { o: 0, xyz: [0, 0, 0], color: 'red' },
   o: 1, xyz: [10, 20, 5], color: 'green'
 })
 
@@ -55,7 +55,7 @@ return (
       // Which works with arrays as well
       transform: xyz.interpolate((x, y, z) => `translate3d(${x}px, ${y}px, ${z}px)`),
       // If you want to combine multiple values use the "interpolate" helper
-      border: interpolate([o, color], (o, c) => `${o * 10}px solid ${c}`)
+      border: interpolate([o, color], (o, c) => `${o * 10}px solid ${c}`),
       // You can also form ranges, even chain multiple interpolations
       padding:
         o.interpolate({ range: [0, 0.5, 1], output: [0, 0, 10] })
@@ -63,9 +63,9 @@ return (
       // Interpolating strings (like up-front) through ranges is allowed ...
       borderColor: o.interpolate({ range: [0, 1], output: ['red', '#ffaabb'] }),
       // There's also a shortcut for plain, optionless ranges ...
-      opacity: o.interpolate([0.1, 0.2. 0.6, 1], [1, 0.1, 0.5, 1]),
+      opacity: o.interpolate([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1]),
   }}>
-    {r.interpolate(n => n.toFixed(2)) /* innerText interpolation ... */ }
+    {o.interpolate(n => n.toFixed(2)) /* innerText interpolation ... */ }
   </animated.div>
 )
 ```
