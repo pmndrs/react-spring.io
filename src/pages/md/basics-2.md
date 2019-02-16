@@ -60,6 +60,8 @@ return (
       padding:
         o.interpolate({ range: [0, 0.5, 1], output: [0, 0, 10] })
          .interpolate(o => `${o}%`),
+      // Interpolating strings (like up-front) through ranges is allowed ...
+      borderColor: o.interpolate({ range: [0, 1], output: ['red', '#ffaabb'] }),
       // There's also a shortcut for plain, optionless ranges ...
       opacity: o.interpolate([0.1, 0.2. 0.6, 1], [1, 0.1, 0.5, 1]),
   }}>

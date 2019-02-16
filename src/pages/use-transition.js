@@ -70,9 +70,13 @@ return transitions.map(({ item, props, key }) =>
         <p>toggle between components,</p>
         <div className="code-table">
           <FencedCode language="jsx">{`const [toggle, set] = useState(false)
-const transitions = useTransition(toggle, null, { ... })
+const transitions = useTransition(toggle, null, {
+  from: { position: 'absolute', opacity: 0 },
+  enter: { opacity: 1 },
+  leave: { opacity: 0 },
+})
 return transitions.map(({ item, key, props }) => 
-  toggle
+  item
     ? <animated.div style={props}>😄</animated.div>
     : <animated.div style={props}>🤪</animated.div>
 )`}</FencedCode>
@@ -88,7 +92,11 @@ return transitions.map(({ item, key, props }) =>
         <p>mount/unmount single-component reveals,</p>
         <div className="code-table">
           <FencedCode language="jsx">{`const [show, set] = useState(false)
-const transitions = useTransition(show, null, { ... })
+const transitions = useTransition(show, null, {
+  from: { position: 'absolute', opacity: 0 },
+  enter: { opacity: 1 },
+  leave: { opacity: 0 },
+})
 return transitions.map(({ item, key, props }) =>
   item && <animated.div style={props}>✌️</animated.div>
 )`}</FencedCode>
