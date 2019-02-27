@@ -152,7 +152,7 @@ export default function TransitionPage({path}) {
 
         <p>
           <mark>
-            Transitions inherit from <Link to="/docs/api/props/keyframes">Keyframes</Link>
+            Transitions inherit from <Link to="/docs/props/keyframes">Keyframes</Link>
           </mark>
           , so its slots (initial, from, enter, leave and update) can take the same types that Keyframe slots can take, namely: objects, functions, object-arrays. This gives you
           the ability to handle complex multistage, chained or scripted animations.

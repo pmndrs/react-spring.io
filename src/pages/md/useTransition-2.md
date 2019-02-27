@@ -1,6 +1,6 @@
 ## Properties
 
-All properties of the [shared-api](/api) apply.
+All properties of the [shared-api](/docs/hooks/api) apply.
 
 | Property | Type | Description |
 | -------- | ---- | -------- |

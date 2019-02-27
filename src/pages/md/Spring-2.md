@@ -13,7 +13,7 @@
 * string patterns (transform, border, boxShadow, etc)
 * auto is valid
 * non-animatable string values (visibility, pointerEvents, etc)
-* scrollTop/scrollLeft ([native only](/perf), since these aren't actual dom properties)
+* scrollTop/scrollLeft ([native only](/docs/props/performance), since these aren't actual dom properties)
 
 ```jsx
 <Spring

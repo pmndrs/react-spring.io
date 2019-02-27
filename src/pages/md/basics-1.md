@@ -8,7 +8,7 @@ There are 5 hooks in react-spring currently:
 * `useTransition` for mount/unmount transitions (lists where items are added/removed/updated)
 * `useChain` to queue or chain multiple animations together
 
-The easiest is [useSpring](/useSpring), but the same concept applies to all animation primitives. Let's have a look ...
+The easiest is [useSpring](/docs/hooks/use-spring), but the same concept applies to all animation primitives. Let's have a look ...
 
 ```jsx
 import { useSpring, animated } from 'react-spring'
@@ -33,7 +33,7 @@ You need the animation-primitive itself, and a special factory called `animated`
 const props = useSpring({ opacity: 1, from: { opacity: 0 } })
 ```
 
-A spring simply animates values from one state to another. Updates are accumulative, springs remember all the values you ever pass. You can use arbitrary names. There are a couple of reserved keywords like "from" (for base values). [You can learn about the api here](/api). The received props are not static values! These props are self-updating, you cannot use them in regular divs and such.
+A spring simply animates values from one state to another. Updates are accumulative, springs remember all the values you ever pass. You can use arbitrary names. There are a couple of reserved keywords like "from" (for base values). [You can learn about the api here](/docs/hooks/api). The received props are not static values! These props are self-updating, you cannot use them in regular divs and such.
 
 ### Finally, tie the animated values to your view
 

@@ -37,6 +37,6 @@ return trail.map(props => <animated.div style={props} />)
 
 ## Properties
 
-All properties of the [shared-api](/api) apply.
+All properties of the [shared-api](/docs/hooks/api) apply.
 
 ## Demos
