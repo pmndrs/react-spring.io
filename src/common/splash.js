@@ -51,13 +51,15 @@ const Container = styled.div`
 const Column = styled.div`
   height: 100%;
   width: 400px;
-  &:first-child {
-    margin-right: 120px;
-  }
 
   display: flex;
   align-items: center;
   justify-content: center;
+  @media(min-width: 900px) {
+    &:first-child {
+      margin-right: 120px;
+    }
+  }
 `
 
 const QuickNav = styled.div`

@@ -26,7 +26,6 @@ body,
   height: 100%;
   background-color: #fff;
   color: #111;
-  min-width: 900px;
   font-weight: 400;
   font-kerning: normal;
 
@@ -34,6 +33,15 @@ body,
   letter-spacing: -0.002em;
   font: 15px/22px 'Inter', system-ui, sans-serif;
   font-kerning: normal;
+
+}
+
+@media(min-width: 900px) {
+  html,
+  body,
+  #root {
+    min-width: 900px;
+  }
 }
 
 @import url('https://rsms.me/inter/inter.css');
