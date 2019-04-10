@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
 import {useSpring, config} from 'react-spring'
+import dedent from 'dedent'
 
 const Context = React.createContext()
 
@@ -22,7 +23,7 @@ export const Image = styled('a')`
 export const FencedCode = function({language = 'javascript', children}) {
   return (
     <pre style={{width: '100%'}}>
-      <code className={`language-${language}`}>{children}</code>
+      <code className={`language-${language}`}>{dedent(children)}</code>
     </pre>
   )
 }

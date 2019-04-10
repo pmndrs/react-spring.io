@@ -17,8 +17,11 @@ export default function BasicsDocsPage({path}) {
         <p>Although you can use them as such.</p>
         <div className="code-table">
           <FencedCode>
-            {`const props = useSpring({ opacity: 1, from: { opacity: 0 } })
-return <animated.h1 style={props}>hello</animated.h1>`}
+            {`const props = useSpring({
+                opacity: 1,
+                from: { opacity: 0 },
+              })
+              return <animated.h1 style={props}>hello</animated.h1>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>hello</animated.div>}</RewindSpring>
         </div>
@@ -26,11 +29,11 @@ return <animated.h1 style={props}>hello</animated.h1>`}
         <div className="code-table">
           <FencedCode>
             {`const props = useSpring({ x: 100, from: { x: 0 } })
-return (
-  <animated.svg strokeDashoffset={props.x}>
-    <path d="..." />
-  </animated.svg>
-)`}
+              return (
+                <animated.svg strokeDashoffset={props.x}>
+                  <path d="..." />
+                </animated.svg>
+              )`}
           </FencedCode>
           <RewindSpring>
             {x => (
@@ -54,7 +57,7 @@ return (
         <div className="code-table">
           <FencedCode>
             {`const props = useSpring({ number: 1, from: { number: 0 } })
-return <animated.span>{props.number}</animated.span>`}
+              return <animated.span>{props.number}</animated.span>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div>{x.interpolate(n => n.toFixed(2))}</animated.div>}</RewindSpring>
         </div>
@@ -62,7 +65,7 @@ return <animated.span>{props.number}</animated.span>`}
         <div className="code-table">
           <FencedCode>
             {`const props = useSpring({ scroll: 100, from: { scroll: 0 } })
-return <animated.div scrollTop={props.scroll} />`}
+              return <animated.div scrollTop={props.scroll} />`}
           </FencedCode>
           <RewindSpring>
             {x => (
@@ -83,9 +86,9 @@ return <animated.div scrollTop={props.scroll} />`}
         <div className="code-table">
           <FencedCode>
             {`const AnimatedDonut = animated(Donut)
-// ...
-const props = useSpring({ value: 100, from: { value: 0 } })
-return <AnimatedDonut percent={props.value} />`}
+              // ...
+              const props = useSpring({ value: 100, from: { value: 0 } })
+              return <AnimatedDonut percent={props.value} />`}
           </FencedCode>
           <RewindSpring>
             {x => (

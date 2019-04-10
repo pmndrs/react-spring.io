@@ -26,13 +26,15 @@ export default function LogPage({path}) {
         <p>You will now do:</p>
         <FencedCode>{`import { useSpring, animated, ... } from 'react-spring'`}</FencedCode>
         <p>The lib comes with the following exports:</p>
-        <FencedCode>{`web (web/hooks, default for react-dom)
-native (react-native/hooks, default for react-native)
-renderprops-web (previously "web")
-renderprops-native (previously "native")
-renderprops-addons (previously "addons")
-renderprops-konva (previously "konva")
-renderprops-universal (previously "universal")`}</FencedCode>
+        <FencedCode>
+          {`web (web/hooks, default for react-dom)
+            native (react-native/hooks, default for react-native)
+            renderprops-web (previously "web")
+            renderprops-native (previously "native")
+            renderprops-addons (previously "addons")
+            renderprops-konva (previously "konva")
+            renderprops-universal (previously "universal")`}
+        </FencedCode>
         <p>For commonjs, add ".cjs"</p>
         <p>Both render-props and hooks will be kept and maintained for the forseeable future.</p>
 
