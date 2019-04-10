@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "dedent": "^0.7.0",
     "intersection-observer": "^0.5.1",
     "lodash-es": "^4.17.11",
     "lorem-ipsum": "^1.0.6",
