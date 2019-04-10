@@ -3,17 +3,237 @@ import React from 'react'
 import NavPage from '../common/nav-page'
 import {FencedCode} from '../common/components'
 import {Link} from '@reach/router'
+import styled from 'styled-components'
+
+const Section = styled.section`
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+`
 
 export default function LogPage({path}) {
   return (
     <NavPage currentPath={path}>
-      <section>
-        <h1>Changelog</h1>
+      <h1>Changelog</h1>
 
-        <h2>react-spring 8.1</h2>
+      <Section>
         <p>
-          <a href="https://twitter.com/0xca0a/status/1093146801467781120">https://twitter.com/0xca0a/status/1093146801467781120</a>
+          <h2>react-spring 9.0</h2>
+          This version includes tons of improvements to the <code>Controller</code> class, which is used by every primitive (eg: <code>useSpring</code> or <code>{'<Spring>'}</code>
+          ). These improvements have caused a few breaking changes, so make sure your animations are working as expected when you try upgrading!
         </p>
+        <p>
+          <h3>Unified API</h3>
+          <p>
+            In the past two major versions, the "Render Props API" and "Hooks API" were provided by separate modules. In fact, each API had its own implementation of the internal{' '}
+            <code>Controller</code> class, which was bad for maintenance.
+          </p>
+          <FencedCode>
+            {`import { useSpring } from 'react-spring'
+              import { Spring } from 'react-spring/renderprops'`}
+          </FencedCode>
+          <p>The new version unifies these APIs into a single module!</p>
+          <FencedCode>
+            {`import { Spring, useSpring } from 'react-spring'
+
+              // The legacy module is still available:
+              import { Spring } from 'react-spring/renderprops'`}
+          </FencedCode>
+          This drastically reduces the bundle size from <a href="https://bundlephobia.com/result?p=react-spring@8.0.19">26kb</a> to 0kb! 🎉
+        </p>
+        <p>
+          <h3>
+            Improved <code>useTransition</code>
+          </h3>
+          You might know that the <code>enter</code>, <code>update</code>, and <code>leave</code> props of <code>useTransition</code> accept function values so you can customize
+          the animations on an item-by-item basis.
+          <FencedCode>
+            {`useTransition(items, {
+                from: { width: 0 },
+                enter: item => ({ width: item.width }),
+              })`}
+          </FencedCode>
+          <p>
+            In the past, the object returned by <code>enter</code> wasn't able to configure the animation, except for its <code>to</code> values. Now, you're free to include any
+            props that can be passed to <code>useSpring</code>!
+          </p>
+          <FencedCode>
+            {`useTransition(items, {
+                from: {width: 0},
+                enter: item => ({
+                  width: item.width,
+                  delay: item.delay, // Per-item delay
+                  config: { duration: item.duration }, // Per-item spring config
+                  onFrame: frame => { // Per-item event listeners
+                    console.log('onFrame:', frame)
+                  },
+                }),
+              })`}
+          </FencedCode>
+        </p>
+        <p>
+          <h3>Improved async animations</h3>
+          Async animations are created when an array or async function is passed to <code>useSpring</code> as the <code>to</code> prop. Pass an array to create a chain of
+          animations. Pass an async function to create animations on-the-fly by repeatedly calling the given <code>next</code> function.
+          <FencedCode>
+            {`// Chaining with an array
+              useSpring({
+                to: [{ opacity: 1 }, { color: 'red' }],
+                from: { opacity: 0, color: 'black' },
+              })
+
+              // Chaining with an async function
+              useSpring({
+                to: async (next) => {
+                  await next({ opacity: 1 })
+                  await next({ color: 'red' })
+                },
+                from: { opacity: 0, color: 'black' },
+              })`}
+          </FencedCode>
+          In the new version, the objects of your arrays and <code>next</code> calls are allowed to include any props that can be passed to <code>useSpring</code>.
+          <FencedCode>
+            {`// Chaining with an array
+              useSpring({
+                to: [{ opacity: 1, config: { duration: 1000 } }, { color: 'red', delay: 1000 }],
+                from: { opacity: 0, color: 'black' },
+              })
+
+              // Chaining with an async function
+              useSpring({
+                to: async (next) => {
+                  await next({ opacity: 1, config: { duration: 1000 } })
+                  await next({ color: 'red', delay: 1000 })
+                },
+                from: { opacity: 0, color: 'black' },
+              })`}
+          </FencedCode>
+          <p>
+            ⚠️ Additionally, async animations are no longer cancelled when the props are updated. Async chains (eg: <code>{`to: [{}, {}]`}</code>) are never cancelled, even if
+            another chain begins. Async scripts (eg: <code>{`to: async () => {}`}</code>) are only interrupted when another script or chain begins.
+          </p>
+        </p>
+        <p>
+          <h3>
+            Repurposed <code>onStart</code> prop
+          </h3>
+          The <code>onStart</code> prop is now called whenever an animated key is about to start animating to a new value. Previously, it was called every time the props were
+          updated (even when no animations were actually started), which proved to be unreliable.
+          <FencedCode>
+            {`useSpring({
+                opacity: 1,
+                from: { opacity: 0 },
+                onStart(animation) {
+                  console.log(\`Animating "\${animation.key}":\`, animation);
+                }
+              })`}
+          </FencedCode>
+        </p>
+        <p>
+          <h3>
+            Improved <code>stop</code> function
+          </h3>
+          The <code>useSpring</code> function returns two functions (one for updating, one for cancellation) when you pass a function as the first argument.
+          <FencedCode>{`const [props, update, stop] = useSpring(() => ({ opacity: 1 }))`}</FencedCode>
+          <p>
+            Previously, the <code>stop</code> function wouldn't actually stop any animations, which made it seem broken.
+          </p>
+          <p>
+            In this version, it will stop <i>all</i> animations (and prevent any delayed animations!) when called with no arguments. Additionally, you can pass an animated key (eg:{' '}
+            <code>"opacity"</code>) if you only want to stop one property from animating.
+          </p>
+          <FencedCode>
+            {`stop()          // Stop all animations
+              stop('opacity') // Stop only the "opacity" animation
+              stop('opacity', 'width') // Stop "opacity" and "width"
+
+              stop(true)          // Stop all animations and pretend like they finished
+              stop(true, 'width') // Stop "width" and pretend like it finished`}
+          </FencedCode>
+        </p>
+        <p>
+          <h3>Time-based diffing</h3>
+          <p>"Time-based diffing" is a new strategy used when updating the props. It uses timestamps to know when props have been overridden.</p>
+          <p>
+            In practice, this means that delayed animations can be selectively overridden without needing to call <code>stop</code> first.
+          </p>
+          <FencedCode>
+            {`useSpring({
+                from: { width: 10, height: 10 },
+                to: async (next) => {
+                  // Create a delayed animation
+                  next({ width: 100, height: 100, delay: 2000 }) // 2 seconds
+
+                  // Immediately override the width animation
+                  next({ width: 50 }) // This creates a new animation which starts immediately,
+                                      // and it prevents the delayed animation from changing
+                                      // the width. The height will still animate in 2 seconds.
+                }
+              })`}
+          </FencedCode>
+          <p>
+            This behavior comes in handy with <code>useTransition</code> when an <code>enter</code> animation only partially conflicts with an <code>update</code> or{' '}
+            <code>leave</code> animation.
+          </p>
+          <FencedCode>
+            {`useTransition(items, {
+                from: { size: 0, color: 'green' },
+                enter: { size: 100, color: 'black' },
+                leave: { size: 0 }, // Once the "leave" animation begins, the "color" will continue
+              })                    // animating from "green" to "black" since it never changed.
+              `}
+          </FencedCode>
+          <p>
+            Lastly, for anyone interested in the imperative API, here's an example that uses the <code>Controller</code> API to demonstrate time-based diffing:
+          </p>
+          <FencedCode>
+            {`import { Controller, animated } from 'react-spring'
+
+              // Create a controller (aka: the manual API)
+              const spring = new Controller({
+                opacity: 1, // The initial props
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'red',
+              })
+
+              // Inspect when each prop was last updated
+              console.log(spring.timestamps) // => { "to.opacity": now,
+                                             //      "to.width": now,
+                                             //      "to.height": now,
+                                             //      "to.backgroundColor": now }
+
+              // Use the animated values
+              <animated.div style={spring.getValues()} />
+
+              // Create a delayed animation
+              spring.update({
+                opacity: 0,
+                width: '50%',
+                delay: 2000,
+              }).start(values => {
+                console.log('Final values:', values)
+              })
+
+              // Notice the props have not changed yet
+              assert(spring.props.opacity === 1)
+              assert(spring.props.width === '100%')
+
+              // You can override any prop (except the "delay" prop)
+              spring.update({
+                opacity: 0.5, // This prevents the delayed animation from changing the opacity.
+              }).start()      // NOTE: The width will still animate to "50%" two seconds from now.
+
+              // Other methods
+              spring.stop('opacity', 'width')
+              spring.destroy()`}
+          </FencedCode>
+        </p>
+      </Section>
+
+      <Section>
+        <h2>react-spring 8.0</h2>
+        <a href="https://twitter.com/0xca0a/status/1093146801467781120">https://twitter.com/0xca0a/status/1093146801467781120</a>
 
         <h3>Breaking changes</h3>
 
@@ -45,9 +265,9 @@ export default function LogPage({path}) {
         <p>
           See: <Link to="/docs/props/transition">useTransition</Link>
         </p>
-      </section>
+      </Section>
 
-      <section>
+      <Section>
         <h2>react-spring 7.0</h2>
         <p>
           <a href="https://medium.com/@johnadetutu90/react-spring-just-got-hooked-32bd672e3bb7">https://medium.com/@johnadetutu90/react-spring-just-got-hooked-32bd672e3bb7</a>
@@ -68,9 +288,9 @@ export default function LogPage({path}) {
         <p>
           Nothing, except the removal of <code>/dist/</code>, and the experimental useSpring export moved to <code>/hooks</code>. Should be good to go! 😊
         </p>
-      </section>
+      </Section>
 
-      <section>
+      <Section>
         <h2>react-spring 6.0</h2>
         <p>
           <a href="https://medium.com/@drcmda/react-spring-6-0-is-out-of-beta-533ad6c8b4a">https://medium.com/@drcmda/react-spring-6-0-is-out-of-beta-533ad6c8b4a</a>
@@ -153,17 +373,15 @@ export default function LogPage({path}) {
             components or effects that don't belong anywhere else
           </li>
         </ul>
-      </section>
 
-      <section>
-        <h2>Upgrading from 5.0 to 6.0</h2>
+        <h3>Upgrading to 6.0</h3>
         <p>
           The changes made are mostly features, the api changes are slight and looking at the front page here will tell you immediately what to do. You will probably have to adapt
           your Transitions and Trail, Keyframes are backwards compatible. If you have used timings off <code>dist/addons</code> before, duration is now inbuilt (see above). A
           noticeable change also concerns spring config props, where before we would be closer to how the animated library interprets tension and friction we are now 1:1 compatible
           with react-motion.
         </p>
-      </section>
+      </Section>
     </NavPage>
   )
 }
