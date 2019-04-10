@@ -1,7 +1,7 @@
 # useSprings
 
 ```js
-import { useSprings, animated } from 'react-spring'
+import {useSprings, animated} from 'react-spring'
 ```
 
 Creates multiple springs, each with its own config. Use it for static lists, etc.
@@ -19,10 +19,10 @@ const springs = useSprings(number, items.map(item => ({ opacity: item.opacity })
 You will get an updater function back. It will not cause the component to render like an overwrite would (still the animation executes of course). Handling updates like this is useful for fast-occurring updates, but you should generally prefer it. Optionally there's also a stop function as a third argument.
 
 ```jsx
-const [springs, set, stop] = useSprings(number, index => ({ opacity: 1 }))
+const [springs, set, stop] = useSprings(number, index => ({opacity: 1}))
 
 // Update springs with new props
-set(index => ({ opacity: 0 }))
+set(index => ({opacity: 0}))
 // Stop all springs
 stop()
 ```

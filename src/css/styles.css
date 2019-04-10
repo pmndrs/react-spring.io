@@ -33,10 +33,9 @@ body,
   letter-spacing: -0.002em;
   font: 15px/22px 'Inter', system-ui, sans-serif;
   font-kerning: normal;
-
 }
 
-@media(min-width: 900px) {
+@media (min-width: 900px) {
   html,
   body,
   #root {

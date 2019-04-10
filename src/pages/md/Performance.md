@@ -1,40 +1,33 @@
 # Better performance ⚡️
 
 ```jsx
-import { animated, interpolate } from 'react-spring/renderprops'
+import {animated, interpolate} from 'react-spring/renderprops'
 ```
 
-One of the strengths of react-spring is that it can *apply animations without relying on React* to render updates frame by frame like most React animation libraries do. The difference may not be apparent in simple situations, but try a nested chart or routes and the difference will be quite drastic.
+One of the strengths of react-spring is that it can _apply animations without relying on React_ to render updates frame by frame like most React animation libraries do. The difference may not be apparent in simple situations, but try a nested chart or routes and the difference will be quite drastic.
 
-By default we will render every frame (like in the image on the left) as it gives you more freedom (for instance this is the only way that you can animate React-component props). In situations where that becomes expensive use the `native` flag. The flag is available for all primitives (Spring, Transition & Trail, Keyframes, Parallax is native by design). *Try doing this in all situations where you can*, the benefits are worth it. Especially if your animated component consists of large subtrees, routes, etc.
+By default we will render every frame (like in the image on the left) as it gives you more freedom (for instance this is the only way that you can animate React-component props). In situations where that becomes expensive use the `native` flag. The flag is available for all primitives (Spring, Transition & Trail, Keyframes, Parallax is native by design). _Try doing this in all situations where you can_, the benefits are worth it. Especially if your animated component consists of large subtrees, routes, etc.
 
 Just be aware of the following conditions:
 
 1.  `native` only animates styles, attributes and children (as textContent)
-2.  The values you receive *are opaque objects, not regular values*
+2.  The values you receive _are opaque objects, not regular values_
 3.  Receiving elements must be `animated.[elementName]`, for instance `div` becomes `animated.div`
 4.  If you use styled-components or custom components do: `animated(component)`
 5.  If you need to interpolate styles use `interpolate`
 
-You can natively animate *styles*,
+You can natively animate _styles_,
 
 ```jsx
-<Spring
-  native
-  from={{ opacity: 0 }}
-  to={{ opacity: 1 }}>
-  {props =>
-    <animated.div style={props}>hello</animated.div>}
+<Spring native from={{opacity: 0}} to={{opacity: 1}}>
+  {props => <animated.div style={props}>hello</animated.div>}
 </Spring>
 ```
 
-*attributes*, 
+_attributes_,
 
 ```jsx
-<Spring
-  native
-  from={{ x: 100 }}
-  to={{ x: 0 }}>
+<Spring native from={{x: 100}} to={{x: 0}}>
   {props => (
     <animated.svg strokeDashoffset={props.x}>
       <path d="..." />
@@ -43,27 +36,19 @@ You can natively animate *styles*,
 </Spring>
 ```
 
-*innerText*,
+_innerText_,
 
 ```jsx
-<Spring
-  native
-  from={{ number: 0 }}
-  to={{ number: 1 }}>
-  {props =>
-    <animated.div>{props.number}</animated.div>}
+<Spring native from={{number: 0}} to={{number: 1}}>
+  {props => <animated.div>{props.number}</animated.div>}
 </Spring>
 ```
 
-*scrollTop/Left*.
+_scrollTop/Left_.
 
 ```jsx
-<Spring
-  native
-  from={{ scroll: 0 }}
-  to={{ scroll: 250 }}>
-  {props =>
-    <animated.div scrollTop={props.scroll} />}
+<Spring native from={{scroll: 0}} to={{scroll: 250}}>
+  {props => <animated.div scrollTop={props.scroll} />}
 </Spring>
 ```
 
@@ -122,7 +107,7 @@ Interplations are also a good way in order to emulate css-keyframes since you ca
 100 % { transform: scale(1); }
 `*/
 
-<Spring native to={{ x: state ? 1 : 0 }}>
+<Spring native to={{x: state ? 1 : 0}}>
   {props => (
     <animated.div
       style={{
@@ -132,7 +117,8 @@ Interplations are also a good way in order to emulate css-keyframes since you ca
             output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1]
           })
           .interpolate(x => `scale(${x})`)
-      }} />
+      }}
+    />
   )}
 </Spring>
 ```
@@ -141,14 +127,14 @@ Interplations are also a good way in order to emulate css-keyframes since you ca
 
 `interpolate` either takes an object of the following shape:
 
-| Value            | default  | Description |
-| ---------------- | -------- | ----------- |
-| extrapolateLeft  | extend   | Left extrapolate. Can be: identity/clamp/extend
-| extrapolateRight | extend   | Right extrapolate. Can be: identity/clamp/extend
-| extrapolate      | extend   | Shortcut to set left and right-extrapolate
-| range            | [0,1]    | Array of input ranges
-| output           | undefined | Array of mapped output ranges
-| map              | undefined | Value filter applied to input value
+| Value            | default   | Description                                      |
+| ---------------- | --------- | ------------------------------------------------ |
+| extrapolateLeft  | extend    | Left extrapolate. Can be: identity/clamp/extend  |
+| extrapolateRight | extend    | Right extrapolate. Can be: identity/clamp/extend |
+| extrapolate      | extend    | Shortcut to set left and right-extrapolate       |
+| range            | [0,1]     | Array of input ranges                            |
+| output           | undefined | Array of mapped output ranges                    |
+| map              | undefined | Value filter applied to input value              |
 
 A range shortcut: `val.interpolate([...inputRange], [...outputRange])`
 

@@ -65,8 +65,8 @@ export const Main = styled.main`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  
-  @media(max-width: 899px) {
+
+  @media (max-width: 899px) {
     flex-direction: column;
   }
 `
@@ -79,8 +79,8 @@ const NavColumn = styled.aside`
 const ContentColumn = styled.aside`
   width: 60vw;
   padding: 0 40px;
-  
-  @media(max-width: 899px) {
+
+  @media (max-width: 899px) {
     width: 100vw;
     padding: 0 12px;
   }

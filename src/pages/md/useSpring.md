@@ -1,7 +1,7 @@
 # useSpring
 
 ```js
-import { useSpring, animated } from 'react-spring'
+import {useSpring, animated} from 'react-spring'
 ```
 
 Turns values into animated-values.
@@ -11,7 +11,7 @@ Turns values into animated-values.
 If you re-render the component with changed props, the animation will update.
 
 ```jsx
-const props = useSpring({ opacity: toggle ? 1 : 0 })
+const props = useSpring({opacity: toggle ? 1 : 0})
 ```
 
 ### Or: pass a function that returns values, and update using "set"
@@ -19,17 +19,17 @@ const props = useSpring({ opacity: toggle ? 1 : 0 })
 You will get an updater function back. It will not cause the component to render like an overwrite would (still the animation executes of course). Handling updates like this is useful for fast-occurring updates, but you should generally prefer it. Optionally there's also a stop function as a third argument.
 
 ```jsx
-const [props, set, stop] = useSpring(() => ({ opacity: 1 }))
+const [props, set, stop] = useSpring(() => ({opacity: 1}))
 
 // Update spring with new props
-set({ opacity: toggle ? 1 : 0 })
+set({opacity: toggle ? 1 : 0})
 // Stop animation
 stop()
 ```
 
 ### Finally: distribute animated props among the view
 
-The return value is an object containing animated props. 
+The return value is an object containing animated props.
 
 ```jsx
 return <animated.div style={props}>i will fade</animated.div>
@@ -47,9 +47,9 @@ Any property that useSpring does not recognize will be combined into "to", for i
 
 ```jsx
 // This ...
-const props = useSpring({ opacity: 1, color: 'red' })
+const props = useSpring({opacity: 1, color: 'red'})
 // is a shortcut for this ...
-const props = useSpring({ to: { opacity: 1, color: 'red' } })
+const props = useSpring({to: {opacity: 1, color: 'red'}})
 ```
 
 ### Async chains/scripts
@@ -59,12 +59,12 @@ The to-property also allows you to either script your animation, or chain multip
 #### This is how you create a script
 
 ```jsx
-const props = useSpring({ 
+const props = useSpring({
   to: async (next, cancel) => {
-    await next({ opacity: 1, color: '#ffaaee' })
-    await next({ opacity: 0, color: 'rgb(14,26,19)' })
+    await next({opacity: 1, color: '#ffaaee'})
+    await next({opacity: 0, color: 'rgb(14,26,19)'})
   },
-  from: { opacity: 0, color: 'red' } 
+  from: {opacity: 0, color: 'red'}
 })
 // ...
 return <animated.div style={props}>I will fade in and out</animated.div>
@@ -73,9 +73,9 @@ return <animated.div style={props}>I will fade in and out</animated.div>
 #### And this is how you create a chain
 
 ```jsx
-const props = useSpring({ 
-  to: [{ opacity: 1, color: '#ffaaee' }, { opacity: 0, color: 'rgb(14,26,19)' }],
-  from: { opacity: 0, color: 'red' } 
+const props = useSpring({
+  to: [{opacity: 1, color: '#ffaaee'}, {opacity: 0, color: 'rgb(14,26,19)'}],
+  from: {opacity: 0, color: 'red'}
 })
 // ...
 return <animated.div style={props}>I will fade in and out</animated.div>

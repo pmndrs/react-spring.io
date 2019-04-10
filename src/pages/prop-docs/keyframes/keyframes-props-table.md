@@ -1,3 +1,3 @@
-| Property | Type   | Required | Default   | Description             |
-|----------|--------|----------|-----------|-------------------------|
-| state    | String | false    | __default | Name of the active slot |
+| Property | Type   | Required | Default     | Description             |
+| -------- | ------ | -------- | ----------- | ----------------------- |
+| state    | String | false    | \_\_default | Name of the active slot |

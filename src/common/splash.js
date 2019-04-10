@@ -55,7 +55,7 @@ const Column = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media(min-width: 900px) {
+  @media (min-width: 900px) {
     &:first-child {
       margin-right: 120px;
     }

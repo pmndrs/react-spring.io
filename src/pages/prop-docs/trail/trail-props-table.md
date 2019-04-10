@@ -1,5 +1,5 @@
 | Property | Type             | Required | Default      | Description                                                                                                                             |
-|----------|------------------|----------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | ---------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | keys     | fn/undefined/any | false    | item => item | Item keys (the same keys you'd hand over to react in a list). If you specify items, keys can be an accessor function (item => item.key) |
 | from     | obj              | false    | -            | Base values, optional                                                                                                                   |
 | to       | obj              | false    | -            | Animates to ...                                                                                                                         |

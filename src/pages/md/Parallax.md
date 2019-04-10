@@ -1,7 +1,7 @@
 # Parallax
 
 ```jsx
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import {Parallax, ParallaxLayer} from 'react-spring/renderprops-addons'
 ```
 
 ## Basics
@@ -9,11 +9,9 @@ import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 `Parallax` creates a scroll container. Throw in any amount of `ParallaxLayer`s and it will take care of moving them in accordance to their offsets and speeds.
 
 ```jsx
-<Parallax pages={3} scrolling={false} horizontal ref={ref => this.parallax = ref}>
+<Parallax pages={3} scrolling={false} horizontal ref={ref => (this.parallax = ref)}>
   <ParallaxLayer offset={0} speed={0.5}>
-    <span onClick={() => this.parallax.scrollTo(1)}>
-      Layers can contain anything
-    </span>
+    <span onClick={() => this.parallax.scrollTo(1)}>Layers can contain anything</span>
   </ParallaxLayer>
 </Parallax>
 ```
@@ -34,17 +32,17 @@ import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
 ### Parallax
 
-| Property | Type |	Required | Default | Description |
-| -------- | ---- | -------- | ------- | ----------- |
-| config | Object | false | config.slow | Spring config (optional) |
-| scrolling | Bool | false | true | Allow content to be scrolled, or not |
-| horizontal | Bool | false | false | Scrolls horizontally or vertically |
-| pages |	Number | true	| - |	Determines the total space of the inner content where each page takes 100% of the visible container |
+| Property   | Type   | Required | Default     | Description                                                                                         |
+| ---------- | ------ | -------- | ----------- | --------------------------------------------------------------------------------------------------- |
+| config     | Object | false    | config.slow | Spring config (optional)                                                                            |
+| scrolling  | Bool   | false    |  true       | Allow content to be scrolled, or not                                                                |
+| horizontal | Bool   |  false   | false       |  Scrolls horizontally or vertically                                                                 |
+|  pages     | Number | true     | -           | Determines the total space of the inner content where each page takes 100% of the visible container |
 
 ### ParallaxLayer
 
-| Property | Type | Required | Default | Description |
-| -------- | ---- | -------- | ------- | ----------- |
-| factor | Number | false | 1 | Size of a page, (1=100%, 1.5=1 and 1/2, ...) |
-| offset | Number | false | 0 | Determines where the layer will be at when scrolled to (0=start, 1=1st page, ...) |
-| speed | Number | false | 0 | shifts the layer in accordance to its offset, values can be positive or negative |
+|  Property | Type    | Required |  Default |  Description                                                                      |
+| --------- | ------- | -------- | -------- | --------------------------------------------------------------------------------- |
+|  factor   |  Number | false    |  1       | Size of a page, (1=100%, 1.5=1 and 1/2, ...)                                      |
+|  offset   |  Number |  false   | 0        | Determines where the layer will be at when scrolled to (0=start, 1=1st page, ...) |
+|  speed    | Number  |  false   |  0       | shifts the layer in accordance to its offset, values can be positive or negative  |

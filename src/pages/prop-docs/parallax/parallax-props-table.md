@@ -1,5 +1,5 @@
 | Property   | Type   | Required | Default     | Description                                                                                         |
-|------------|--------|----------|-------------|-----------------------------------------------------------------------------------------------------|
+| ---------- | ------ | -------- | ----------- | --------------------------------------------------------------------------------------------------- |
 | config     | obj    | false    | config.slow | Spring config (optional)                                                                            |
 | scrolling  | bool   | false    | true        | Allow content to be scrolled, or not                                                                |
 | horizontal | bool   | false    | false       | Scrolls horizontally or vertically                                                                  |

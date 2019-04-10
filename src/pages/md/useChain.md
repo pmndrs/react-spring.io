@@ -1,25 +1,26 @@
 # useChain
 
 ```js
-import { useChain, animated } from 'react-spring'
+import {useChain, animated} from 'react-spring'
 ```
 
-Set the execution order of previously defined animation-hooks, where one animation starts after the other in sequence. You need to collect refs off the animations you want to chain, which blocks the animation from starting on its own. The order can be changed in subsequent render passes. 
+Set the execution order of previously defined animation-hooks, where one animation starts after the other in sequence. You need to collect refs off the animations you want to chain, which blocks the animation from starting on its own. The order can be changed in subsequent render passes.
 
 ```jsx
 // Build a spring and catch its ref
 const springRef = useRef()
-const props = useSpring({ ...values, ref: springRef })
+const props = useSpring({...values, ref: springRef})
 // Build a transition and catch its ref
 const transitionRef = useRef()
-const transitions = useTransition({ ...values, ref: transitionRef })
+const transitions = useTransition({...values, ref: transitionRef})
 // First run the spring, when it concludes run the transition
 useChain([springRef, transitionRef])
 // Use the animated props like always
 return (
   <animated.div style={props}>
-    {transitions.map(({ item, key, props }) =>
-      <animated.div key={key} style={props} />)}
+    {transitions.map(({item, key, props}) => (
+      <animated.div key={key} style={props} />
+    ))}
   </animated.div>
 )
 ```
@@ -29,7 +30,7 @@ You can optionally define timeSteps and a timeFrame (which defaults to a second)
 ```jsx
 // The spring will start right away: 0.0 * 1000ms = 0ms
 // The transition will start after: 0.5 * 1000ms (the timeFrame default) = 500ms
-useChain([springRef, transitionRef], [0, 0.5], /*1000*/)
+useChain([springRef, transitionRef], [0, 0.5] /*1000*/)
 ```
 
 ## Demos

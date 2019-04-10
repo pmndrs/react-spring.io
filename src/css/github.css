@@ -627,7 +627,7 @@
 }
 
 .markdown-body li::before {
-  content: "● ";
+  content: '● ';
   color: rgb(206, 212, 222);
   font-weight: bold;
   margin-right: 5px;
