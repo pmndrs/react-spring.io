@@ -39,7 +39,6 @@ export default function LogPage({path}) {
               // The legacy module is still available:
               import { Spring } from 'react-spring/renderprops'`}
           </FencedCode>
-          This drastically reduces the bundle size from <a href="https://bundlephobia.com/result?p=react-spring@8.0.19">26kb</a> to 0kb! 🎉
         </p>
         <p>
           <h3>
