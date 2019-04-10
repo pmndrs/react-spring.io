@@ -18,7 +18,7 @@ export default function LogPage({path}) {
 
       <Section>
         <p>
-          <h2>react-spring 9.0</h2>
+          <h2>react-spring 9.0 (not yet released)</h2>
           This version includes tons of improvements to the <code>Controller</code> class, which is used by every primitive (eg: <code>useSpring</code> or <code>{'<Spring>'}</code>
           ). These improvements have caused a few breaking changes, so make sure your animations are working as expected when you try upgrading!
         </p>
