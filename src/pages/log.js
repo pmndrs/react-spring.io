@@ -47,7 +47,7 @@ export default function LogPage({path}) {
           You might know that the <code>enter</code>, <code>update</code>, and <code>leave</code> props of <code>useTransition</code> accept function values so you can customize
           the animations on an item-by-item basis.
           <FencedCode>
-            {`useTransition(items, {
+            {`useTransition(items, null, {
                 from: { width: 0 },
                 enter: item => ({ width: item.width }),
               })`}
@@ -57,7 +57,7 @@ export default function LogPage({path}) {
             props that can be passed to <code>useSpring</code>!
           </p>
           <FencedCode>
-            {`useTransition(items, {
+            {`useTransition(items, null, {
                 from: {width: 0},
                 enter: item => ({
                   width: item.width,
@@ -175,7 +175,7 @@ export default function LogPage({path}) {
             <code>leave</code> animation.
           </p>
           <FencedCode>
-            {`useTransition(items, {
+            {`useTransition(items, null, {
                 from: { size: 0, color: 'green' },
                 enter: { size: 100, color: 'black' },
                 leave: { size: 0 }, // Once the "leave" animation begins, the "color" will continue
