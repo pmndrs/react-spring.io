@@ -185,7 +185,7 @@ export default function LogPage({path}) {
           <p>
             Lastly, for anyone interested in the imperative API, here's an example that uses the <code>Controller</code> API to demonstrate time-based diffing:
           </p>
-          <FencedCode>
+          <FencedCode language="jsx">
             {`import { Controller, animated } from 'react-spring'
 
               // Create a controller (aka: the manual API)

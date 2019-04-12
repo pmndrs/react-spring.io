@@ -54,7 +54,7 @@ _Spring are configurable_, delays, tension, friction, resets, everything can be 
 ```jsx
 import {Spring, config} from 'react-spring/renderprops'
 
-;<Spring config={config.default} />
+return <Spring config={config.default} />
 ```
 
 | Property        | Value                           |

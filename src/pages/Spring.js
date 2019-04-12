@@ -18,27 +18,27 @@ export default function UseSpringPage({path}) {
 
       <RewindSpringProvider>
         <div className="code-table">
-          <FencedCode>
+          <FencedCode language="jsx">
             {`<Spring
-  from={{ opacity: 0 }}
-  to={{ opacity: 1 }}>
-  {props => <div style={props}>hello</div>}
-</Spring>`}
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}>
+                {props => <div style={props}>hello</div>}
+              </Spring>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>hello</animated.div>}</RewindSpring>
         </div>
         <p>Do with them whatever you like, animate attributes for instance,</p>
         <div className="code-table">
-          <FencedCode>
+          <FencedCode language="jsx">
             {`<Spring
-  from={{ x: 100 }}
-  to={{ x: 0 }}>
-  {props => (
-    <svg strokeDashoffset={props.x}>
-      <path d="..." />
-    </svg>
-  )}
-</Spring>`}
+                from={{ x: 100 }}
+                to={{ x: 0 }}>
+                {props => (
+                  <svg strokeDashoffset={props.x}>
+                    <path d="..." />
+                  </svg>
+                )}
+              </Spring>`}
           </FencedCode>
           <RewindSpring>
             {x => (
@@ -60,23 +60,23 @@ export default function UseSpringPage({path}) {
         </div>
         <p>or innerText,</p>
         <div className="code-table">
-          <FencedCode>
+          <FencedCode language="jsx">
             {`<Spring
-  from={{ number: 0 }}
-  to={{ number: 1 }}>
-  {props => <div>{props.number}</div>}
-</Spring>`}
+                from={{ number: 0 }}
+                to={{ number: 1 }}>
+                {props => <div>{props.number}</div>}
+              </Spring>`}
           </FencedCode>
           <RewindSpring>{x => <animated.div>{x.interpolate(n => n.toFixed(2))}</animated.div>}</RewindSpring>
         </div>
         <p>or generic React-component props.</p>
         <div className="code-table">
-          <FencedCode>
+          <FencedCode language="jsx">
             {`<Spring
-  from={{ value: 0 }}
-  to={{ value: 100 }}>
-  {props => <Donut value={props.value} />}
-</Spring>`}
+                from={{ value: 0 }}
+                to={{ value: 100 }}>
+                {props => <Donut value={props.value} />}
+              </Spring>`}
           </FencedCode>
           <RewindSpring>
             {x => (

@@ -19,15 +19,17 @@ export default function TransitionPage({path}) {
       <RewindSpringProvider>
         <p>You can transition arrays,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`const items = [...]
-  
-  <Transition
-    items={items} keys={item => item.key}
-    from={{ transform: 'translate3d(0,-40px,0)' }}
-    enter={{ transform: 'translate3d(0,0px,0)' }}
-    leave={{ transform: 'translate3d(0,-40px,0)' }}>
-    {item => props => <div style={props}>{item.text}</div>}
-  </Transition>`}</FencedCode>
+          <FencedCode language="jsx">
+            {`const items = [...]
+
+              <Transition
+                items={items} keys={item => item.key}
+                from={{ transform: 'translate3d(0,-40px,0)' }}
+                enter={{ transform: 'translate3d(0,0px,0)' }}
+                leave={{ transform: 'translate3d(0,-40px,0)' }}>
+                {item => props => <div style={props}>{item.text}</div>}
+              </Transition>`}
+          </FencedCode>
           <RewindSpring>
             {x => (
               <>
@@ -69,17 +71,19 @@ export default function TransitionPage({path}) {
         </div>
         <p>toggle between components,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`<Transition
-  items={toggle}
-  from={{ position: 'absolute', opacity: 0 }}
-  enter={{ opacity: 1 }}
-  leave={{ opacity: 0 }}>
-  {toggle =>
-    toggle
-      ? props => <div style={props}>😄</div>
-      : props => <div style={props}>🤪</div>
-  }
-</Transition>`}</FencedCode>
+          <FencedCode language="jsx">
+            {`<Transition
+                items={toggle}
+                from={{ position: 'absolute', opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}>
+                {toggle =>
+                  toggle
+                    ? props => <div style={props}>😄</div>
+                    : props => <div style={props}>🤪</div>
+                }
+              </Transition>`}
+          </FencedCode>
           <RewindSpring>
             {x => (
               <>
@@ -91,13 +95,15 @@ export default function TransitionPage({path}) {
         </div>
         <p>mount/unmount single-component reveals,</p>
         <div className="code-table">
-          <FencedCode language="jsx">{`<Transition
-  items={show}
-  from={{ opacity: 0 }}
-  enter={{ opacity: 1 }}
-  leave={{ opacity: 0 }}>
-  {show => show && (props => <div style={props}>✌️</div>)}
-</Transition>`}</FencedCode>
+          <FencedCode language="jsx">
+            {`<Transition
+              items={show}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}>
+              {show => show && (props => <div style={props}>✌️</div>)}
+            </Transition>`}
+          </FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>✌️</animated.div>}</RewindSpring>
         </div>
       </RewindSpringProvider>
