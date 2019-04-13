@@ -98,7 +98,7 @@ const transitions = useTransition(show, null, {
   leave: { opacity: 0 },
 })
 return transitions.map(({ item, key, props }) =>
-  item && <animated.div style={props}>✌️</animated.div>
+  item && <animated.div key={key} style={props}>✌️</animated.div>
 )`}</FencedCode>
           <RewindSpring>{x => <animated.div style={{opacity: x}}>✌️</animated.div>}</RewindSpring>
         </div>
