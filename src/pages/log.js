@@ -39,6 +39,21 @@ export default function LogPage({path}) {
               // The legacy module is still available:
               import { Spring } from 'react-spring/renderprops'`}
           </FencedCode>
+          <p>
+            ⚠️ Note: Using <code>"auto"</code> as an end value is not supported by the <code>react-spring</code> module, but the <code>react-spring/renderprops</code> module still
+            supports it.
+          </p>
+        </p>
+        <p>
+          <h3>Improved types</h3>
+          TypeScript definitions have been rewritten for a better experience.
+          <br />
+          Changes include the following:
+          <ul>
+            <li>Added tests to ensure types are never broken</li>
+            <li>Smarter type inference</li>
+            <li>More inline documentation</li>
+          </ul>
         </p>
         <p>
           <h3>
