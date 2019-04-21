@@ -129,25 +129,43 @@ export default function LogPage({path}) {
         </p>
         <p>
           <h3>
-            Repurposed <code>onStart</code> prop
+            Added <code>cancel</code> prop
           </h3>
-          The <code>onStart</code> prop is now called whenever an animated key is about to start animating to a new value. Previously, it was called every time the props were
-          updated (even when no animations were actually started), which proved to be unreliable.
+          The <code>cancel</code> prop can be used anywhere the <code>reset</code> prop can be (eg: <code>useSpring</code>).
+          <ul>
+            <li>When true, all animations are cancelled.</li>
+            <li>When false, all animations are resumed.</li>
+            <li>When a string, a single key has its animation cancelled.</li>
+            <li>When an array of strings, multiple keys may have their animations cancelled.</li>
+          </ul>
           <FencedCode>
-            {`useSpring({
+            {`const props = useSpring({
+                cancel: true, // Cancel all animations
                 opacity: 1,
-                from: { opacity: 0 },
-                onStart(animation) {
-                  console.log(\`Animating "\${animation.key}":\`, animation);
-                }
-              })`}
+              })
+
+              const props = useSpring({
+                cancel: 'foo', // Cancel the "foo" animation only
+                from: { foo: 0, bar: 0 }
+                to: { foo: 1, bar: 1 },
+              })
+
+              const props = useSpring({
+                cancel: ['foo', 'bar'], // Cancel multiple animations by key
+                from: { foo: 0, bar: 0 }
+                to: { foo: 1, bar: 1 },
+              })
+              `}
           </FencedCode>
+          <p>
+            The <code>reset</code> prop is ignored for all keys cancelled by the <code>cancel</code> prop.
+          </p>
         </p>
         <p>
           <h3>
             Improved <code>stop</code> function
           </h3>
-          The <code>useSpring</code> function returns two functions (one for updating, one for cancellation) when you pass a function as the first argument.
+          When you pass a function as the first argument, the <code>useSpring</code> function returns two functions (one for updates, one for stops).
           <FencedCode>{`const [props, update, stop] = useSpring(() => ({ opacity: 1 }))`}</FencedCode>
           <p>
             Previously, the <code>stop</code> function wouldn't actually stop any animations, which made it seem broken.
@@ -162,7 +180,24 @@ export default function LogPage({path}) {
               stop('opacity', 'width') // Stop "opacity" and "width"
 
               stop(true)          // Stop all animations and pretend like they finished
-              stop(true, 'width') // Stop "width" and pretend like it finished`}
+              stop(true, 'width') // Stop "width" and pretend like it finished
+              `}
+          </FencedCode>
+        </p>
+        <p>
+          <h3>
+            Repurposed <code>onStart</code> prop
+          </h3>
+          The <code>onStart</code> prop is now called whenever an animated key is about to start animating to a new value. Previously, it was called every time the props were
+          updated (even when no animations were actually started), which proved to be unreliable.
+          <FencedCode>
+            {`useSpring({
+                opacity: 1,
+                from: { opacity: 0 },
+                onStart(animation) {
+                  console.log(\`Animating "\${animation.key}":\`, animation);
+                }
+              })`}
           </FencedCode>
         </p>
         <p>
