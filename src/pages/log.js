@@ -19,8 +19,15 @@ export default function LogPage({path}) {
       <Section>
         <p>
           <h2>react-spring 9.0 (not yet released)</h2>
-          This version includes tons of improvements to the <code>Controller</code> class, which is used by every primitive (eg: <code>useSpring</code> or <code>{'<Spring>'}</code>
-          ). These improvements have caused a few breaking changes, so make sure your animations are working as expected when you try upgrading!
+          <p>
+            Say hello 👋 to <b style={{fontWeight: 600}}>react-spring v9.0.0</b>, which comes with useful new features and fixes!!
+          </p>
+          <p style={{marginTop: 10}}>
+            You might run into <i>breaking changes</i> 👻, so be sure your animations still work after upgrading.
+          </p>
+          <p style={{marginTop: 10, marginBottom: 40}}>
+            If anything is broken, please report it in <a href="https://github.com/react-spring/react-spring/issues/642">this issue</a> as soon as possible. Thank you!! 🎉
+          </p>
         </p>
         <p>
           <h3>Unified API</h3>
