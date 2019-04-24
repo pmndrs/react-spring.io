@@ -56,6 +56,39 @@ export default function LogPage({path}) {
           </ul>
         </p>
         <p>
+          <h3>Time-based diffing</h3>
+          <p>"Time-based diffing" is a new strategy used when updating the props. It uses timestamps to know when props have been overridden.</p>
+          <p>
+            In practice, this means that delayed animations can be selectively overridden without needing to call <code>stop</code> first.
+          </p>
+          <FencedCode>
+            {`useSpring({
+                from: { width: 10, height: 10 },
+                to: async (next) => {
+                  // Create a delayed animation
+                  next({ width: 100, height: 100, delay: 2000 }) // 2 seconds
+
+                  // Immediately override the width animation
+                  next({ width: 50 }) // This creates a new animation which starts immediately,
+                                      // and it prevents the delayed animation from changing
+                                      // the width. The height will still animate in 2 seconds.
+                }
+              })`}
+          </FencedCode>
+          <p>
+            This behavior comes in handy with <code>useTransition</code> when an <code>enter</code> animation only partially conflicts with an <code>update</code> or{' '}
+            <code>leave</code> animation.
+          </p>
+          <FencedCode>
+            {`useTransition(items, null, {
+                from: { size: 0, color: 'green' },
+                enter: { size: 100, color: 'black' },
+                leave: { size: 0 }, // Once the "leave" animation begins, the "color" will continue
+              })                    // animating from "green" to "black" since it never changed.
+              `}
+          </FencedCode>
+        </p>
+        <p>
           <h3>
             Improved <code>useTransition</code>
           </h3>
@@ -201,39 +234,81 @@ export default function LogPage({path}) {
           </FencedCode>
         </p>
         <p>
-          <h3>Time-based diffing</h3>
-          <p>"Time-based diffing" is a new strategy used when updating the props. It uses timestamps to know when props have been overridden.</p>
+          <h3>Reworked dependency injection</h3>
           <p>
-            In practice, this means that delayed animations can be selectively overridden without needing to call <code>stop</code> first.
+            Dependency injection lets react-spring be compatible with multiple platforms. To support a new platform, you can import the <code>react-spring/universal</code> module
+            and interact with its <code>Globals</code> export. To get an idea of how this is done, you can check out the existing platforms (eg: <code>src/targets/web.js</code>).
+            <p />
+            In v9.0.0, the <code>Globals</code> export now comes with only an <code>assign</code> method, instead of calling functions with names like{' '}
+            <code>Globals.injectRequestFrame()</code>. The <code>Globals.assign</code> method takes an object of injected dependencies. You are not required to inject all possible
+            dependencies, since most have sane defaults.
           </p>
           <FencedCode>
-            {`useSpring({
-                from: { width: 10, height: 10 },
-                to: async (next) => {
-                  // Create a delayed animation
-                  next({ width: 100, height: 100, delay: 2000 }) // 2 seconds
+            {`import { Globals } from 'react-spring/universal'
 
-                  // Immediately override the width animation
-                  next({ width: 50 }) // This creates a new animation which starts immediately,
-                                      // and it prevents the delayed animation from changing
-                                      // the width. The height will still animate in 2 seconds.
-                }
-              })`}
-          </FencedCode>
-          <p>
-            This behavior comes in handy with <code>useTransition</code> when an <code>enter</code> animation only partially conflicts with an <code>update</code> or{' '}
-            <code>leave</code> animation.
-          </p>
-          <FencedCode>
-            {`useTransition(items, null, {
-                from: { size: 0, color: 'green' },
-                enter: { size: 100, color: 'black' },
-                leave: { size: 0 }, // Once the "leave" animation begins, the "color" will continue
-              })                    // animating from "green" to "black" since it never changed.
+              // The old way
+              Globals.injectDefaultElement(View)
+              Globals.injectStringInterpolator(createStringInterpolator)
+              Globals.injectColorNames(colorNames)
+              Globals.injectApplyAnimatedValues(
+                (instance, props) =>
+                  instance.setNativeProps ? instance.setNativeProps(props) : false,
+                style => ({ ...style, transform: new AnimatedTransform(style.transform) })
+              )
+
+              // The new way
+              Globals.assign({
+                defaultElement: View,
+                createStringInterpolator,
+                applyAnimatedValues: (instance, props) =>
+                  instance.setNativeProps ? instance.setNativeProps(props) : false,
+                createAnimatedTransform: transform =>
+                  new AnimatedTransform(transform),
+              })
               `}
           </FencedCode>
           <p>
-            Lastly, for anyone interested in the imperative API, here's an example that uses the <code>Controller</code> API to demonstrate time-based diffing:
+            Note: When using the <code>react-spring/universal</code> module, you must inject the <code>applyAnimatedValues</code> function. Everything else is optional. For other
+            modules like <code>react-spring/native</code>, the required globals are injected for you.
+          </p>
+          <FencedCode language="ts">
+            {`export interface AnimatedGlobals {
+                // Defaults to \`Date.now\`
+                now?: () => number
+                // To support colors like "red". Defaults to \`{}\`
+                colorNames?: { [key: string]: number }
+                // Usually the "div" of the platform. Defaults to \`undefined\`
+                defaultElement?: any
+                // Update the values of the affected nodes. Required
+                applyAnimatedValues?: (node: any, props: object) => boolean | void
+                // Wrap the \`transform\` property of an animated style
+                createAnimatedTransform?: (transform: any) => any
+                // Wrap the \`style\` property of an animated component
+                createAnimatedStyle?: (style: any) => any
+                // Create the \`ref\` API of an animated component
+                createAnimatedRef?: (
+                  node: { current: any },
+                  mounted?: { current: boolean },
+                  forceUpdate?: () => void
+                ) => { current: any }
+                // Defaults to \`window.requestAnimationFrame\`
+                requestAnimationFrame?: (onFrame: () => void) => number
+                // Defaults to \`window.cancelAnimationFrame\`
+                cancelAnimationFrame?: (handle: number) => void
+                // Called on every frame. Defaults to \`undefined\`
+                manualFrameloop?: () => void
+                // Custom string interpolation. Defaults to \`undefined\`
+                interpolation?: (config: object) => (input: number) => number | string
+              }`}
+          </FencedCode>
+        </p>
+        <p>
+          <h3>
+            Reworked <code>Controller</code> API
+          </h3>
+          <p>
+            Lastly, for anyone interested in an imperative API, here's an example that demonstrates time-based diffing using the <code>Controller</code> class, which had a massive
+            rewrite in v9.0.0.
           </p>
           <FencedCode language="jsx">
             {`import { Controller, animated } from 'react-spring'
@@ -253,7 +328,7 @@ export default function LogPage({path}) {
                                              //      "to.backgroundColor": now }
 
               // Use the animated values
-              <animated.div style={spring.getValues()} />
+              <animated.div style={spring} />
 
               // Create a delayed animation
               spring.update({
