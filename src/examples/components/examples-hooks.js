@@ -71,7 +71,7 @@ return <animated.div style={{ transform }} children="Slide">`,
   {
     name: 'hooks/draggable-list',
     title: 'Draggable list',
-    link: 'https://codesandbox.io/embed/r5qmj8m6lq',
+    link: 'https://codesandbox.io/embed/01p1kxymow',
     tags: ['useSprings'],
   },
   {

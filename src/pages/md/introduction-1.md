@@ -11,7 +11,7 @@
       <img src="https://i.imgur.com/OxGLHeT.gif"  class="tablet"/>
     </div>
   </a>
-  <a href="https://codesandbox.io/embed/r5qmj8m6lq" >
+  <a href="https://codesandbox.io/embed/01p1kxymow" >
     <div class="demo-cell">
       <img src="https://i.imgur.com/ifdCBvG.gif" class="phone"/>
     </div>
