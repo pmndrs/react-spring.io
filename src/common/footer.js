@@ -17,6 +17,9 @@ export default function Footer() {
           <li>
             <a href="https://github.com/react-spring/react-spring/issues">contact</a>
           </li>
+          <li>
+            <a href="http://mihaicernusca.com/">/&nbsp; site made by mihaicernusca</a>
+          </li>
         </ul>
       </div>
     </Container>
