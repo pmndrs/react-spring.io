@@ -54,7 +54,7 @@ const props = useSpring({to: {opacity: 1, color: 'red'}})
 
 ### Async chains/scripts
 
-The to-property also allows you to either script your animation, or chain multiple animations together. Since these animations will execute asynchroneously make sure to provide a "from" property for base values, otherwise props will be empty.
+The `to` prop also allows you to (1) script your animation, or (2) chain multiple animations together. Since these animations will execute asynchronously, make sure to provide a `from` property for base values (otherwise, props will be empty).
 
 #### This is how you create a script
 
