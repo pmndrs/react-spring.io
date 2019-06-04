@@ -35,6 +35,7 @@
     "eject": "react-scripts eject",
     "postinstall": "rm -rf src/examples && cp -R node_modules/react-spring-examples src/examples"
   },
+  "bic": false,
   "husky": {
     "hooks": {
       "precommit": "pretty-quick --staged"
