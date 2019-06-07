@@ -9,7 +9,7 @@ Trail animates the first item of a list of elements, the rest form a natural tra
 _It takes a list of items of any type, and their keys_. The latter defaults to `item => item`, which, if your items are self-sufficient as a key is often good enough.
 
 _You provide a single function-child_ that receives an item and additionally its index. The full signature looks like: `(item, index) => props => ReactNode`
-  
+
 TLDR, items in, keys if necessary, present the item that comes out and apply the animated props you receive.
 
 ```jsx
