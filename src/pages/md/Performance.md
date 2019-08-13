@@ -80,7 +80,7 @@ In cases where you need to clamp or extrapolate, each animated value can `interp
           o.interpolate({ range: [0, 0.5, 1], output: [0, 0, 10] })
            .interpolate(o => `${o}%`),
         // There's also a shortcut for plain, optionless ranges ...
-        opacity: o.interpolate([0.1, 0.2. 0.6, 1], [1, 0.1, 0.5, 1]),
+        opacity: o.interpolate([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1]),
       }}>
       {
         // Finally, this is how you interpolate innerText
