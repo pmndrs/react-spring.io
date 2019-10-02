@@ -35,7 +35,7 @@ useTransition(items, items => items.id, {
 ### Transitioning [between routes](https://twitter.com/0xca0a/status/1092772431087964161)
 
 ```jsx
-const { location } = useRouter()
+const location = useLocation()
 const transitions = useTransition(location, location => location.pathname, { ... })
 return transitions.map(({ item, props, key }) => (
   <animated.div key={key} style={props}>
