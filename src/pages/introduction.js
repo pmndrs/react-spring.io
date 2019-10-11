@@ -17,7 +17,7 @@ export default function IntroductionPage({path}) {
       <TweetGrid />
       <h2>Used by</h2>
       <Grid gap="0px">
-        <Image title="Aragon" size="130px" href="https://aragon.org/" url="https://aragon.org/static/4b922782-home2.svg" />
+        <Image title="Aragon" size="130px" href="https://aragon.org/" url="https://wiki.aragon.org/design/logo/svg/isotype.svg" />
         <Image title="Next" size="380px" href="https://nextjs.org" url="https://process.filestackapi.com/cache=expiry:max/resize=width:1050/compress/FloGbmnXSe3Gd49LAWXQ" />
         <Image
           title="Codesandbox"
