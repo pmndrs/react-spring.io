@@ -13,8 +13,8 @@ return (
     <animated.div key={index} style={{ transform: xy.interpolate(tr) }} />
   ))}
   </div>
-)`,
-    },
+)`
+    }
   },
   {
     name: 'hooks/card',
@@ -32,8 +32,8 @@ return (
     onMouseLeave={() => set({ xys: [0, 0, 1] })}
     style={{ transform: props.xys.interpolate(trans) }}
   />
-)`,
-    },
+)`
+    }
   },
   {
     name: 'hooks/flip-card',
@@ -49,8 +49,8 @@ return (
   <a.div style={{ opacity: opacity.interpolate(o => 1 - o), transform }} />
   <a.div style={{ opacity, transform: transform.interpolate(t =>
     \`\${t} rotateX(180deg)\`) }} />
-)`,
-    },
+)`
+    }
   },
   {
     name: 'hooks/slider',
@@ -65,26 +65,26 @@ return (
 })
 const transform =
   interpolate([x, size], (x, s) => \`translate3d(\${x}px,0,0) scale(\${s})\`)
-return <animated.div style={{ transform }} children="Slide">`,
-    },
+return <animated.div style={{ transform }} children="Slide">`
+    }
   },
   {
     name: 'hooks/draggable-list',
     title: 'Draggable list',
     link: 'https://codesandbox.io/embed/r5qmj8m6lq',
-    tags: ['useSprings'],
+    tags: ['useSprings']
   },
   {
     name: 'hooks/mouse-parallax',
     title: 'Mouse parallax',
     link: 'https://codesandbox.io/embed/r5x34869vq',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/scroll-parallax',
     title: 'Scroll parallax',
     link: 'https://codesandbox.io/embed/py912w5k6m',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/trails',
@@ -104,8 +104,8 @@ return trail.map(({ x, height, opacity }, index) => (
   <animated.div key={item} style={{ opacity, transform }}>
     <animated.div style={{ height }}>{items[index]}</animated.div>
   </animated.div>
-))`,
-    },
+))`
+    }
   },
   {
     name: 'hooks/simple-transition',
@@ -121,8 +121,8 @@ return trail.map(({ x, height, opacity }, index) => (
 })
 return transitions.map(({ item: Page, props, key }) => (
   <Page key={key} style={props} />
-))`,
-    },
+))`
+    }
   },
   {
     name: 'hooks/image-fade',
@@ -142,56 +142,56 @@ return transitions.map(({ item, props, key }) => (
     key={key}
     style={{ ...props, backgroundImage: \`url(\${item.url})\` }}
   />
-))`,
-    },
+))`
+    }
   },
   {
     name: 'hooks/multistage-transitions',
     title: 'Multistage transitions',
     link: 'https://codesandbox.io/embed/vqpqx5vrl0',
-    tags: ['useTransition'],
+    tags: ['useTransition']
   },
   {
     name: 'hooks/keyframes',
     title: 'Emulating css keyframes',
     link: 'https://codesandbox.io/embed/88lmnl6w88',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/list-reordering',
     title: 'List-reordering',
     link: 'https://codesandbox.io/embed/1wqpz5mzqj',
-    tags: ['useTransition'],
+    tags: ['useTransition']
   },
   {
     name: 'hooks/chain-animation',
     title: 'Chain animation',
     link: 'https://codesandbox.io/embed/2v716k56pr',
-    tags: ['useChain'],
+    tags: ['useChain']
   },
   {
     name: 'hooks/notification-hub',
     title: 'Notification hub',
     link: 'https://codesandbox.io/embed/7mqy09jyq',
-    tags: ['useTransition'],
+    tags: ['useTransition']
   },
   {
     name: 'hooks/script',
     title: 'Spring scripting',
     link: 'https://codesandbox.io/embed/141nrz6v73',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/auto',
     title: 'Animating auto',
     link: 'https://codesandbox.io/embed/q3ypxr5yp4',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/tree',
     title: 'Treeview (nested auto)',
     link: 'https://codesandbox.io/embed/lp80n9z7v9',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/blackflag',
@@ -213,37 +213,37 @@ const useScript = useKeyframes.spring(async next => {
 
 const props = useScript()
 return items.map(i =>
-  <animated.div style={{ transform: props.r.interpolate(interp(i)) }} />)`,
-    },
+  <animated.div style={{ transform: props.r.interpolate(interp(i)) }} />)`
+    }
   },
   {
     name: 'hooks/gestures-pull',
     title: 'Gestures (pull & release)',
     link: 'https://codesandbox.io/embed/r24mzvo3q',
-    tags: ['useSpring'],
+    tags: ['useSpring']
   },
   {
     name: 'hooks/gestures-pager',
     title: 'View pager',
     link: 'https://codesandbox.io/embed/n9vo1my91p',
-    tags: ['useSprings'],
+    tags: ['useSprings']
   },
   {
     name: 'hooks/card-flick',
     title: 'Card stack',
     link: 'https://codesandbox.io/embed/j0y0vpz59',
-    tags: ['useSprings'],
+    tags: ['useSprings']
   },
   {
     name: 'hooks/masonry-grid',
     title: 'Masonry grid',
     link: 'https://codesandbox.io/embed/26mjowzpr',
-    tags: ['useTransition'],
+    tags: ['useTransition']
   },
   {
     name: 'hooks/liquid',
     title: 'Svg filter',
     link: 'https://codesandbox.io/embed/rloj7nw3pn',
-    tags: ['useSpring'],
-  },
+    tags: ['useSpring']
+  }
 ]

@@ -5,11 +5,11 @@ import styled from 'styled-components'
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hasError: false }
+    this.state = {hasError: false}
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true }
+    return {hasError: true}
   }
 
   render() {
@@ -19,7 +19,7 @@ class ErrorBoundary extends React.Component {
 }
 
 export default class Demo extends React.Component {
-  state = { code: undefined, visible: false }
+  state = {code: undefined, visible: false}
   constructor(props) {
     super()
     this.component = Loadable({
@@ -27,28 +27,17 @@ export default class Demo extends React.Component {
       loading: props => {
         if (props.error) console.error(props.error)
         return <div />
-      },
+      }
     })
   }
 
-  setVisible = visible => this.setState({ visible })
+  setVisible = visible => this.setState({visible})
 
-  enter = tag =>
-    this.props.code &&
-    this.props.code[tag] &&
-    this.setState({ code: this.props.code[tag] })
-  leave = tag => this.setState({ code: undefined })
+  enter = tag => this.props.code && this.props.code[tag] && this.setState({code: this.props.code[tag]})
+  leave = tag => this.setState({code: undefined})
 
   render() {
-    const {
-      title,
-      description,
-      tags,
-      link,
-      code,
-      overlayCode = true,
-      fullscreen = false,
-    } = this.props
+    const {title, description, tags, link, code, overlayCode = true, fullscreen = false} = this.props
     return (
       <Container fullscreen={fullscreen}>
         <Header>
@@ -71,7 +60,7 @@ export default class Demo extends React.Component {
                   onMouseEnter={() => this.enter(tag)}
                   onMouseLeave={() => this.leave(tag)}
                   style={{
-                    background: code && code[tag] ? '#5f5f5f' : '#9f9f9f',
+                    background: code && code[tag] ? '#5f5f5f' : '#9f9f9f'
                   }}
                 />
               ))}
@@ -108,18 +97,16 @@ const Container = styled('div')`
 
 const Header = styled('div')`
   margin-bottom: 10px;
-  font-family: 'Chinese Quote', -apple-system, system-ui, 'Segoe UI',
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: 'Chinese Quote', -apple-system, system-ui, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   & > h1 {
-    margin: 0 0 0.17em 0!important;
-    text-transform: uppercase!important;
-    color: rgba(0, 0, 0, 0.85)!important;
-    font-size: 13.6px!important;
-    font-weight: 500!important;
-    line-height: 19.9px!important;
+    margin: 0 0 0.17em 0 !important;
+    text-transform: uppercase !important;
+    color: rgba(0, 0, 0, 0.85) !important;
+    font-size: 13.6px !important;
+    font-weight: 500 !important;
+    line-height: 19.9px !important;
   }
 
   & > p {
