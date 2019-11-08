@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-export default function DemoGrid({children, ...props}) {
+export default function DemoGrid({ children, ...props }) {
   const [intersects, set] = useState(false)
   return <Container {...props}>{children}</Container>
 }

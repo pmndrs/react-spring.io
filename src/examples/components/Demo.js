@@ -1,15 +1,17 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import styled from 'styled-components'
+import 'intersection-observer' // optional polyfill
+import Observer from '@researchgate/react-intersection-observer'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {hasError: false}
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError(error) {
-    return {hasError: true}
+    return { hasError: true }
   }
 
   render() {
@@ -19,7 +21,7 @@ class ErrorBoundary extends React.Component {
 }
 
 export default class Demo extends React.Component {
-  state = {code: undefined, visible: false}
+  state = { code: undefined, visible: false }
   constructor(props) {
     super()
     this.component = Loadable({
@@ -27,17 +29,17 @@ export default class Demo extends React.Component {
       loading: props => {
         if (props.error) console.error(props.error)
         return <div />
-      }
+      },
     })
   }
 
-  setVisible = visible => this.setState({visible})
+  setVisible = ({ isIntersecting }) => this.setState({ visible: isIntersecting })
 
-  enter = tag => this.props.code && this.props.code[tag] && this.setState({code: this.props.code[tag]})
-  leave = tag => this.setState({code: undefined})
+  enter = tag => this.props.code && this.props.code[tag] && this.setState({ code: this.props.code[tag] })
+  leave = tag => this.setState({ code: undefined })
 
   render() {
-    const {title, description, tags, link, code, overlayCode = true, fullscreen = false} = this.props
+    const { title, description, tags, link, code, overlayCode = true, fullscreen = false } = this.props
     return (
       <Container fullscreen={fullscreen}>
         <Header>
@@ -60,7 +62,7 @@ export default class Demo extends React.Component {
                   onMouseEnter={() => this.enter(tag)}
                   onMouseLeave={() => this.leave(tag)}
                   style={{
-                    background: code && code[tag] ? '#5f5f5f' : '#9f9f9f'
+                    background: code && code[tag] ? '#5f5f5f' : '#9f9f9f',
                   }}
                 />
               ))}
@@ -69,9 +71,11 @@ export default class Demo extends React.Component {
         </Header>
         <Content>
           <ErrorBoundary>
-            <div>
-              <this.component />
-              {/*overlayCode && (
+            <Observer onChange={this.setVisible}>
+              <div>
+                {this.state.visible && <this.component />}
+
+                {/*overlayCode && (
               <Spring
                 native
                 from={{ opacity: 0 }}
@@ -79,7 +83,8 @@ export default class Demo extends React.Component {
                 {props => <Code style={props} children={this.state.code} />}
               </Spring>
             )*/}
-            </div>
+              </div>
+            </Observer>
           </ErrorBoundary>
         </Content>
       </Container>
@@ -97,8 +102,9 @@ const Container = styled('div')`
 
 const Header = styled('div')`
   margin-bottom: 10px;
-  font-family: 'Chinese Quote', -apple-system, system-ui, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: 'Chinese Quote', -apple-system, system-ui, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
 
   & > h1 {
     margin: 0 0 0.17em 0 !important;
