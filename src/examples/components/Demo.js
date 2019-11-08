@@ -1,6 +1,8 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import styled from 'styled-components'
+import 'intersection-observer' // optional polyfill
+import Observer from '@researchgate/react-intersection-observer'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -31,7 +33,8 @@ export default class Demo extends React.Component {
     })
   }
 
-  setVisible = visible => this.setState({ visible })
+  setVisible = ({ isIntersecting }) =>
+    this.setState({ visible: isIntersecting })
 
   enter = tag =>
     this.props.code &&
@@ -80,9 +83,11 @@ export default class Demo extends React.Component {
         </Header>
         <Content>
           <ErrorBoundary>
-            <div>
-              <this.component />
-              {/*overlayCode && (
+            <Observer onChange={this.setVisible}>
+              <div>
+                {this.state.visible && <this.component />}
+
+                {/*overlayCode && (
               <Spring
                 native
                 from={{ opacity: 0 }}
@@ -90,7 +95,8 @@ export default class Demo extends React.Component {
                 {props => <Code style={props} children={this.state.code} />}
               </Spring>
             )*/}
-            </div>
+              </div>
+            </Observer>
           </ErrorBoundary>
         </Content>
       </Container>

@@ -77,7 +77,7 @@
     "d3-shape": "^1.2.2",
     "delay": "^4.1.0",
     "random-unicode-emoji": "^1.0.1",
-    "react-spring-examples": "https://github.com/react-spring/react-spring-examples",
+    "react-spring-examples": "github:react-spring/react-spring-examples#renderprops",
     "vec-la": "^1.5.0"
   }
 }

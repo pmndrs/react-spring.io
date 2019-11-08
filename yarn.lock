@@ -940,6 +940,15 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@researchgate/react-intersection-observer@^0.7.4":
+  version "0.7.4"
+  resolved "https://registry.npmjs.org/@researchgate/react-intersection-observer/-/react-intersection-observer-0.7.4.tgz#9360274611beebd801e3c068294ddf2ab0d4b163"
+  integrity sha512-4F291saKAP9I25Qe1ePflvm1DLLA43GlBIZfpMFYWofph7CAm+19nT8xwkQqSszg4PwZa5BpkaI4tAEJHtlj3w==
+  dependencies:
+    invariant "^2.2.2"
+    prop-types "^15.6.0"
+    warning "^3.0.0"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"
@@ -9889,12 +9898,14 @@ react-slick@~0.23.2:
     prettier "^1.14.3"
     resize-observer-polyfill "^1.5.0"
 
-"react-spring-examples@https://github.com/react-spring/react-spring-examples":
+"react-spring-examples@github:react-spring/react-spring-examples#renderprops":
   version "1.0.7"
-  resolved "https://github.com/react-spring/react-spring-examples#ee8d5793cd33fffa341c1b83bb21378699d76fab"
+  resolved "https://codeload.github.com/react-spring/react-spring-examples/tar.gz/111bd7eb6308b95213e963712660a0441e3a4bd2"
   dependencies:
     "@babel/runtime" "^7.3.1"
+    "@researchgate/react-intersection-observer" "^0.7.4"
     flubber "^0.4.2"
+    intersection-observer "^0.5.1"
     lodash-es "^4.17.11"
     lorem-ipsum "^1.0.6"
     prop-types "^15.7.1"
