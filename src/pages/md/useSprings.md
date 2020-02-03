@@ -11,7 +11,7 @@ Creates multiple springs, each with its own config. Use it for static lists, etc
 If you re-render the component with changed props, the animation will update.
 
 ```jsx
-const springs = useSprings(number, items.map(item => ({ opacity: item.opacity }))
+const springs = useSprings(number, items.map(item => ({ opacity: item.opacity })))
 ```
 
 ### Or: pass a function that returns values, and update using "set"
