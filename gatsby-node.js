@@ -54,6 +54,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: {
+        react: path.resolve(__dirname, 'node_modules/react'),
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
         $components: path.resolve(__dirname, 'src/components'),
         buble: '@philpl/buble', // to reduce bundle size
       },
