@@ -65,7 +65,7 @@ export const StyledMainWrapper = styled.div`
   code {
     border: 1px solid #ede7f3;
     border-radius: 4px;
-    padding: 2px 6px;
+    padding: 2px 5px;
     font-size: 0.9375em;
     font-family: ${props => props.theme.fonts.mono};
 
