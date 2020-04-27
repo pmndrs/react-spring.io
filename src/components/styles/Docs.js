@@ -67,6 +67,7 @@ export const StyledMainWrapper = styled.div`
     border-radius: 4px;
     padding: 2px 6px;
     font-size: 0.9375em;
+    font-family: ${props => props.theme.fonts.mono};
 
     background: ${props => props.theme.colors.background};
   }

@@ -1,6 +1,6 @@
 const baseTheme = {
   fonts: {
-    mono: '"SF Mono", "Roboto Mono", Menlo, monospace',
+    mono: 'Menlo, "SF Mono", "Roboto Mono", monospace',
   },
 }
 
