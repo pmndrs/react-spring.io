@@ -518,6 +518,9 @@ export const baseStyles = injectGlobal`
     padding-bottom: 40px;
     border-bottom: 1px solid rgb(230, 236, 241);
     margin-bottom: 32px;
+
+  .titleWrapper > h1 {
+    font-weight: 800;
   }
 
   .gitBtn {
@@ -665,7 +668,7 @@ export const baseStyles = injectGlobal`
 
   .heading1 {
     font-size: 26px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1.5;
     margin-bottom: 16px;
     margin-top: 32px;
@@ -673,7 +676,7 @@ export const baseStyles = injectGlobal`
 
   .heading2 {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.5;
     margin-bottom: 16px;
     margin-top: 32px;
