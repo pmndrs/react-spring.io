@@ -10,6 +10,17 @@ const plugins = [
       component: require.resolve(`./src/templates/docs.js`),
     },
   },
+  {
+    resolve: `gatsby-plugin-prefetch-google-fonts`,
+    options: {
+      fonts: [
+        {
+          family: `Lato`,
+          variants: [`300`, `400`, `500`, `600`, `700`, `800`],
+        },
+      ],
+    },
+  },
   'gatsby-plugin-emotion',
   'gatsby-plugin-react-helmet',
   {
