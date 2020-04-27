@@ -18,6 +18,10 @@ const plugins = [
           family: `Lato`,
           variants: [`300`, `400`, `500`, `600`, `700`, `800`],
         },
+        {
+          family: `Roboto Mono`,
+          variants: [`400`, `600`],
+        },
       ],
     },
   },
