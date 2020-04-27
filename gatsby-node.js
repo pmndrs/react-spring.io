@@ -75,25 +75,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type === `Mdx`) {
     const parent = getNode(node.parent)
 
-    let value = parent.relativePath.replace(parent.ext, '')
-
-    if (value === 'index') {
-      value = ''
+    let slug = `/` + parent.relativePath.replace(parent.ext, '')
+    if (slug.endsWith(`/index`)) {
+      slug = slug.slice(0, -6)
     }
-
     if (config.gatsby && config.gatsby.trailingSlash) {
-      createNodeField({
-        name: `slug`,
-        node,
-        value: value === '' ? `/` : `/${value}/`,
-      })
-    } else {
-      createNodeField({
-        name: `slug`,
-        node,
-        value: `/${value}`,
-      })
+      slug += `/`
     }
+
+    createNodeField({
+      name: 'slug',
+      node,
+      value: slug || `/`,
+    })
 
     createNodeField({
       name: 'id',
