@@ -19,11 +19,9 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   fields {
                     id
-                  }
-                  tableOfContents
-                  fields {
                     slug
                   }
+                  tableOfContents
                 }
               }
             }
@@ -52,6 +50,7 @@ exports.createPages = ({ graphql, actions }) => {
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
+    devtool: 'source-map',
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       alias: {
