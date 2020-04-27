@@ -320,7 +320,7 @@ export const baseStyles = injectGlobal`
     border: 0 !important;
     background-color: rgb(245, 247, 249); /* !important; */
   }
-  
+
   blockquote {
     color: rgb(116, 129, 141);
     margin: 0px 0px 24px;
@@ -515,9 +515,8 @@ export const baseStyles = injectGlobal`
   .titleWrapper {
     display: flex;
     align-items: center;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgb(230, 236, 241);
-    margin-bottom: 32px;
+    margin-bottom: 50px;
+  }
 
   .titleWrapper > h1 {
     font-weight: 800;
