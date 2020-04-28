@@ -13,16 +13,7 @@ const plugins = [
   {
     resolve: `gatsby-plugin-prefetch-google-fonts`,
     options: {
-      fonts: [
-        {
-          family: `Lato`,
-          variants: [`300`, `400`, `500`, `600`, `700`, `800`],
-        },
-        {
-          family: `Roboto Mono`,
-          variants: [`400`, `600`],
-        },
-      ],
+      fonts: config.googleFonts,
     },
   },
   'gatsby-plugin-emotion',
