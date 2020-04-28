@@ -3,6 +3,13 @@ import Link from './link'
 
 import { StyledNextPrevious } from './styles/PageNavigationButtons'
 
+const Visible = ({ visible, ...props }) => (
+  <div
+    {...props}
+    style={{ ...props.style, visibility: visible ? 'visible' : 'hidden' }}
+  />
+)
+
 const NextPrevious = ({ mdx, nav }) => {
   let currentIndex
 
@@ -51,8 +58,8 @@ const NextPrevious = ({ mdx, nav }) => {
 
   return (
     <StyledNextPrevious>
-      {previousInfo.url && currentIndex >= 0 ? (
-        <Link to={nav[currentIndex - 1].url} className={'previousBtn'}>
+      <Visible visible={previousInfo.url && currentIndex >= 0}>
+        <Link to={previousInfo.url} className={'previousBtn'}>
           <div className={'leftArrow'}>
             <svg
               preserveAspectRatio="xMidYMid meet"
@@ -74,24 +81,22 @@ const NextPrevious = ({ mdx, nav }) => {
           </div>
           <div className={'preRightWrapper'}>
             <div className={'smallContent'}>
-              <span>Previous</span>
+              <span>Go back</span>
             </div>
             <div className={'nextPreviousTitle'}>
-              <span>{nav[currentIndex - 1].title}</span>
+              <span>{previousInfo.title}</span>
             </div>
           </div>
         </Link>
-      ) : null}
-      {nextInfo.url && currentIndex >= 0 ? (
-        <Link to={nav[currentIndex + 1].url} className={'nextBtn'}>
+      </Visible>
+      <Visible visible={nextInfo.url && currentIndex >= 0}>
+        <Link to={nextInfo.url} className={'nextBtn'}>
           <div className={'nextRightWrapper'}>
             <div className={'smallContent'}>
-              <span>Next</span>
+              <span>Next up</span>
             </div>
             <div className={'nextPreviousTitle'}>
-              <span>
-                {nav[currentIndex + 1] && nav[currentIndex + 1].title}
-              </span>
+              <span>{nextInfo.title}</span>
             </div>
           </div>
           <div className={'rightArrow'}>
@@ -114,7 +119,7 @@ const NextPrevious = ({ mdx, nav }) => {
             </svg>
           </div>
         </Link>
-      ) : null}
+      </Visible>
     </StyledNextPrevious>
   )
 }

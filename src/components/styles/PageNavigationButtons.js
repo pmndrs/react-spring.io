@@ -9,88 +9,46 @@ export const StyledNextPrevious = styled('div')`
   column-gap: 24px;
   grid-template-columns: calc(50% - 8px) calc(50% - 8px);
 
+  .nextBtn,
   .previousBtn {
-    cursor: pointer;
-    -moz-box-align: center;
-    -moz-box-direction: normal;
-    -moz-box-orient: horizontal;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
-    place-self: stretch;
-    border-radius: 3px;
-    border: 1px solid rgb(230, 236, 241);
-    transition: border 200ms ease 0s;
-    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
-    text-decoration: none;
-
-    background-color: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.text};
-  }
-
-  .nextBtn {
-    cursor: pointer;
-    -moz-box-align: center;
-    -moz-box-direction: normal;
-    -moz-box-orient: horizontal;
-    margin: 0px;
-    padding: 0px;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    place-self: stretch;
-    border-radius: 3px;
-    border: 1px solid rgb(230, 236, 241);
-    transition: border 200ms ease 0s;
-    box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
-    text-decoration: none;
-
-    background-color: ${props => props.theme.colors.background};
+    cursor: pointer;
     color: ${props => props.theme.colors.text};
+    background: ${props => props.theme.colors.background};
+    border: 1px solid hsl(216, 20%, 94%);
+    border-radius: 9px;
+    box-shadow: hsl(216, 20%, 96%) 0px 2px 6px 0px;
+    transition: all 500ms ease;
   }
 
   .nextBtn:hover,
   .previousBtn:hover {
-    text-decoration: none;
-    border: 1px solid #1ed3c6;
+    background: hsl(216, 28%, 99%);
+    border-color: hsl(216, 28%, 90%);
+    box-shadow: hsl(216, 28%, 92%) 0px 2px 9px 0px;
   }
 
-  .nextBtn:hover .rightArrow,
-  .previousBtn:hover .leftArrow {
-    color: #1ed3c6;
-  }
-
-  .leftArrow {
-    display: block;
-    margin: 0px;
-    color: rgb(157, 170, 182);
-    flex: 0 0 auto;
-    font-size: 24px;
-    transition: color 200ms ease 0s;
-    padding: 16px;
-    padding-right: 16px;
-  }
-
+  .leftArrow,
   .rightArrow {
-    flex: 0 0 auto;
-    font-size: 24px;
-    transition: color 200ms ease 0s;
-    padding: 16px;
-    padding-left: 16px;
     display: block;
-    margin: 0px;
-    color: rgb(157, 170, 182);
+    flex: 0 0 auto;
+    padding: 16px;
+    color: hsl(216, 30%, 28%);
+    font-size: 24px;
+  }
+
+  .leftArrow svg,
+  .rightArrow svg {
+    display: block;
   }
 
   .nextPreviousTitle {
     display: block;
     margin: 0px;
     padding: 0px;
-    transition: color 200ms ease 0s;
   }
 
   .nextPreviousTitle span {
