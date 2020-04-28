@@ -27,36 +27,35 @@ const SidebarLayout = ({ location }) => (
       let finalNavItems
 
       if (allMdx.edges !== undefined && allMdx.edges.length > 0) {
-        const navItems = allMdx.edges.map((item, index) => {
-          let innerItems
+        for (const edge of allMdx.edges) {
+          if (!edge) continue
 
-          if (item !== undefined) {
-            if (
-              item.node.fields.slug === location.pathname ||
-              config.gatsby.pathPrefix + item.node.fields.slug ===
-                location.pathname
-            ) {
-              if (item.node.tableOfContents.items) {
-                innerItems = item.node.tableOfContents.items.map(
-                  (innerItem, index) => {
-                    const itemId = innerItem.title
-                      ? innerItem.title.replace(/\s+/g, '').toLowerCase()
-                      : '#'
+          let { slug } = edge.node.fields
+          if (config.gatsby && !config.gatsby.trailingSlash) {
+            slug += '/'
+          }
 
-                    return (
-                      <ListItem key={index} to={`#${itemId}`} level={1}>
-                        {innerItem.title}
-                      </ListItem>
-                    )
-                  }
-                )
-              }
-            }
+          const isMatch =
+            slug === location.pathname ||
+            config.gatsby.pathPrefix + slug === location.pathname
+
+          if (!isMatch) continue
+
+          const { tableOfContents } = edge.node
+          if (tableOfContents && tableOfContents.items) {
+            finalNavItems = tableOfContents.items.map((item, index) => {
+              const itemId = item.title
+                ? item.title.replace(/\s+/g, '').toLowerCase()
+                : '#'
+
+              return (
+                <ListItem key={index} to={`#${itemId}`} level={1}>
+                  {item.title}
+                </ListItem>
+              )
+            })
           }
-          if (innerItems) {
-            finalNavItems = innerItems
-          }
-        })
+        }
       }
 
       if (finalNavItems && finalNavItems.length) {
