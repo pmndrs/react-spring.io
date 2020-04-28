@@ -63,13 +63,28 @@ export const StyledMainWrapper = styled.div`
   }
 
   code {
-    border: 1px solid #ede7f3;
+    color: hsl(216, 30%, 32%);
+    background: hsl(218, 100%, 98%);
+    border: 1px solid hsl(218, 70%, 90%);
     border-radius: 4px;
     padding: 2px 5px;
-    font-size: 0.9375em;
+    margin: 0 1px;
+    font-size: 0.875em;
     font-family: ${props => props.theme.fonts.mono};
+  }
 
-    background: ${props => props.theme.colors.background};
+  pre {
+    border: 0 !important;
+    border-radius: 15px;
+    font-family: ${props => props.theme.fonts.mono};
+    line-height: 1.375em;
+  }
+
+  .pre {
+    font-size: 14px;
+    margin: 0px;
+    padding: 16px;
+    overflow: auto;
   }
 
   @media (max-width: 767px) {

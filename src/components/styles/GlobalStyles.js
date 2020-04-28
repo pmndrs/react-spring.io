@@ -316,10 +316,6 @@ export const baseStyles = injectGlobal`
   .navBarUL li a:hover {
     opacity: 0.7;
   }
-  pre {
-    border: 0 !important;
-    background-color: rgb(245, 247, 249); /* !important; */
-  }
 
   blockquote {
     color: rgb(116, 129, 141);
@@ -716,13 +712,6 @@ export const baseStyles = injectGlobal`
   .paragraph {
     margin: 16px 0px 32px;
     line-height: 1.625;
-  }
-
-  .pre {
-    font-size: 14px;
-    margin: 0px;
-    padding: 16px;
-    overflow: auto;
   }
 
   .poweredBy {
