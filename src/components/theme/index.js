@@ -15,8 +15,8 @@ export const lightTheme = {
   colors: {
     background: '#fff',
     heading: '#000',
-    text: '#3B454E',
-    preFormattedText: 'rgb(245, 247, 249)',
+    text: 'hsl(216, 30%, 28%)',
+    preFormattedText: 'hsl(216, 35%, 98%)',
     link: '#1000EE',
   },
 }
