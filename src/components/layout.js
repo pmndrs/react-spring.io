@@ -13,15 +13,9 @@ const Wrapper = styled('div')`
   justify-content: center;
   background: ${({ theme }) => theme.colors.background};
 
-  .sideBarUL li a {
+  a {
     color: ${({ theme }) => theme.colors.text};
-  }
-
-  .sideBarUL .item > a:hover {
-    background-color: #1ed3c6;
-    color: #fff !important;
-
-    /* background: #F8F8F8 */
+    transition: color 0.15s;
   }
 
   @media only screen and (max-width: 767px) {
