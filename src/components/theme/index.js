@@ -1,8 +1,10 @@
+import 'typeface-inter'
+
 const baseTheme = {
   fonts: {
     mono: "Menlo, 'SF Mono', 'Roboto Mono', monospace",
     body:
-      "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+      "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
   },
 }
 
