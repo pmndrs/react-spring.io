@@ -67,11 +67,7 @@ export default {
     />
   ),
   p: props => <p className="paragraph" {...props} />,
-  pre: props => (
-    <StyledPre>
-      <pre {...props} />
-    </StyledPre>
-  ),
+  pre: props => <StyledPre {...props} />,
   code: CodeBlock,
   a: AnchorTag,
   // TODO add `img`
