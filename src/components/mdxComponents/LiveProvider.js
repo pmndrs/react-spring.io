@@ -3,6 +3,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import { a, useSpring } from 'react-spring'
 import VisibilitySensor from 'react-visibility-sensor'
 import nebu from 'nebu'
+import prismTheme from '../theme/prism'
 
 /** Use a value from the previous render */
 export function usePrev(value) {
@@ -62,7 +63,7 @@ const ReactLiveProvider = ({ code, type }) => {
       scope={scope}
       buble={buble}
       transformCode={transform}>
-      <LiveEditor />
+      <LiveEditor theme={prismTheme} />
       <LiveError />
       <LivePreview />
     </LiveProvider>
