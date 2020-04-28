@@ -50,8 +50,6 @@ const Sidebar = styled('aside')`
   overflow: auto;
   position: fixed;
   padding-left: 0px;
-  position: -webkit-sticky;
-  position: -moz-sticky;
   position: sticky;
   top: 0;
   padding-right: 0;

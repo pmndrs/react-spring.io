@@ -34,7 +34,6 @@ const StyledSwitch = styled('div')`
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: 0.4s;
     transition: 0.4s;
   }
 
@@ -48,7 +47,6 @@ const StyledSwitch = styled('div')`
     top: 0;
     bottom: 0;
     margin: auto 0;
-    -webkit-transition: 0.4s;
     transition: 0.4s;
     box-shadow: 0 0px 15px #2020203d;
     background: white url(${NightImage});
@@ -61,8 +59,6 @@ const StyledSwitch = styled('div')`
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(24px);
-    -ms-transform: translateX(24px);
     transform: translateX(24px);
     background: white url(${DayImage});
     background-repeat: no-repeat;
