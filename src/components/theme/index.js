@@ -1,6 +1,8 @@
 const baseTheme = {
   fonts: {
-    mono: 'Menlo, "SF Mono", "Roboto Mono", monospace',
+    mono: "Menlo, 'SF Mono', 'Roboto Mono', monospace",
+    body:
+      "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
   },
 }
 

@@ -1,4 +1,5 @@
 import { injectGlobal } from 'emotion'
+import theme from '../theme'
 
 export const baseStyles = injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
@@ -32,14 +33,16 @@ export const baseStyles = injectGlobal`
     scroll-behavior: smooth;
   }
 
+  html,
+  body {
+    font-family: ${theme.fonts.body};
+  }
+
   a {
     transition: color 0.15s;
     /* color: #663399; */
   }
 
-  body {
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  }
   .visibleMobile {
     display: none;
   }
