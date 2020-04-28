@@ -10,7 +10,7 @@ import config from '../../config.js'
 
 const Wrapper = styled('div')`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background: ${({ theme }) => theme.colors.background};
 
   .sideBarUL li a {
@@ -30,9 +30,8 @@ const Wrapper = styled('div')`
 `
 
 const Content = styled('main')`
-  display: flex;
-  flex-grow: 1;
-  margin: 0px 88px;
+  max-width: 75ch;
+  margin: 0px 30px;
   padding-top: 3rem;
   background: ${({ theme }) => theme.colors.background};
 
@@ -56,9 +55,11 @@ const MaxWidth = styled('div')`
 
 const LeftSideBarWidth = styled('div')`
   width: 298px;
+  padding-top: 8vh;
 `
 
 const RightSideBarWidth = styled('div')`
+  padding-top: 8vh;
   width: 224px;
 `
 
