@@ -12,13 +12,7 @@ const config = {
     trailingSlash: false,
   },
   header: {
-    logo: '',
-    logoLink: '',
-    title: '',
     githubUrl: 'https://github.com/react-spring/react-spring.io',
-    helpUrl: '',
-    tweetText: '',
-    social: '',
     links: [{ text: '', link: '' }],
     search: {
       enabled: false,

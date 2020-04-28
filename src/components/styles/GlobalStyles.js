@@ -256,29 +256,17 @@ export const baseStyles = injectGlobal`
   }
 
   /* Header section starts here */
-  .removePadd {
-    padding: 0 !important;
-  }
   .navBarDefault {
-    background-color: #001934;
-    border-radius: 0;
-    border-top: 0;
-    margin-bottom: 0;
-    border: 0;
+    position: relative;
     display: flex;
     align-items: center;
-    box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
-    -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
-    -moz-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.8);
-    -o-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+    justify-content: center;
+    border-radius: 0;
+    border: 0;
+    margin: 0;
     z-index: 1;
-    padding: 15px;
-    position: relative;
-    height: 80px;
   }
   .navBarHeader {
-    min-width: 335px;
-    padding-right: 20px;
     display: flex;
     align-items: center;
   }
@@ -287,7 +275,6 @@ export const baseStyles = injectGlobal`
     display: flex;
     align-items: center;
   }
-
   .navBarBrand img {
     width: 120px;
     margin-right: 6px;
@@ -327,6 +314,7 @@ export const baseStyles = injectGlobal`
     border-left: 4px solid rgb(230, 236, 241);
     border-color: rgb(230, 236, 241);
   }
+
   .socialWrapper {
     display: flex;
     align-items: center;
@@ -337,34 +325,7 @@ export const baseStyles = injectGlobal`
   .socialWrapper li a {
     display: contents;
   }
-  .discordBtn, .twitterBtn {
-    border-radius: 4px;
-    border: solid 1px #d1d2d3;
-    background-color: #f1f5f8;
-    width: 20px;
-    height: 20px;
-    padding-top: 2px;
-    margin-left: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: .8;
-    cursor: pointer;
-  }
-  .twitterBtn img {
-    width: 12px !important;
-  }
-  .discordBtn img {
-    width: 10px !important;
-  }
-  .discordBtn:hover, .twitterBtn:hover {
-    opacity: 1;
-  }
-  .discordBtn {
-    img {
-      width: 10px;
-    }
-  }
+
   /* Header section ends here */
   .sidebarTitle {
     /* box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); */
