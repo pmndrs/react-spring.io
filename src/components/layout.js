@@ -24,9 +24,9 @@ const Wrapper = styled('div')`
 `
 
 const Content = styled('main')`
-  max-width: 75ch;
-  margin: 0px 30px;
-  padding-top: 3rem;
+  width: 75ch;
+  margin: 0px 3rem;
+  padding-top: 1.5rem;
   background: ${({ theme }) => theme.colors.background};
 
   table tr {
@@ -36,7 +36,7 @@ const Content = styled('main')`
   @media only screen and (max-width: 1023px) {
     padding-left: 0;
     margin: 0 10px;
-    padding-top: 3rem;
+    padding-top: 1.5rem;
   }
 `
 
