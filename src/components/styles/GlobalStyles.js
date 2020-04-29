@@ -377,26 +377,28 @@ export const baseStyles = injectGlobal`
     width: 40px;
   }
 
-  .sideBarUL {
-    margin-top: 32px;
-  }
-
   .sideBarUL li {
     list-style-type: none;
     width: auto;
   }
 
   .sideBarUL li a {
-    /* color: #fff; */
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5;
-    padding: 7px 24px 7px 16px;
-    padding-left: 10px;
-    padding-right: 25px;
-    border-style: solid none solid solid;
-    border-width: 1px 0px 1px 1px;
-    border-color: transparent currentcolor transparent transparent;
+    padding: 6px 0;
+    padding-left: 15px;
+    padding-right: 35px;
+  }
+
+  .sideBarUL .active > a,
+  .sideBarUL li a:hover {
+    color: hsl(216, 30%, 28%);
+    background-color: hsl(216, 30%, 97%);
   }
 
   .hideFrontLine .collapser {
@@ -405,19 +407,7 @@ export const baseStyles = injectGlobal`
     outline: none;
     position: absolute;
     right: 20px;
-    z-index: 1;
     cursor: pointer;
-  }
-
-  .hideFrontLine .active > a {
-    background-color: #1ed3c6;
-    color: #fff !important;
-  }
-  .firstLevel ul li .collapser svg path {
-    fill: #fff !important;
-  }
-  .active .collapser > svg > path {
-    fill: #001933 !important;
   }
 
   .firstLevel ul .item ul .item {
@@ -427,26 +417,6 @@ export const baseStyles = injectGlobal`
   .sideBarUL .item {
     list-style: none;
     padding: 0;
-  }
-
-  .sideBarUL .item > a {
-    color: #1ED3C6;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    padding-right: 35px;
-    padding-left: 15px;
-  }
-
-  .showFrontLine .item > a:hover {
-    background-color: #001933;
-  }
-
-  .showFrontLine .active > a {
-    /* color: #fff; */
-    background-color: #001933;
   }
 
   .sideBarUL .item .item {
@@ -464,18 +434,9 @@ export const baseStyles = injectGlobal`
     width: calc(100% - 16px) !important;
   }
 
-  .showFrontLine .item .active > a {
-    border-color: rgb(230, 236, 241) !important;
-    border-style: solid none solid solid;
-    border-width: 1px 0px 1px 1px;
-    background-color: #1ed3c6 !important;
-    color: #fff;
-  }
-
   .titleWrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 50px;
   }
 
   .titleWrapper > h1 {

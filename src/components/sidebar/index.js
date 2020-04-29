@@ -1,8 +1,10 @@
 import React from 'react'
 import Tree from './tree'
+import { animated, useSpring } from 'react-spring'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import { ExternalLink } from 'react-feather'
+import fadeOut from './fade-out.svg'
 import config from '../../../config'
 
 const ListItem = styled(({ className, active, level, ...props }) => {
@@ -14,46 +16,27 @@ const ListItem = styled(({ className, active, level, ...props }) => {
     </li>
   )
 })`
-  list-style: none;
-
   a {
-    color: #5c6975;
-    text-decoration: none;
-    font-weight: ${({ level }) => (level === 0 ? 700 : 400)};
-    padding: 0.45rem 0 0.45rem ${props => 2 + (props.level || 0) * 1}rem;
-    display: block;
     position: relative;
-
-    &:hover {
-      color: #1ed3c6 !important;
-    }
-
-    ${props =>
-      props.active &&
-      `
-      // color: #663399;
-      border-color: rgb(230,236,241) !important;
-      border-style: solid none solid solid;
-      border-width: 1px 0px 1px 1px;
-      background-color: #fff;
-    `} // external link icon
-    svg {
-      float: right;
-      margin-right: 1rem;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 19px !important;
   }
 `
 
 const Sidebar = styled('aside')`
   width: 100%;
-  height: 100vh;
-  overflow: auto;
+  height: 385px;
+  border: 1px solid hsl(216, 20%, 94%);
+  border-radius: 15px;
+  box-shadow: hsl(216, 20%, 96%) 0px 2px 6px 0px;
+  overflow: hidden;
+
   position: fixed;
-  padding-left: 0px;
   position: sticky;
-  top: 0;
-  padding-right: 0;
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  top: 20px;
 
   @media only screen and (max-width: 1023px) {
     width: 100%;
@@ -71,20 +54,19 @@ const Sidebar = styled('aside')`
   }
 `
 
-const Divider = styled(props => (
-  <li {...props}>
-    <hr />
-  </li>
-))`
-  list-style: none;
-  padding: 0.5rem 0;
+const EdgeGradient = styled('div')`
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: url('${fadeOut}') repeat-x;
+`
 
-  hr {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-bottom: 1px solid #ede7f3;
-  }
+const Scroller = styled('div')`
+  height: 100%;
+  overflow: auto;
+  padding: 15px 0 20px;
 `
 
 const SidebarLayout = ({ location }) => (
@@ -104,31 +86,42 @@ const SidebarLayout = ({ location }) => (
       }
     `}
     render={({ allMdx }) => {
+      const minOpacity = 0.25
+      const [{ opacity }] = useSpring(() => ({
+        to: { opacity: minOpacity },
+        from: { opacity: 1 },
+        config: { frequency: 1.2 },
+        delay: 2000,
+      }))
+      const AnimatedSidebar = animated(Sidebar)
       return (
-        <Sidebar>
-          {config.sidebar.title ? (
-            <div
-              className={'sidebarTitle hiddenMobile'}
-              dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
-            />
-          ) : null}
-          <ul className={'sideBarUL'}>
-            <Tree edges={allMdx.edges} />
-            {config.sidebar.links && config.sidebar.links.length > 0 && (
-              <Divider />
-            )}
-            {config.sidebar.links.map((link, key) => {
-              if (link.link !== '' && link.text !== '') {
-                return (
-                  <ListItem key={key} to={link.link}>
-                    {link.text}
-                    <ExternalLink size={14} />
-                  </ListItem>
-                )
-              }
-            })}
-          </ul>
-        </Sidebar>
+        <AnimatedSidebar
+          style={{ opacity }}
+          onMouseEnter={() => opacity.start(1, { delay: 200 })}
+          onMouseLeave={() => opacity.start(minOpacity, { delay: 200 })}>
+          <Scroller>
+            {config.sidebar.title ? (
+              <div
+                className={'sidebarTitle hiddenMobile'}
+                dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
+              />
+            ) : null}
+            <ul className={'sideBarUL'}>
+              <Tree edges={allMdx.edges} />
+              {config.sidebar.links.map((link, key) => {
+                if (link.link !== '' && link.text !== '') {
+                  return (
+                    <ListItem key={key} to={link.link}>
+                      {link.text}
+                      <ExternalLink size={14} />
+                    </ListItem>
+                  )
+                }
+              })}
+            </ul>
+          </Scroller>
+          <EdgeGradient />
+        </AnimatedSidebar>
       )
     }}
   />
