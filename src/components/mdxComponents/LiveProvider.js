@@ -57,10 +57,10 @@ const buble = {
   },
 }
 
-const ReactLiveProvider = ({ code, type }) => {
+const ReactLiveProvider = props => {
   return (
     <LiveProvider
-      code={code.trim()}
+      code={props.code}
       scope={scope}
       buble={buble}
       transformCode={transform}>
