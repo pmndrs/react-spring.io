@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { Sidebar } from './styles/Sidebar'
+import { RightSidebar } from './styles/RightSidebar'
 import config from '../../config'
 
 const SidebarLayout = ({ location }) => (
@@ -60,18 +60,18 @@ const SidebarLayout = ({ location }) => (
 
       if (finalNavItems && finalNavItems.length) {
         return (
-          <Sidebar>
+          <RightSidebar>
             <ul className={'rightSideBarUL'}>
               <li className={'rightSideTitle'}>CONTENTS</li>
               {finalNavItems}
             </ul>
-          </Sidebar>
+          </RightSidebar>
         )
       } else {
         return (
-          <Sidebar>
+          <RightSidebar>
             <ul></ul>
-          </Sidebar>
+          </RightSidebar>
         )
       }
     }}

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-export const Sidebar = styled('aside')`
+export const RightSidebar = styled('aside')`
   width: 100%;
   height: 100vh;
   overflow: auto;
