@@ -12,7 +12,7 @@ const config = {
     trailingSlash: true,
   },
   header: {
-    githubUrl: 'https://github.com/react-spring/react-spring.io',
+    githubUrl: 'https://github.com/react-spring/react-spring',
     links: [{ text: '', link: '' }],
     search: {
       enabled: false,
