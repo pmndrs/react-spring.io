@@ -104,6 +104,6 @@ function transform(input) {
     const output = nebu.process(input, { plugins })
     return `__r(props => {\n${output}\n})`
   } catch (e) {
-    return 'null'
+    return '__r(() => false)'
   }
 }
