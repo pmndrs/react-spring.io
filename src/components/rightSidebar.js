@@ -1,9 +1,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-
-// import Link from './link';
+import { Sidebar } from './styles/Sidebar'
 import config from '../../config'
-import { Sidebar, ListItem } from './styles/Sidebar'
 
 const SidebarLayout = ({ location }) => (
   <StaticQuery
@@ -46,12 +44,14 @@ const SidebarLayout = ({ location }) => (
             finalNavItems = tableOfContents.items.map((item, index) => {
               const itemId = item.title
                 ? item.title.replace(/\s+/g, '').toLowerCase()
-                : '#'
+                : ``
 
               return (
-                <ListItem key={index} to={`#${itemId}`} level={1}>
-                  {item.title}
-                </ListItem>
+                <li key={index}>
+                  <a href={'#' + itemId} level={1}>
+                    {item.title}
+                  </a>
+                </li>
               )
             })
           }
