@@ -9,7 +9,7 @@ const config = {
     pathPrefix: '/',
     siteUrl: 'https://react-spring.io',
     gaTrackingId: null,
-    trailingSlash: false,
+    trailingSlash: true,
   },
   header: {
     githubUrl: 'https://github.com/react-spring/react-spring.io',
