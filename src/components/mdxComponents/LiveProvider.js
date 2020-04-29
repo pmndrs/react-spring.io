@@ -19,26 +19,27 @@ const scope = {
   __r: useExample => {
     const Example = ({ visible }) => {
       const wasVisible = usePrev(visible)
+
+      let style
       try {
-        const style = useExample({
+        style = useExample({
           reset: !wasVisible && visible,
           cancel: !visible,
         })
-        return (
-          <a.div
-            style={{
-              width: 80,
-              height: 80,
-              marginTop: 20,
-              backgroundColor: 'purple',
-              borderRadius: 16,
-              ...style,
-            }}
-          />
-        )
-      } catch (e) {
-        return null
-      }
+      } catch (e) {}
+
+      return (
+        <a.div
+          style={{
+            width: 80,
+            height: 80,
+            marginTop: 20,
+            backgroundColor: 'purple',
+            borderRadius: 16,
+            ...style,
+          }}
+        />
+      )
     }
     return (
       <VisibilitySensor>
