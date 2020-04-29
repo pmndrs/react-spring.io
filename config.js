@@ -25,7 +25,12 @@ const config = {
   sidebar: {
     forcedNavOrder: [],
     collapsedNav: [],
-    links: [],
+    links: [
+      {
+        text: 'Spring Visualizer',
+        link: 'https://react-spring-visualizer.com/',
+      },
+    ],
     frontline: false,
     ignoreIndex: true,
     title: '',
