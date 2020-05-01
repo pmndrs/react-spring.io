@@ -77,16 +77,27 @@ const calculateTreeData = edges => {
   tmp.reverse()
   return tmp.reduce((accu, slug) => {
     const parts = slug.split('/')
+    // console.log('slug:', parts)
 
     let { items: prevItems } = accu
+    // console.log('prevItems:', [].concat(prevItems))
 
     const slicedParts =
       config.gatsby && config.gatsby.trailingSlash
         ? parts.slice(1, -2)
         : parts.slice(1, -1)
 
+    // console.log('slicedParts:', slicedParts)
     for (const part of slicedParts) {
-      let tmp = prevItems.find(item => item && item.label == part)
+      // const partRegex = new RegExp(`^${part}$`)
+      let tmp = prevItems.find(
+        item => item && item.label === part // || partRegex.test(item.label))
+      )
+      console.log(
+        'Found %O for %O',
+        { ...tmp, items: tmp.items && [...tmp.items] },
+        part
+      )
 
       if (tmp) {
         if (!tmp.items) {
@@ -95,19 +106,21 @@ const calculateTreeData = edges => {
       } else {
         tmp = { label: part, items: [] }
         prevItems.push(tmp)
+        // console.log('pushItem:', tmp, [...prevItems])
       }
       if (tmp && tmp.items) {
         prevItems = tmp.items
+        // console.log('prevItems:', [...prevItems])
       }
     }
     // sort items alphabetically.
-    prevItems.map(item => {
-      item.items = item.items.sort(function(a, b) {
-        if (a.label < b.label) return -1
-        if (a.label > b.label) return 1
-        return 0
-      })
-    })
+    // prevItems.map(item => {
+    //   item.items = item.items.sort(function(a, b) {
+    //     if (a.label < b.label) return -1
+    //     if (a.label > b.label) return 1
+    //     return 0
+    //   })
+    // })
     const slicedLength =
       config.gatsby && config.gatsby.trailingSlash
         ? parts.length - 2

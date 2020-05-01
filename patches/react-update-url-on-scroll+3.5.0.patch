@@ -1,0 +1,335 @@
+diff --git a/node_modules/react-update-url-on-scroll/lib/Manager.js b/node_modules/react-update-url-on-scroll/lib/Manager.js
+index 6e8de9f..7d13425 100644
+--- a/node_modules/react-update-url-on-scroll/lib/Manager.js
++++ b/node_modules/react-update-url-on-scroll/lib/Manager.js
+@@ -18,11 +18,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
+ 
+ var defaultConfig = {
+   affectHistory: false,
+-  debounce: 100,
+   keepLastAnchorHash: false,
+-  offset: 0,
++  offset: undefined,
+   scrollBehaviour: 'smooth',
+   scrollDelay: 0,
++  scrollThrottle: 100,
+   scrollOnImagesLoad: false,
+   onSectionEnter: null,
+   meta: null,
+@@ -37,7 +37,10 @@ var Manager = function Manager() {
+   _classCallCheck(this, Manager);
+ 
+   this.getBasePath = function (anchors) {
+-    var newBasePath = ('' + window.location.origin + window.location.pathname).replace(/\/$/, '');
++    var newBasePath = '' + window.location.origin + window.location.pathname;
++    if (_this.config.trailingSlash !== true) {
++      newBasePath = newBasePath.replace(/\/$/, '');
++    }
+ 
+     if (anchors) {
+       Object.keys(anchors).forEach(function (id) {
+@@ -65,6 +68,9 @@ var Manager = function Manager() {
+   this.configure = function (config) {
+     _this.config = _extends({}, defaultConfig, config);
+     _this.resetDefaultMetaTags();
++
++    _this.scrollHandler = (0, _func.throttle)(_this.handleScroll, ~~_this.config.scrollThrottle);
++    _this.forceHashUpdate = (0, _func.debounce)(_this.handleHashChange, 1);
+   };
+ 
+   this.resetDefaultMetaTags = function () {
+@@ -173,9 +179,19 @@ var Manager = function Manager() {
+     }
+   };
+ 
++  var scrollEndTimer;
++
+   this.handleScroll = function () {
++    if (_this.ignoreScrollEvents) {
++      clearTimeout(scrollEndTimer);
++      scrollEndTimer = setTimeout(function() {
++        _this.ignoreScrollEvents = false;
++      }, _this.config.scrollThrottle + 50);
++      return;
++    }
++
+     var _config = _this.config,
+-        offset = _config.offset,
++        offset = _config.offset || 0,
+         keepLastAnchorHash = _config.keepLastAnchorHash,
+         affectHistory = _config.affectHistory;
+ 
+@@ -200,23 +216,29 @@ var Manager = function Manager() {
+     }
+   };
+ 
++  var pageLoaded = new Promise(function(resolve) {
++    _this.onPageLoad = resolve;
++  });
++
+   this.handleHashChange = function (e) {
+     _this.basePath = _this.getBasePath(_this.anchors);
+ 
+     if (_this.forcedHash) {
+       _this.forcedHash = false;
+     } else {
+-      var hash = (0, _hash.getHash)({ manager: _this });
+-      var runScrollingToSection = function runScrollingToSection() {
+-        var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+-        return _this.goToSection(hash, delay);
+-      };
+-
++      var promises = [getScrollDelay()];
+       if (_this.config.scrollOnImagesLoad && !_this.imagesAreLoaded) {
+-        window.addEventListener(EVENT_IMAGES_LOADED, runScrollingToSection, false);
+-      } else {
+-        runScrollingToSection(_this.config.scrollDelay);
++        promises.push(
++          new Promise(function(resolve) {
++            window.addEventListener(EVENT_IMAGES_LOADED, resolve, false);
++          })
++        );
+       }
++      Promise.all(promises).then(function() {
++        var hash = (0, _hash.getHash)({ manager: _this });
++        _this.ignoreScrollEvents = true;
++        return _this.goToSection(hash);
++      }).catch(console.error);
+     }
+   };
+ 
+@@ -226,33 +248,47 @@ var Manager = function Manager() {
+     var element = (_this.anchors[id] ? _this.anchors[id].component : null) || document.getElementById(id);
+     var offset = _this.config.offset;
+ 
+-
+     if (element) {
+-      setTimeout(function () {
+-        var marginTop = ~~(element.currentStyle || window.getComputedStyle(element).marginTop.replace(/\D+/g, ''));
+-        var elementPosition = element.getBoundingClientRect().top;
+-        var offsetPosition = elementPosition - offset;
+-
+-        (0, _scroll.scrollTo)({
+-          top: offsetPosition,
+-          behavior: _this.config.scrollBehaviour
+-        });
+-      }, delay);
++      pageLoaded.then(function() {
++        setTimeout(function () {
++          var marginTop = ~~(element.currentStyle || window.getComputedStyle(element).marginTop.replace(/\D+/g, ''));
++          var elementPosition = element.offsetTop;
++          var offsetPosition = elementPosition -
++            (typeof offset !== 'undefined' 
++              ? offset 
++              : (window.innerHeight / 8) - (element.clientHeight / 2));
++  
++          (0, _scroll.scrollTo)({
++            top: offsetPosition,
++            behavior: _this.config.scrollBehaviour
++          });
++        }, delay);
++      }).catch(console.error);
+     }
+   };
+ 
+   this.anchors = {};
+   this.forcedHash = false;
+-  this.config = defaultConfig;
+-
+-  this.scrollHandler = (0, _func.debounce)(this.handleScroll, ~~this.config.debounce);
+-  this.forceHashUpdate = (0, _func.debounce)(this.handleHashChange, 1);
+-
+-  this.basePath = this.getBasePath();
+-  this.basePathName = window.location.pathname;
+   this.imagesAreLoaded = false;
++  this.ignoreScrollEvents = false;
++  this.configure(defaultConfig);
++
++  var scrollDelayPromise;
++  var getScrollDelay = function() {
++    if (!scrollDelayPromise && _this.config.scrollDelay > 0) {
++      scrollDelayPromise = new Promise(function(resolve) {
++        pageLoaded.then(() => {
++          setTimeout(resolve, _this.config.scrollDelay);
++        }).catch(console.error);
++      });
++    }
++    return scrollDelayPromise;
++  };
+ 
+-  this.resetDefaultMetaTags();
++  if (typeof window !== 'undefined') {
++    this.basePath = this.getBasePath();
++    this.basePathName = window.location.pathname;
++  }
+ 
+   setTimeout(function () {
+     var eventDispatched = false;
+@@ -293,7 +329,7 @@ var Manager = function Manager() {
+     }
+   });
+ 
+-  if (window.history && window.history.pushState) {
++  if (typeof window !== 'undefined' && window.history && window.history.pushState) {
+     window.addEventListener('popstate', function () {
+       if (_this.config.reloadOnGoingBack) {
+         window.location.reload();
+diff --git a/node_modules/react-update-url-on-scroll/lib/ScrollableSection.js b/node_modules/react-update-url-on-scroll/lib/ScrollableSection.js
+index 0282476..c5647b7 100644
+--- a/node_modules/react-update-url-on-scroll/lib/ScrollableSection.js
++++ b/node_modules/react-update-url-on-scroll/lib/ScrollableSection.js
+@@ -128,9 +128,9 @@ var ScrollableLink = exports.ScrollableLink = function (_Component2) {
+ 
+   _createClass(ScrollableLink, [{
+     key: 'handleClick',
+-    value: function handleClick() {
++    value: function handleClick(event) {
+       var href = this.props.href;
+-
++      event.preventDefault();
+ 
+       if (href && href !== '/' && href !== '#') {
+         var pathParts = href.split('#');
+@@ -139,13 +139,12 @@ var ScrollableLink = exports.ScrollableLink = function (_Component2) {
+         var id = (0, _func.createId)({ name: name, hash: hash });
+ 
+         if (_Manager2.default.anchors[id]) {
++          _Manager2.default.ignoreScrollEvents = true;
+           (0, _hash.updateHash)({
+             anchor: _Manager2.default.anchors[id],
+             affectHistory: false,
+             manager: _Manager2.default
+           });
+-
+-          _Manager2.default.goToSection(id);
+         }
+       } else {
+         (0, _hash.removeHash)({ manager: _Manager2.default });
+diff --git a/node_modules/react-update-url-on-scroll/lib/index.js b/node_modules/react-update-url-on-scroll/lib/index.js
+index ad8a759..9d983b3 100644
+--- a/node_modules/react-update-url-on-scroll/lib/index.js
++++ b/node_modules/react-update-url-on-scroll/lib/index.js
+@@ -52,3 +52,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
+ 
+ var goToTop = exports.goToTop = _Manager2.default.goToTop;
+ var configureAnchors = exports.configureAnchors = _Manager2.default.configure;
++
++exports.pageDidLoad = function() {
++  _Manager2.default.onPageLoad();
++};
+\ No newline at end of file
+diff --git a/node_modules/react-update-url-on-scroll/lib/utils/func.js b/node_modules/react-update-url-on-scroll/lib/utils/func.js
+index a16b180..2441f20 100644
+--- a/node_modules/react-update-url-on-scroll/lib/utils/func.js
++++ b/node_modules/react-update-url-on-scroll/lib/utils/func.js
+@@ -4,6 +4,23 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ var _arguments = arguments;
++
++var throttle = exports.throttle = function throttle(func, ms) {
++  var timer = -1;
++  var timestamp = Date.now();
++  return function run() {
++    var now = Date.now();
++    clearTimeout(timer);
++    if (now - timestamp < ms) {
++      var delay = ms - (now - timestamp);
++      timer = setTimeout(run, delay);
++      return;
++    }
++    timestamp = now;
++    func();
++  }
++};
++
+ var debounce = exports.debounce = function debounce(func, wait, immediate) {
+   var timeout = void 0;
+   return function () {
+diff --git a/node_modules/react-update-url-on-scroll/lib/utils/hash.js b/node_modules/react-update-url-on-scroll/lib/utils/hash.js
+index 00865a3..57251c5 100644
+--- a/node_modules/react-update-url-on-scroll/lib/utils/hash.js
++++ b/node_modules/react-update-url-on-scroll/lib/utils/hash.js
+@@ -9,7 +9,9 @@ var _func = require('./func');
+ 
+ var _meta = require('./meta');
+ 
+-var basePath = '' + window.location.origin + window.location.pathname;
++var basePath = typeof window !== 'undefined'
++  ? '' + window.location.origin + window.location.pathname
++  : '';
+ 
+ var getCurrentHash = function getCurrentHash() {
+   return decodeURI(window.location.hash.slice(1));
+@@ -38,6 +40,7 @@ var updateHash = exports.updateHash = function updateHash(_ref2) {
+   var newPath = '' + (name ? (exact ? window.location.origin : basePath) + '/' + name : basePath) + (hash ? '#' + hash : '');
+ 
+   window.history[method](undefined, undefined, newPath);
++  window.dispatchEvent(new HashChangeEvent('hashchange'));
+ 
+   if (meta) {
+     (0, _meta.setMetaTags)(meta);
+@@ -51,6 +54,7 @@ var removeHash = exports.removeHash = function removeHash(_ref3) {
+   var manager = _ref3.manager;
+ 
+   window.history.replaceState(undefined, manager.defaultMetaTags.title, manager ? manager.basePath : basePath);
++  window.dispatchEvent(new HashChangeEvent('hashchange'));
+ 
+   manager.setDefaultMetaTags();
+ };
+\ No newline at end of file
+diff --git a/node_modules/react-update-url-on-scroll/lib/utils/meta.js b/node_modules/react-update-url-on-scroll/lib/utils/meta.js
+index 4441707..86263f1 100644
+--- a/node_modules/react-update-url-on-scroll/lib/utils/meta.js
++++ b/node_modules/react-update-url-on-scroll/lib/utils/meta.js
+@@ -69,9 +69,13 @@ var getDefaultMetaTags = exports.getDefaultMetaTags = function getDefaultMetaTag
+     return metaTags;
+   }
+ 
+-  var metas = document.getElementsByTagName('meta');
++  if (typeof document !== 'undefined') {
++    var metas = document.getElementsByTagName('meta');
++
++    return (0, _arrayFrom2.default)(metas).reduce(function (acc, item) {
++      return _extends({}, acc, _defineProperty({}, getMetaTagName(item), item.getAttribute('content')));
++    }, { title: document.title });
++  }
+ 
+-  return (0, _arrayFrom2.default)(metas).reduce(function (acc, item) {
+-    return _extends({}, acc, _defineProperty({}, getMetaTagName(item), item.getAttribute('content')));
+-  }, { title: document.title });
++  return { title: '' };
+ };
+\ No newline at end of file
+diff --git a/node_modules/react-update-url-on-scroll/lib/utils/scroll.js b/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
+index a5206e7..d58770f 100644
+--- a/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
++++ b/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
+@@ -101,16 +101,23 @@ var checkElementRelevance = exports.checkElementRelevance = function checkElemen
+ //    to be more relevant.
+ var getBestAnchorGivenScrollLocation = exports.getBestAnchorGivenScrollLocation = function getBestAnchorGivenScrollLocation(anchors, offset) {
+   var bestId = void 0,
+-      bestElement = void 0;
++      bestElement = void 0,
++      bestDistance = void 0;
++
++  var targetY = getScrollTop() + (window.innerHeight / 8);
+ 
+   Object.keys(anchors).forEach(function (id) {
+     var element = anchors[id].component;
+-    if (doesElementContainScrollTop(element, offset)) {
+-      if (!bestElement || checkElementRelevance(bestElement, element)) {
++    var offsetTop = getElementOffset(element).top;
++    var distance = Math.abs(offsetTop - targetY);
++    if (offsetTop < targetY) {
++      if (!bestDistance || distance < bestDistance) {
++        bestDistance = distance;
+         bestElement = element;
+         bestId = id;
+       }
+     }
+   });
++
+   return bestId;
+ };
+\ No newline at end of file

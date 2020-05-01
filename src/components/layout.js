@@ -25,6 +25,7 @@ const Wrapper = styled('div')`
 
 const Content = styled('main')`
   width: 75ch;
+  max-width: 100vw;
   margin: 0px 3rem;
   padding-top: 1.5rem;
   background: ${({ theme }) => theme.colors.background};
@@ -34,8 +35,8 @@ const Content = styled('main')`
   }
 
   @media only screen and (max-width: 1023px) {
-    padding-left: 0;
-    margin: 0 10px;
+    margin: 0;
+    padding: 0 1.25em;
     padding-top: 1.5rem;
   }
 `
@@ -57,28 +58,30 @@ const RightSideBarWidth = styled('div')`
   width: 224px;
 `
 
-const Layout = ({ children, location }) => (
-  <ThemeProvider location={location}>
-    <MDXProvider components={mdxComponents}>
-      <Wrapper>
-        <LeftSideBarWidth className={'hiddenMobile'}>
-          <Sidebar location={location} />
-        </LeftSideBarWidth>
-        {config.sidebar.title ? (
-          <div
-            className={'sidebarTitle sideBarShow'}
-            dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
-          />
-        ) : null}
-        <Content>
-          <MaxWidth>{children}</MaxWidth>
-        </Content>
-        <RightSideBarWidth className={'hiddenMobile'}>
-          <RightSidebar location={location} />
-        </RightSideBarWidth>
-      </Wrapper>
-    </MDXProvider>
-  </ThemeProvider>
-)
+const Layout = ({ children, location }) => {
+  return (
+    <ThemeProvider location={location}>
+      <MDXProvider components={mdxComponents}>
+        <Wrapper>
+          <LeftSideBarWidth className={'hiddenMobile'}>
+            <Sidebar location={location} />
+          </LeftSideBarWidth>
+          {config.sidebar.title ? (
+            <div
+              className={'sidebarTitle sideBarShow'}
+              dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
+            />
+          ) : null}
+          <Content>
+            <MaxWidth>{children}</MaxWidth>
+          </Content>
+          <RightSideBarWidth className={'hiddenMobile'}>
+            <RightSidebar location={location} />
+          </RightSideBarWidth>
+        </Wrapper>
+      </MDXProvider>
+    </ThemeProvider>
+  )
+}
 
 export default Layout

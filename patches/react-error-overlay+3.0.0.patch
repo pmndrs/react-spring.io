@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-error-overlay/lib/index.js b/node_modules/react-error-overlay/lib/index.js
+index c721c3a..c50acee 100644
+--- a/node_modules/react-error-overlay/lib/index.js
++++ b/node_modules/react-error-overlay/lib/index.js
+@@ -2472,7 +2472,7 @@ var map = function () {
+                   line = _map$getOriginalPosit.line,
+                   column = _map$getOriginalPosit.column;
+ 
+-              var originalSource = source == null ? [] : map.getSource(source);
++              var originalSource = source == null ? [] : map.getSource(source) || source;
+               return new __WEBPACK_IMPORTED_MODULE_1__stack_frame__["b" /* default */](functionName, fileName, lineNumber, columnNumber, Object(__WEBPACK_IMPORTED_MODULE_3__getLinesAround__["a" /* getLinesAround */])(lineNumber, contextLines, fileSource), functionName, source, line, column, Object(__WEBPACK_IMPORTED_MODULE_3__getLinesAround__["a" /* getLinesAround */])(line, contextLines, originalSource));
+             }));
+ 

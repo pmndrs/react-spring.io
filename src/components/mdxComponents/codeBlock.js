@@ -3,6 +3,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer'
 import Loadable from 'react-loadable'
 import LoadingProvider from './loading'
 import prismTheme from '../theme/prism'
+import { format } from '../editor/format'
 
 /** Removes the last token from a code example if it's empty. */
 function cleanTokens(tokens) {
@@ -31,7 +32,7 @@ const CodeBlock = ({ children: exampleCode, ...props }) => {
     return (
       <Highlight
         {...defaultProps}
-        code={exampleCode}
+        code={format(exampleCode)}
         language="javascript"
         theme={prismTheme}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (

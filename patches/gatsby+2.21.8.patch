@@ -1,0 +1,194 @@
+diff --git a/node_modules/gatsby/cache-dir/production-app.js b/node_modules/gatsby/cache-dir/production-app.js
+index 23b319f..bc47aa2 100644
+--- a/node_modules/gatsby/cache-dir/production-app.js
++++ b/node_modules/gatsby/cache-dir/production-app.js
+@@ -1,28 +1,27 @@
+-import { apiRunner, apiRunnerAsync } from "./api-runner-browser"
+-import React from "react"
+-import ReactDOM from "react-dom"
+-import { Router, navigate, Location, BaseContext } from "@reach/router"
+-import { ScrollContext } from "gatsby-react-router-scroll"
+-import domReady from "@mikaelkristiansson/domready"
++import { apiRunner, apiRunnerAsync } from './api-runner-browser'
++import React from 'react'
++import ReactDOM from 'react-dom'
++import { Router, navigate, Location, BaseContext } from '@reach/router'
++import domReady from '@mikaelkristiansson/domready'
+ import {
+   shouldUpdateScroll,
+   init as navigationInit,
+   RouteUpdates,
+-} from "./navigation"
+-import emitter from "./emitter"
+-import PageRenderer from "./page-renderer"
+-import asyncRequires from "./async-requires"
++} from './navigation'
++import emitter from './emitter'
++import PageRenderer from './page-renderer'
++import asyncRequires from './async-requires'
+ import {
+   setLoader,
+   ProdLoader,
+   publicLoader,
+   PageResourceStatus,
+-} from "./loader"
+-import EnsureResources from "./ensure-resources"
+-import stripPrefix from "./strip-prefix"
++} from './loader'
++import EnsureResources from './ensure-resources'
++import stripPrefix from './strip-prefix'
+ 
+ // Generated during bootstrap
+-import matchPaths from "./match-paths.json"
++import matchPaths from './match-paths.json'
+ 
+ const loader = new ProdLoader(asyncRequires, matchPaths)
+ setLoader(loader)
+@@ -54,8 +53,7 @@ apiRunnerAsync(`onClientEntry`).then(() => {
+       value={{
+         baseuri: `/`,
+         basepath: `/`,
+-      }}
+-    >
++      }}>
+       <PageRenderer {...props} />
+     </BaseContext.Provider>
+   )
+@@ -67,31 +65,25 @@ apiRunnerAsync(`onClientEntry`).then(() => {
+         <EnsureResources location={location}>
+           {({ pageResources, location }) => (
+             <RouteUpdates location={location}>
+-              <ScrollContext
++              <Router
++                basepath={__BASE_PATH__}
+                 location={location}
+-                shouldUpdateScroll={shouldUpdateScroll}
+-              >
+-                <Router
+-                  basepath={__BASE_PATH__}
++                id="gatsby-focus-wrapper">
++                <RouteHandler
++                  path={
++                    pageResources.page.path === `/404.html`
++                      ? stripPrefix(location.pathname, __BASE_PATH__)
++                      : encodeURI(
++                          pageResources.page.matchPath ||
++                            pageResources.page.path
++                        )
++                  }
++                  {...this.props}
+                   location={location}
+-                  id="gatsby-focus-wrapper"
+-                >
+-                  <RouteHandler
+-                    path={
+-                      pageResources.page.path === `/404.html`
+-                        ? stripPrefix(location.pathname, __BASE_PATH__)
+-                        : encodeURI(
+-                            pageResources.page.matchPath ||
+-                              pageResources.page.path
+-                          )
+-                    }
+-                    {...this.props}
+-                    location={location}
+-                    pageResources={pageResources}
+-                    {...pageResources.json}
+-                  />
+-                </Router>
+-              </ScrollContext>
++                  pageResources={pageResources}
++                  {...pageResources.json}
++                />
++              </Router>
+             </RouteUpdates>
+           )}
+         </EnsureResources>
+diff --git a/node_modules/gatsby/cache-dir/root.js b/node_modules/gatsby/cache-dir/root.js
+index 30974a7..dd578e2 100644
+--- a/node_modules/gatsby/cache-dir/root.js
++++ b/node_modules/gatsby/cache-dir/root.js
+@@ -1,18 +1,17 @@
+-import React from "react"
+-import { Router, Location, BaseContext } from "@reach/router"
+-import { ScrollContext } from "gatsby-react-router-scroll"
++import React from 'react'
++import { Router, Location, BaseContext } from '@reach/router'
+ 
+ import {
+   shouldUpdateScroll,
+   init as navigationInit,
+   RouteUpdates,
+-} from "./navigation"
+-import { apiRunner } from "./api-runner-browser"
+-import loader from "./loader"
+-import { PageQueryStore, StaticQueryStore } from "./query-result-store"
+-import EnsureResources from "./ensure-resources"
++} from './navigation'
++import { apiRunner } from './api-runner-browser'
++import loader from './loader'
++import { PageQueryStore, StaticQueryStore } from './query-result-store'
++import EnsureResources from './ensure-resources'
+ 
+-import { reportError, clearError } from "./error-overlay-handler"
++import { reportError, clearError } from './error-overlay-handler'
+ 
+ // TODO: Remove entire block when we make fast-refresh the default
+ // In fast-refresh, this logic is all moved into the `error-overlay-handler`
+@@ -51,8 +50,7 @@ const RouteHandler = props => (
+     value={{
+       baseuri: `/`,
+       basepath: `/`,
+-    }}
+-  >
++    }}>
+     <PageQueryStore {...props} />
+   </BaseContext.Provider>
+ )
+@@ -66,25 +64,19 @@ class LocationHandler extends React.Component {
+         <EnsureResources location={location}>
+           {locationAndPageResources => (
+             <RouteUpdates location={location}>
+-              <ScrollContext
++              <Router
++                basepath={__BASE_PATH__}
+                 location={location}
+-                shouldUpdateScroll={shouldUpdateScroll}
+-              >
+-                <Router
+-                  basepath={__BASE_PATH__}
+-                  location={location}
+-                  id="gatsby-focus-wrapper"
+-                >
+-                  <RouteHandler
+-                    path={encodeURI(
+-                      locationAndPageResources.pageResources.page.matchPath ||
+-                        locationAndPageResources.pageResources.page.path
+-                    )}
+-                    {...this.props}
+-                    {...locationAndPageResources}
+-                  />
+-                </Router>
+-              </ScrollContext>
++                id="gatsby-focus-wrapper">
++                <RouteHandler
++                  path={encodeURI(
++                    locationAndPageResources.pageResources.page.matchPath ||
++                      locationAndPageResources.pageResources.page.path
++                  )}
++                  {...this.props}
++                  {...locationAndPageResources}
++                />
++              </Router>
+             </RouteUpdates>
+           )}
+         </EnsureResources>
+@@ -105,8 +97,7 @@ class LocationHandler extends React.Component {
+         <Router
+           basepath={__BASE_PATH__}
+           location={location}
+-          id="gatsby-focus-wrapper"
+-        >
++          id="gatsby-focus-wrapper">
+           <RouteHandler
+             path={location.pathname}
+             location={location}

@@ -1,0 +1,13 @@
+diff --git a/node_modules/gatsby-plugin-mdx/gatsby/source-nodes.js b/node_modules/gatsby-plugin-mdx/gatsby/source-nodes.js
+index 706fc18..fe3d9e7 100644
+--- a/node_modules/gatsby-plugin-mdx/gatsby/source-nodes.js
++++ b/node_modules/gatsby-plugin-mdx/gatsby/source-nodes.js
+@@ -70,6 +70,8 @@ module.exports = (
+   createTypes(`
+     type MdxFrontmatter {
+       title: String!
++      metaTitle: String
++      metaDescription: String
+     }
+ 
+     type MdxHeadingMdx {

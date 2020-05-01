@@ -1,9 +1,12 @@
 // GitHub Light
 // Author: Thomas Pink (https://github.com/thomaspink/vscode-github-theme)
+import theme from '../theme'
 
 export default {
   plain: {
     color: '#24292e',
+    fontFamily: theme.fonts.mono,
+    fontSize: '15px',
   },
   styles: [
     {

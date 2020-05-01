@@ -46,6 +46,15 @@ export const RightSidebar = styled('aside')`
     color: ${props => props.theme.colors.text};
   }
 
+  .rightSideBarUL li a.level-3 {
+    margin-left: 12px;
+    color: hsl(216, 15%, 60%);
+  }
+
+  .rightSideBarUL li a.active {
+    color: red;
+  }
+
   @media only screen and (max-width: 50rem) {
     width: 100%;
     position: relative;

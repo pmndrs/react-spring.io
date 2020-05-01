@@ -1,7 +1,37 @@
 require('dotenv').config()
 const queries = require('./src/utils/algolia')
 const config = require('./config')
-const plugins = [
+const { Link } = require('styled-icons/fa-solid/Link')
+
+const autolink = {
+  resolve: `gatsby-remark-autolink-headers`,
+  options: {
+    offsetY: 100,
+    className: 'autolink',
+    maintainCase: true,
+    removeAccents: true,
+    enableCustomId: true,
+    isIconAfterHeader: true,
+    elements: [`h1`, `h2`, `h3`],
+  },
+}
+
+const remarkPlugins = [
+  {
+    resolve: 'gatsby-remark-images',
+    options: {
+      maxWidth: 1035,
+      sizeByPixelDensity: true,
+    },
+  },
+  {
+    resolve: 'gatsby-remark-copy-linked-files',
+  },
+  autolink,
+]
+
+const gatsbyPlugins = [
+  // autolink,
   'gatsby-plugin-sitemap',
   'gatsby-plugin-sharp',
   {
@@ -28,18 +58,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-mdx',
     options: {
-      gatsbyRemarkPlugins: [
-        {
-          resolve: 'gatsby-remark-images',
-          options: {
-            maxWidth: 1035,
-            sizeByPixelDensity: true,
-          },
-        },
-        {
-          resolve: 'gatsby-remark-copy-linked-files',
-        },
-      ],
+      gatsbyRemarkPlugins: remarkPlugins,
       extensions: ['.mdx', '.md'],
     },
   },
@@ -54,12 +73,6 @@ const plugins = [
       anonymize: false,
     },
   },
-  {
-    resolve: 'gatsby-transformer-remark',
-    options: {
-      plugins: ['gatsby-remark-autolink-headers'],
-    },
-  },
 ]
 
 // check and add algolia
@@ -69,7 +82,7 @@ if (
   config.header.search.algoliaAppId &&
   config.header.search.algoliaAdminKey
 ) {
-  plugins.push({
+  gatsbyPlugins.push({
     resolve: `gatsby-plugin-algolia`,
     options: {
       appId: config.header.search.algoliaAppId, // algolia application id
@@ -82,26 +95,29 @@ if (
 
 // check and add pwa functionality
 if (config.pwa && config.pwa.enabled && config.pwa.manifest) {
-  plugins.push({
-    resolve: `gatsby-plugin-manifest`,
-    options: { ...config.pwa.manifest },
-  })
-  plugins.push({
-    resolve: 'gatsby-plugin-offline',
-    options: {
-      appendScript: require.resolve(`./src/custom-sw-code.js`),
+  gatsbyPlugins.push(
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: { ...config.pwa.manifest },
     },
-  })
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        appendScript: require.resolve(`./src/custom-sw-code.js`),
+      },
+    }
+  )
 } else {
-  plugins.push('gatsby-plugin-remove-serviceworker')
+  gatsbyPlugins.push('gatsby-plugin-remove-serviceworker')
 }
 
 // check and remove trailing slash
 if (config.gatsby && !config.gatsby.trailingSlash) {
-  plugins.push('gatsby-plugin-remove-trailing-slashes')
+  gatsbyPlugins.push('gatsby-plugin-remove-trailing-slashes')
 }
 
 module.exports = {
+  plugins: gatsbyPlugins,
   pathPrefix: config.gatsby.pathPrefix,
   siteMetadata: {
     title: config.siteMetadata.title,
@@ -120,5 +136,4 @@ module.exports = {
     headerLinks: config.header.links,
     siteUrl: config.gatsby.siteUrl,
   },
-  plugins,
 }

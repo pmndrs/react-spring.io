@@ -1,11 +1,9 @@
 import styled from '@emotion/styled'
 
 export const StyledHeading = styled('h1')`
-  font-size: 32px;
+  font-size: 36px;
   line-height: 1.5;
   font-weight: 500;
-  border-left: 2px solid #1ed3c6;
-  padding: 0 16px;
   flex: 1;
   margin-top: 0;
   padding-top: 0;
@@ -13,8 +11,7 @@ export const StyledHeading = styled('h1')`
 `
 
 export const Edit = styled('div')`
-  padding: 1rem 1.5rem;
-  text-align: right;
+  padding: 1rem 0;
 
   a {
     font-size: 14px;
@@ -39,6 +36,7 @@ export const Edit = styled('div')`
 `
 
 export const StyledMainWrapper = styled.div`
+  width: 100%;
   max-width: 750px;
   color: ${props => props.theme.colors.text};
 
@@ -47,7 +45,7 @@ export const StyledMainWrapper = styled.div`
     -webkit-padding-start: 40px;
     -moz-padding-start: 40px;
     -o-padding-start: 40px;
-    margin: 24px 0px;
+    margin: 18px 0px 24px;
     padding: 0px 0px 0px 2em;
 
     li {
@@ -62,29 +60,62 @@ export const StyledMainWrapper = styled.div`
     color: ${props => props.theme.colors.link};
   }
 
+  .autolink {
+    display: inline-block;
+    transform: translateY(1px);
+    padding: 0 8px;
+  }
+
+  small {
+    font-style: italic;
+  }
+
   code {
     color: hsl(216, 30%, 32%);
     background: hsl(218, 100%, 98%);
     border: 1px solid hsl(218, 70%, 90%);
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 2px 5px;
     margin: 0 1px;
     font-size: 0.875em;
     font-family: ${props => props.theme.fonts.mono};
+    line-height: 1.375em;
   }
 
   pre {
-    border: 0 !important;
     border-radius: 15px;
+    font-size: 15px;
     font-family: ${props => props.theme.fonts.mono};
     line-height: 1.375em;
   }
 
   .pre {
-    font-size: 14px;
     margin: 0px;
-    padding: 16px;
+    padding: 12px;
     overflow: auto;
+    border-radius: 0;
+  }
+
+  textarea {
+    transition: border 200ms ease-out;
+    border: 2px solid hsla(216, 30%, 86%, 0) !important;
+    border-radius: 15px;
+  }
+
+  textarea:focus {
+    outline: none;
+    border: 2px solid hsla(216, 30%, 86%, 1) !important;
+  }
+
+  .react-live-editor > pre {
+    border: 2px solid hsla(216, 30%, 86%, 0) !important;
+  }
+
+  hr {
+    height: 1px;
+    background: hsl(218, 25%, 95%);
+    border: 0;
+    margin: 30px 0;
   }
 
   @media (max-width: 767px) {

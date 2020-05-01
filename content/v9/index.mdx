@@ -1,0 +1,625 @@
+---
+title: Introducing v9.0
+---
+
+Behold! Every feature introduced in v9, on this page!
+
+Want to know the **breaking changes**? 👻 [Go here!](/v9/breaking-changes)
+
+🎨 _The examples with graphics are editable._
+
+---
+
+# Dependency arrays {#dependency-arrays}
+
+Every hook except `useChain` now supports a `deps` argument, which is an
+array exactly like what `useEffect` takes.
+
+Whenever a dependency is changed, the update will be processed and thus
+the animation will be updated. But otherwise, updates are ignored when
+all dependencies are unchanged.
+
+When a dependency array is passed, the `useSpring` and `useSprings` hooks
+each return an `animate` function.
+
+```js
+const [style, animate] = useSpring({ x: 0, y: 0 }, [])
+useEffect(() => {
+  animate({ x: 100, y: 100 })
+}, [])
+```
+
+---
+
+# The `useTransition` rework
+
+Read the [Breaking Changes](/v9/breaking-changes) page to learn about the new
+API for the `useTransition` hook.
+
+---
+
+# The `loop` prop
+
+Use `loop: true` to repeat an animation.
+
+```js react-live=true
+useSpring({
+  loop: true,
+  from: { rotateZ: 0 },
+  to: { rotateZ: 180 },
+})
+```
+
+## The `loop` function
+
+Pass a function to be called after each loop. Return `true` to continue
+looping, or `false` to stop.
+
+```js react-live=true
+let n = 0
+useSpring({
+  loop: () => 3 > n++,
+  from: { x: 0 },
+  to: { x: 100 },
+})
+```
+
+The `loop` function can also return a `loop` object, which is described in the
+next section. This is useful when you want to decide the next loop animation
+right after the previous loop is finished.
+
+## The `loop` object
+
+Define a `loop` object to customize the loop animation separately from the
+initial animation. It may contain any of the `useSpring` props. For example,
+if `reverse: true` is used, the loop animation will reverse on each loop.
+
+```js react-live=true
+useSpring({
+  loop: { reverse: true },
+  from: { x: 0 },
+  to: { x: 100 },
+})
+```
+
+### Inherited props
+
+The `loop` object is always merged into a copy of the props object it was
+defined in. The following example shows a loop animation that inherits its
+`config` prop.
+
+```js react-live=true
+useSpring({
+  from: { x: 0 },
+  config: { duration: 1000 },
+  loop: {
+    x: 100,
+  },
+})
+```
+
+Notice how the loop doesn't run more than once. That's because some props
+are **never** inherited. These props include `default`, `reset`, and `reverse`.
+
+To loop the animation, try adding `reset: true` to the `loop` prop in the above
+example. Alternatively, you could add `from: { x: 0 }` to get the same effect.
+
+Before we move on, try overriding the inherited `config` prop by adding
+`config: { friction: 5 }` to the `loop` object in the example above.
+
+---
+
+# The `cancel` prop
+
+When `true`, the `cancel` prop stops the animation of every animated value
+owned by the `Controller` that receives it.
+
+The following example never animates, because `cancel` is always true.
+
+```js
+useSpring({
+  cancel: true,
+  from: { x: 0 },
+  to: { x: 100 },
+})
+```
+
+Once the `cancel` prop turns from `true` to `false`, the declared animation
+will resume or reset, depending on the given props.
+
+### Delayed updates
+
+The `cancel` prop even prevents delayed updates. 😎
+
+```jsx
+const [style, animate] = useSpring(() => ({ x: 0 }))
+
+// Pass this to an element.
+const onClick = () => {
+  animate({ x: 100, delay: 500 })
+
+  // Prevent the previous update. 🤣
+  animate({ cancel: true })
+}
+```
+
+### Specific keys
+
+To cancel the animation of specific keys, you can pass a single key, an array of
+keys, or a `(key: string) => boolean` function.
+
+```js
+// Using a single key
+cancel: 'x',
+
+// Using an array of keys
+cancel: ['x', 'y'],
+
+// Using a function
+cancel: key => key !== 'x',
+```
+
+The `reset` and `immediate` props support these same types.
+
+---
+
+# Config props
+
+The `config` prop existed in v8.x, but v9.x brings a few improvements.
+
+### Partial updates
+
+The `config` prop can now be partially updated.
+
+```js
+const { x } = useSpring({
+  from: { x: 0 },
+  config: { frequency: 1 },
+})
+useEffect(() => {
+  x.start({ config: { velocity: 0 } })
+  x.start({ config: { friction: 20 } })
+}, [])
+```
+
+### Additions
+
+The following props have been added:
+
+- `frequency?: number`
+
+  The natural frequency (in seconds), which dictates the number of bounces
+  per second when no damping exists.
+
+  When defined, `tension` is derived from this, and `friction` is derived
+  from `tension` and `damping`.
+
+- `damping?: number`
+
+  The damping ratio, which dictates how the spring slows down.
+
+  Set to `0` to never slow down. Set to `1` to slow down without bouncing.
+  Between `0` and `1` is for you to explore.
+
+  Only works when `frequency` is defined. Defaults to `1`.
+
+- `round?: number`
+
+  While animating, round to the nearest multiple of this number.
+  The `from` and `to` values are never rounded, as well as any value
+  passed to the `set` method of an animated value.
+
+- `bounce?: number`
+
+  When above zero, the spring will bounce instead of overshooting when
+  exceeding its goal value.
+
+  Its velocity is multiplied by `-1 + bounce` whenever its current value
+  equals or exceeds its goal. For example, setting `bounce` to `0.5` chops
+  the velocity in half on each bounce, in addition to any friction.
+
+- `progress?: number`
+
+  When used with `duration`, it decides how far into the easing function
+  to start from. The duration itself is unaffected.
+
+  Defaults to `0`, which means "start from the beginning".
+
+  Setting to `1+` makes an immediate animation. Setting to `0.5` means "start
+  from the middle of the easing function". Any number `>= 0` and `<= 1` makes
+  sense here.
+
+- `restVelocity?: number`
+
+  The smallest velocity before the animation is considered to be "not moving".
+  When undefined, `precision` is used instead.
+
+---
+
+# Default props
+
+The `default` prop lets you set the default value of certain props defined in
+the same update.
+
+### Declarative updates
+
+For the declarative API, this prop is `true` by default. In the following
+example, the `onRest` handler is inherited by every update passed to `animate`,
+except when a call has its own `onRest` prop defined.
+
+```jsx
+useSpring({
+  to: async animate => { ... },
+  onRest: () => { ... }
+})
+```
+
+### Imperative updates
+
+Imperative updates can use `default: true` to set default props. When an
+async `to` prop is defined by an imperative update, it will inherit props from
+the imperative update like this:
+
+```jsx
+useSpring({
+  from: { x: 0 },
+  to: async animate => {
+    // The `config` prop below is inherited by
+    // both objects in the `to` array.
+    await animate({
+      to: [{ x: 100 }, { x: 0 }],
+      config: { tension: 100 },
+    })
+  },
+})
+```
+
+Default props are inherited while an update is being processed by the internal
+diffing algorithm within [`SpringValue#_merge`][merge1].
+
+[merge1]: https://github.com/react-spring/react-spring/blob/a2210466245b09f9686cd3b5172d61f1854a7e38/packages/core/src/SpringValue.ts#L521-L800
+
+For example, both the `ref` prop and the `animate` function will inherit
+the default props defined below (in the `useSpring` props function).
+
+```jsx
+const ref = useRef()
+const [{ x }, animate] = useSpring(() => ({
+  x: 0,
+  onRest: () => { ... },
+  ref,
+}))
+
+useEffect(async () => {
+  // Animate to 100 with the ref API.
+  await ref.current.start({ x: 100 })
+  // Animate to 0 with the function API.
+  await animate({ x: 0 })
+}, [])
+```
+
+### Compatible props
+
+In the last example, only the `onRest` prop is inherited, because only some
+props can have a default value.
+
+The following props can have default values:
+
+- `config`
+- `immediate`
+- `onDelayEnd`
+- `onProps`
+- `onStart`
+- `onChange`
+- `onRest`
+
+---
+
+# Event props
+
+Props like `onRest` can now be defined on a per-key basis.
+
+```jsx
+useSpring({
+  from: { x: 0, y: 0 },
+  onRest: {
+    x: () => console.log('x.onRest'),
+    y: () => console.log('y.onRest'),
+  },
+})
+```
+
+Any prop whose name starts with `on` is affected.
+
+### React to finished delays.
+
+The `onDelayEnd` prop is called for every non-cancelled update, after its
+`delay` is finished. It receives a props object and the affected `SpringValue`
+object.
+
+```jsx
+useSpring({
+  onDelayEnd(props, spring) {
+    console.log('onDelayEnd:', props, spring)
+  },
+})
+```
+
+### Inspect your props.
+
+The `onProps` prop is called for every update that wasn't prevented.
+It receives a props object and the affected `SpringValue` object.
+
+It can be useful when debugging an animation.
+
+This prop is called immediately after all props have been merged into
+the `animation` object owned by the `SpringValue` passed to you.
+
+This prop is called before the first frame of the updated animation.
+
+```jsx
+useSpring({
+  onProps(props, spring) {
+    console.log('onProps:', {
+      // Inspect the update props.
+      props,
+      // Inspect the animated value.
+      spring,
+      // Inspect the animation state.
+      ...spring.animation,
+    })
+  },
+})
+```
+
+---
+
+# The `SpringValue` class
+
+Imperative APIs are a great way of animating in response to events, without
+the need for component state (ie: render-based updates). In this sense, the
+`SpringValue` class is a welcome addition to `react-spring`.
+
+It wraps around an `Animated` node, the type of object you passed to animated
+components in v8. Now you'll be passing `SpringValue` objects, which manage
+their own `Animation` state (separate from any `Controller` object).
+
+### `new SpringValue(props)`
+
+Create an animated value. Any type is valid, but only certain types are
+actually animated.
+
+The `props` argument can be either..
+
+- a `to` value
+- or a set of `useSpring` props.
+
+Types that cannot be animated are basically `immediate: true` animations.
+Such types include: a `boolean`, a `display` string like `"none"`, etc.
+
+The animatable types are:
+
+- `number`s
+
+  ```js
+  new SpringValue(0)
+  ```
+
+- `string`s with numbers
+
+  ```js
+  new SpringValue('0px 10px')
+  new SpringValue('rgba(0, 0, 255, 1)')
+  ```
+
+- named colors
+
+  ```js
+  new SpringValue('red')
+  ```
+
+- and arrays of the preceding types
+
+  ```js
+  new SpringValue([0, '1em'])
+  ```
+
+## Methods
+
+### `get(): T`
+
+Get the current value.
+
+```js
+const value = spring.get()
+```
+
+### `set(value): this`
+
+Set the current value, replace the `goal` value, and stop animating.
+
+```js
+spring.set(1)
+```
+
+### `update(props): this`
+
+Add an update to the `queue` array. All updates in the `queue` are
+applied at the same time.
+
+```js
+const delays = [0, 100, 300]
+for (const delay of delays) {
+  spring.update({ x: delay })
+}
+spring.start()
+```
+
+⚠️ This method may be deprecated soon.
+
+### `start(): Promise`
+
+Process the `queue` array and replace it with an empty array.
+
+The returned `Promise` resolves after every animation triggered by
+the `queue` array has either finished or been cancelled.
+
+```js
+await spring.start()
+```
+
+The awaited value is an `AnimationResult` object.
+
+The `AnimationResult` type has the following properties:
+
+- `value: T`
+- `spring: SpringValue`
+- `finished?: boolean`
+- `cancelled?: boolean`
+
+### `start(props): Promise`
+
+Process the given `props` object.
+
+The returned promise is resolved after the animation is finished or cancelled.
+If a `start` call triggers no animation, the promise resolves immediately.
+
+```js
+await spring.start({ from: 0, to: 1 })
+```
+
+### `start(queue): Promise`
+
+Process the given array of updates.
+
+The returned promise resolves to an `AnimationResult` object whose:
+
+- `finished` property is only `true` when every animation triggered by
+  the `queue` was finished before being stopped or cancelled.
+
+- `cancelled` property is only `false` when all updates in the `queue` were
+  never cancelled.
+
+```js
+// prettier-ignore
+await spring.start([
+  { from: 0 },
+  { to: 10 },
+  { to: 20, delay: 1000 },
+])
+```
+
+### `finish(): this`
+
+Jump to the goal value immediately.
+
+The `onStart` prop is called whenever `finish` is called before the first
+frame. The `onRest` prop is called with `finished: true` as expected.
+
+```js
+spring.finish()
+```
+
+### `finish(value): this`
+
+Jump to the given value immediately, and call the `onStart` and `onRest`
+props the same way `.finish()` does.
+
+```js
+spring.finish(100)
+```
+
+Fluid values (eg: other `SpringValue` objects) can also be passed.
+
+### `stop(): this`
+
+Stop animating and cancel any delayed updates.
+
+The `goal` value is replaced with the current value.
+
+```js
+spring.stop()
+```
+
+### `reset(): this`
+
+Restart the animation using its cached `from` and `to` values.
+
+```js
+spring.reset()
+```
+
+Equivalent to a `.start({ reset: true })` call.
+
+### `advance(dt: number): boolean`
+
+Advance the current animation by the given `dt` (in milliseconds).
+
+_You will probably never call this._
+
+```js
+// Advance a single frame.
+spring.advance(1000 / 60)
+```
+
+### `is(phase: string): void`
+
+Check for the given phase.
+
+```jsx
+if (spring.is('PAUSED')) {
+  return
+}
+```
+
+Valid phases include:
+
+- `CREATED` The spring has never animated since being created.
+- `IDLE` The spring is done animating.
+- `ACTIVE` The spring is animating.
+- `PAUSED` The spring was animating but is now paused.
+- `DISPOSED` The spring can no longer animate.
+
+## Properties
+
+### `key?: string`
+
+The name given to the `SpringValue` object by its owner.
+
+For `Controller` objects, the `key` of each `SpringValue` is the property name
+from either the `to` or `from` object prop.
+
+When defined, the `to` prop can be an object with this `key` defined as
+a property.
+
+```js
+spring.key = 'foo'
+spring.start({ to: { foo: '180deg' } })
+```
+
+### `get idle(): boolean`
+
+Returns `true` when both:
+
+- the current phase is _anything but_ `ACTIVE`
+- no async `to` prop is active
+
+Put simply, it's `true` when not animating.
+
+### `get goal(): T`
+
+The end value of the current animation.
+
+### `get velocity(): number | number[]`
+
+The velocity of the current animation.
+
+### `animation: Animation`
+
+The animation descriptor.
+
+### `queue?: SpringUpdate<T>[]`
+
+The queue of pending updates.
+
+Call `.start()` to flush the queue.

@@ -1,3 +1,4 @@
+vendor/
 public
 .cache
 node_modules

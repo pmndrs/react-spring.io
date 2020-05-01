@@ -1,0 +1,56 @@
+diff --git a/node_modules/gatsby-remark-autolink-headers/gatsby-browser.js b/node_modules/gatsby-remark-autolink-headers/gatsby-browser.js
+deleted file mode 100644
+index c0f5369..0000000
+--- a/node_modules/gatsby-remark-autolink-headers/gatsby-browser.js
++++ /dev/null
+@@ -1,39 +0,0 @@
+-"use strict";
+-
+-var offsetY = 0;
+-
+-var getTargetOffset = function getTargetOffset(hash) {
+-  var id = window.decodeURI(hash.replace("#", ""));
+-
+-  if (id !== "") {
+-    var element = document.getElementById(id);
+-
+-    if (element) {
+-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+-      var clientTop = document.documentElement.clientTop || document.body.clientTop || 0;
+-      return element.getBoundingClientRect().top + scrollTop - clientTop - offsetY;
+-    }
+-  }
+-
+-  return null;
+-};
+-
+-exports.onInitialClientRender = function (_, pluginOptions) {
+-  if (pluginOptions.offsetY) {
+-    offsetY = pluginOptions.offsetY;
+-  }
+-
+-  requestAnimationFrame(function () {
+-    var offset = getTargetOffset(window.location.hash);
+-
+-    if (offset !== null) {
+-      window.scrollTo(0, offset);
+-    }
+-  });
+-};
+-
+-exports.shouldUpdateScroll = function (_ref) {
+-  var location = _ref.routerProps.location;
+-  var offset = getTargetOffset(location.hash);
+-  return offset !== null ? [0, offset] : true;
+-};
+\ No newline at end of file
+diff --git a/node_modules/gatsby-remark-autolink-headers/gatsby-ssr.js b/node_modules/gatsby-remark-autolink-headers/gatsby-ssr.js
+index c886271..1f9cd2c 100644
+--- a/node_modules/gatsby-remark-autolink-headers/gatsby-ssr.js
++++ b/node_modules/gatsby-remark-autolink-headers/gatsby-ssr.js
+@@ -1,4 +1,5 @@
+ "use strict";
++console.log('hello world 2')
+ 
+ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+ 

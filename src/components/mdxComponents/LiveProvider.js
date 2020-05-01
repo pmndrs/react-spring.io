@@ -1,54 +1,11 @@
 import * as React from 'react'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
-import { a, useSpring } from 'react-spring'
-import VisibilitySensor from 'react-visibility-sensor'
-import nebu from 'nebu'
+import { pageDidLoad } from 'react-update-url-on-scroll'
 import prismTheme from '../theme/prism'
 
-/** Use a value from the previous render */
-export function usePrev(value) {
-  const prevRef = React.useRef()
-  React.useEffect(() => {
-    prevRef.current = value
-  })
-  return prevRef.current
-}
-
-const scope = {
-  // Create and render a component that uses the example code.
-  __r: useExample => {
-    const Example = ({ visible }) => {
-      const wasVisible = usePrev(visible)
-
-      let style
-      try {
-        style = useExample({
-          reset: !wasVisible && visible,
-          cancel: !visible,
-        })
-      } catch (e) {}
-
-      return (
-        <a.div
-          style={{
-            width: 80,
-            height: 80,
-            marginTop: 20,
-            backgroundColor: 'purple',
-            borderRadius: 16,
-            ...style,
-          }}
-        />
-      )
-    }
-    return (
-      <VisibilitySensor>
-        {props => <Example visible={props.isVisible} />}
-      </VisibilitySensor>
-    )
-  },
-  useSpring,
-}
+import { transform } from '../editor/transform'
+import { format } from '../editor/format'
+import { scope } from '../editor/scope'
 
 const buble = {
   transforms: {
@@ -57,53 +14,28 @@ const buble = {
   },
 }
 
-const ReactLiveProvider = props => {
+const ReactLive = props => {
+  // HACK: Wait until the first ReactLive component has rendered before letting
+  // `react-update-url-on-scroll` scroll to the location hash.
+  React.useEffect(() => {
+    pageDidLoad()
+  }, [])
+
   return (
     <LiveProvider
-      code={props.code}
+      code={format(props.code)}
       scope={scope}
       buble={buble}
       transformCode={transform}>
-      <LiveEditor theme={prismTheme} />
+      <LiveEditor theme={prismTheme} className="react-live-editor" />
       <LiveError />
-      <LivePreview />
+      <LivePreview
+        style={{
+          padding: 12,
+        }}
+      />
     </LiveProvider>
   )
 }
 
-export default ReactLiveProvider
-
-const hookIds = ['useSpring']
-
-function transform(input) {
-  const plugins = [
-    {
-      Program(node) {
-        const lastStmt = node.body[node.body.length - 1]
-        if (lastStmt && lastStmt.type !== 'ReturnStatement') {
-          if (lastStmt.type == 'ExpressionStatement') {
-            const expr = lastStmt.expression
-            if (
-              expr.type == 'CallExpression' &&
-              hookIds.indexOf(expr.callee.name) >= 0
-            ) {
-              const objExpr = expr.arguments.find(
-                e => e.type == 'ObjectExpression'
-              )
-              if (objExpr) {
-                objExpr.unshift('properties', '...props,\n')
-              }
-            }
-            expr.before('return ')
-          }
-        }
-      },
-    },
-  ]
-  try {
-    const output = nebu.process(input, { plugins })
-    return `__r(props => {\n${output}\n})`
-  } catch (e) {
-    return '__r(() => false)'
-  }
-}
+export default ReactLive

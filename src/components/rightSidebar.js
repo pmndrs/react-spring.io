@@ -1,5 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
+import { ScrollableLink } from 'react-update-url-on-scroll'
 import { RightSidebar } from './styles/RightSidebar'
 import config from '../../config'
 
@@ -14,6 +15,10 @@ const SidebarLayout = ({ location }) => (
                 slug
               }
               tableOfContents
+              headings {
+                value
+                depth
+              }
             }
           }
         }
@@ -21,44 +26,107 @@ const SidebarLayout = ({ location }) => (
     `}
     render={({ allMdx }) => {
       let navItems = []
-
       let finalNavItems
 
-      if (allMdx.edges !== undefined && allMdx.edges.length > 0) {
-        for (const edge of allMdx.edges) {
-          if (!edge) continue
-
-          let { slug } = edge.node.fields
-          if (config.gatsby && !config.gatsby.trailingSlash) {
-            slug += '/'
-          }
-
-          const isMatch =
-            slug === location.pathname ||
-            config.gatsby.pathPrefix + slug === location.pathname
-
-          if (!isMatch) continue
-
-          const { tableOfContents } = edge.node
-          if (tableOfContents && tableOfContents.items) {
-            finalNavItems = tableOfContents.items.map((item, index) => {
-              const itemId = item.title
-                ? item.title.replace(/\s+/g, '').toLowerCase()
-                : ``
-
-              return (
-                <li key={index}>
-                  <a href={'#' + itemId} level={1}>
-                    {item.title}
-                  </a>
-                </li>
-              )
-            })
+      function matchEdge(test) {
+        if (allMdx.edges && allMdx.edges.length) {
+          for (const edge of allMdx.edges) {
+            if (edge && test(edge)) {
+              return edge
+            }
           }
         }
       }
 
-      if (finalNavItems && finalNavItems.length) {
+      // Find the edge matching our pathname.
+      const edge = matchEdge(edge => {
+        let { slug } = edge.node.fields
+        if (config.gatsby && !config.gatsby.trailingSlash) {
+          slug += '/'
+        }
+        return (
+          slug === location.pathname ||
+          config.gatsby.pathPrefix + slug === location.pathname
+        )
+      })
+
+      const { headings } = edge ? edge.node : { headings: [] }
+
+      const usedHeadings = React.useRef(headings)
+      React.useEffect(() => {
+        usedHeadings.current = headings
+      })
+
+      const [activeId, setActiveId] = React.useState(getActiveId)
+      function getActiveId() {
+        let activeId = window.location.hash.slice(1)
+
+        const headings = usedHeadings.current
+        for (let i = 0; i < headings.length; i++) {
+          const h = headings[i]
+
+          if (!h.id) {
+            let { value } = h
+            if (!value) {
+              continue
+            }
+
+            const customIdRegex = /\{\#([^\}]+)\}$/
+            const match = value.match(customIdRegex)
+            const title = value.replace(customIdRegex, '')
+
+            h.title = title
+            h.id =
+              (match && match[1]) ||
+              title.replace(/\s+/g, '-').replace(/[():]/g, '')
+          }
+
+          if (h.id === activeId && h.depth > 1) {
+            // Find the nearest preceding <h1>
+            for (let j = i; --j >= 0; ) {
+              const h = headings[j]
+              if (h.depth == 1) {
+                activeId = h.id
+                break
+              }
+            }
+          }
+        }
+
+        return activeId
+      }
+
+      if (headings.length) {
+        finalNavItems = headings.map(({ id, title, depth }, index) => {
+          if (!title || depth > 1) {
+            return null
+          }
+          return (
+            <li key={index}>
+              <ScrollableLink href={'#' + id}>
+                <a
+                  href={'#' + id}
+                  className={[
+                    'level-' + depth,
+                    id === activeId ? 'active' : '',
+                  ].join(' ')}>
+                  {title}
+                </a>
+              </ScrollableLink>
+            </li>
+          )
+        })
+      }
+
+      React.useEffect(() => {
+        const effect = () => setActiveId(getActiveId())
+        window.addEventListener('hashchange', effect)
+        return () => {
+          window.removeEventListener('hashchange', effect)
+        }
+      }, [])
+
+      if (finalNavItems) {
         return (
           <RightSidebar>
             <ul className={'rightSideBarUL'}>

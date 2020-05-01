@@ -1,0 +1,178 @@
+---
+title: Breaking Changes
+---
+
+This page is all about breaking changes between v8.x and v9.x. Get ready to upgrade!
+
+# The `useTransition` hook
+
+The new `useTransition` is used like this:
+
+```js
+// 1. Provide items and props
+const transition = useTransition(items, props)
+// 2. Map the items into a fragment
+const fragment = transition((style, item) => {
+  // 3. Render each item
+  return <a.div style={style}>{item}</a.div>
+})
+```
+
+### The `transition` function
+
+On this page, the `transition` function returned by `useTransition` is
+referred to as the `TransitionFn` (its type name in TypeScript).
+
+It accepts a callback that receives four arguments: the animated values,
+the item, the `Transition` object, and the sibling position.
+
+It returns a React fragment containing every element returned by your
+callback. As you might assume, elements in the middle of their `leave`
+animation need to remain mounted.
+
+All elements in the fragment are guaranteed to have a `key` prop, whether or
+not you define one explicitly. Unkeyed elements will use the `ctrl.id` from
+their `Transition` object.
+
+### Transition objects
+
+For every unique item key, there exists a `Transition` object. The only time
+you have access to a `Transition` object is when it's passed as the 3rd argument
+of your `TransitionFn` callback.
+
+```js
+// The `t` argument is a Transition object.
+// The `i` argument is the sibling position.
+const elems = transition((style, item, t, i) => (
+  <a.div style={style}>{t.phase}</a.div>
+))
+```
+
+### Transition keys
+
+Every `Transition` object has a unique key that identifies it. You have the
+option of defining explicit keys or letting the "item" (the value represented
+by the `Transition` object) be its own key.
+
+To define explicit keys, you must define the `keys` prop in your `useTransition`
+props. For example, when using an items array, the new `keys` prop can be:
+
+- an array of keys
+- or a mapping function that returns a key for any item given to it.
+
+```js
+useTransition(items, {
+  // Using a function
+  keys: item => item.key,
+  // Using an array created by lodash.map
+  keys: _.map(items, 'key'),
+})
+```
+
+⚠️ You **must** use explicit keys for any item that is an immutable object.
+
+Using explicit keys for mutable objects is unnecessary. 🥳
+
+### The `key` prop
+
+If you're passing a single item to `useTransition`, you have the option of
+passing a single key as the `key` prop.
+
+```js
+useTransition(item, {
+  key: item.key,
+})
+```
+
+### The `expires` prop
+
+The `expires` prop lets you control when removed items are unmounted (after
+their `leave` animation has finished). By default, unmounting is postponed
+until the next render or until all transitions are resting.
+
+When `true` or `<= 0`, the default behavior is used.
+
+When `false`, items are never unmounted.
+
+When `> 0`, this prop is used in a `setTimeout` call that forces a
+rerender if the component that called `useTransition` doesn't rerender
+on its own after an item's `leave` animation is finished.
+
+### Other changes
+
+Here are the breaking changes in `useTransition` without their own section.
+
+- The `reset` prop now prefers the `initial` prop over the `from` prop.
+
+- The `unique` prop was removed.
+  Unique mode is now the default behavior.
+
+- The `lazy` prop was removed (in favor of the `expires` prop).
+  Lazy mode is now the default behavior.
+
+- The `onDestroyed` prop was removed.
+
+- The `order` prop was removed.
+
+---
+
+# The `onFrame` prop
+
+This prop has been renamed to `onChange`, because it's _not_ necessarily called
+from within a `requestAnimationFrame` callback.
+
+For example, the `onChange` prop is called when you call the `set` method of an
+animated value.
+
+---
+
+# The `from` prop
+
+The `from` prop behaves differently in imperative updates. When defined,
+it implies the `reset` prop is true.
+
+```js react-live=true
+const { x } = useSpring({ x: 0 })
+useEffect(() => {
+  // This animates as expected, from 100 to 0.
+  x.start({ from: 100, to: 0 })
+})
+```
+
+The example above uses the new `SpringValue` API.
+
+---
+
+# The `interpolate` function
+
+This function is now the `to` function.
+
+```jsx
+import { to } from 'react-spring'
+
+const { x, y } = useSpring({
+  from: { x: 0, y: 0 },
+})
+
+// Combine two animated values
+to([x, y], (x, y) => x / y)
+```
+
+---
+
+# The `Controller` class
+
+Unless you've been using `new Controller()` or have been accessing the `controllers`
+property off the ref API, these changes won't affect you.
+
+- The `interpolate` method is now the `to` method.
+
+- The `stop` method no longer has an optional `finished` argument.
+  Instead, it accepts zero or more keys to specifically stop animating.
+
+- The `pause` method was removed. This method will be restored once the pausing
+  feature is ready.
+
+- The `destroy` method was renamed to `dispose`.
+
+- Most properties have been either renamed or removed.

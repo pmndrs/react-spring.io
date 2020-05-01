@@ -23,8 +23,8 @@ const config = {
     },
   },
   sidebar: {
-    forcedNavOrder: [],
-    collapsedNav: [],
+    forcedNavOrder: ['v9', 'api', 'api/props', 'api/components', 'examples'],
+    collapsedNav: ['guides'],
     links: [
       {
         text: 'Spring Visualizer',

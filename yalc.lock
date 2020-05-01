@@ -1,0 +1,8 @@
+{
+  "version": "v1",
+  "packages": {
+    "react-spring": {
+      "signature": "446c42fe39ead502c029891946ff4435"
+    }
+  }
+}

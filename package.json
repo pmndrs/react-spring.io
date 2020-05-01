@@ -1,5 +1,6 @@
 {
   "name": "@react-spring/docs",
+  "version": "0.0.0-development",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.7.4",
@@ -38,9 +39,9 @@
     "gatsby-transformer-remark": "^2.6.42",
     "graphql": "^14.5.8",
     "is-absolute-url": "^3.0.3",
-    "lodash.flatten": "^4.4.0",
     "lodash.startcase": "^4.4.0",
     "nebu": "^1.2.0",
+    "prism-react-renderer": "^1.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-feather": "^2.0.3",
@@ -50,6 +51,7 @@
     "react-live": "^2.2.2",
     "react-loadable": "^5.5.0",
     "react-spring": "link:../packages/react-spring/dist",
+    "react-update-url-on-scroll": "^3.5.0",
     "react-use-gesture": "^7.0.15",
     "react-visibility-sensor": "^5.1.1",
     "styled-components": "^4.4.1",
@@ -59,12 +61,13 @@
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
-    "build": "gatsby build --prefix-paths"
+    "build": "gatsby build --prefix-paths",
+    "postinstall": "patch-package && indo"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "prettier": "^1.19.1",
-    "prism-react-renderer": "^1.0.2"
+    "patch-package": "^6.2.2",
+    "prettier": "^1.19.1"
   },
   "bic": false
 }
