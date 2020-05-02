@@ -48,14 +48,15 @@ const MaxWidth = styled('div')`
   }
 `
 
-const LeftSideBarWidth = styled('div')`
-  width: 298px;
+const SideBarWidth = styled('div')`
+  flex: 1;
+  max-width: 298px;
   padding-top: 8vh;
-`
 
-const RightSideBarWidth = styled('div')`
-  padding-top: 8vh;
-  width: 224px;
+  @media only screen and (max-width: 1200px) {
+    visibility: hidden;
+    pointer-events: none;
+  }
 `
 
 const Layout = ({ children, location }) => {
@@ -63,9 +64,9 @@ const Layout = ({ children, location }) => {
     <ThemeProvider location={location}>
       <MDXProvider components={mdxComponents}>
         <Wrapper>
-          <LeftSideBarWidth className={'hiddenMobile'}>
-            <Sidebar location={location} />
-          </LeftSideBarWidth>
+          <SideBarWidth className={'hiddenMobile'}>
+            {false && <Sidebar location={location} />}
+          </SideBarWidth>
           {config.sidebar.title ? (
             <div
               className={'sidebarTitle sideBarShow'}
@@ -75,9 +76,9 @@ const Layout = ({ children, location }) => {
           <Content>
             <MaxWidth>{children}</MaxWidth>
           </Content>
-          <RightSideBarWidth className={'hiddenMobile'}>
+          <SideBarWidth className={'hiddenMobile'}>
             <RightSidebar location={location} />
-          </RightSideBarWidth>
+          </SideBarWidth>
         </Wrapper>
       </MDXProvider>
     </ThemeProvider>
