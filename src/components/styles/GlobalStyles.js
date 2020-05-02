@@ -46,12 +46,15 @@ export const baseStyles = injectGlobal`
     position: relative;
     padding-bottom: 56.2%;
   }
+
   a {
+    cursor: pointer;
     text-decoration: none;
   }
   a:hover {
     text-decoration: none;
   }
+
   .displayInline {
     display: inline-block;
   }
