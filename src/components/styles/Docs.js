@@ -75,6 +75,10 @@ export const StyledMainWrapper = styled.div`
     font-style: italic;
   }
 
+  strong {
+    font-weight: 600;
+  }
+
   code {
     color: hsl(216, 30%, 32%);
     background: hsl(218, 100%, 98%);
