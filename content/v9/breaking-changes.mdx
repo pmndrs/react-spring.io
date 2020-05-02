@@ -121,6 +121,25 @@ useEffect(() => {
 The `TransitionHandle` object in `ref.current` has an almost identical
 API to what `useSprings` has.
 
+### The `sort` prop
+
+The `sort` prop is a function that takes two items, returns `-1` when
+the 1st item should appear first, and returns `1` when the 2nd item should.
+
+It's a useful shortcut for slicing and sorting your items array before passing
+it to the `useTransition` hook.
+
+```js
+// v8
+useTransition(items.slice().sort(props.sort), null, props)
+
+// v9
+useTransition(items, {
+  sort: (a, b) => { ... },
+  ...props
+})
+```
+
 ### Other changes
 
 Here are the breaking changes in `useTransition` without their own section.
