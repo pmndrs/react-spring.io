@@ -62,10 +62,12 @@
   "scripts": {
     "start": "gatsby develop",
     "build": "gatsby build --prefix-paths",
-    "postinstall": "patch-package && indo"
+    "postinstall": "patch-package && indo",
+    "deploy": "npm run build && gh-pages -d public"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "gh-pages": "^2.2.0",
     "patch-package": "^6.2.2",
     "prettier": "^1.19.1"
   },
