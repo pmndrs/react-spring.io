@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-update-url-on-scroll/lib/Manager.js b/node_modules/react-update-url-on-scroll/lib/Manager.js
-index 6e8de9f..7d13425 100644
+index 6e8de9f..9476e01 100644
 --- a/node_modules/react-update-url-on-scroll/lib/Manager.js
 +++ b/node_modules/react-update-url-on-scroll/lib/Manager.js
 @@ -18,11 +18,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
@@ -121,7 +121,7 @@ index 6e8de9f..7d13425 100644
 +          var offsetPosition = elementPosition -
 +            (typeof offset !== 'undefined' 
 +              ? offset 
-+              : (window.innerHeight / 8) - (element.clientHeight / 2));
++              : (window.innerHeight / 4) - (element.clientHeight / 2));
 +  
 +          (0, _scroll.scrollTo)({
 +            top: offsetPosition,
@@ -302,7 +302,7 @@ index 4441707..86263f1 100644
  };
 \ No newline at end of file
 diff --git a/node_modules/react-update-url-on-scroll/lib/utils/scroll.js b/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
-index a5206e7..d58770f 100644
+index a5206e7..6f46730 100644
 --- a/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
 +++ b/node_modules/react-update-url-on-scroll/lib/utils/scroll.js
 @@ -101,16 +101,23 @@ var checkElementRelevance = exports.checkElementRelevance = function checkElemen
@@ -313,7 +313,7 @@ index a5206e7..d58770f 100644
 +      bestElement = void 0,
 +      bestDistance = void 0;
 +
-+  var targetY = getScrollTop() + (window.innerHeight / 8);
++  var targetY = getScrollTop() + (window.innerHeight / 4);
  
    Object.keys(anchors).forEach(function (id) {
      var element = anchors[id].component;
