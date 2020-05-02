@@ -107,6 +107,33 @@ the inherited `config.duration` with a springy animation.
 
 ---
 
+# Dynamic goals
+
+The `FrameValue` class (inherited by `SpringValue` and `Interpolation`) allows for
+animations toward or from an observable `FluidValue` object. You can make any library
+work like this with `react-spring` by following [this guide](https://www.npmjs.com/package/fluids#fluidvalue-example).
+
+```js react-live=true
+const { x } = useSpring({
+  to: { x: 100 },
+  from: { x: 0 },
+  loop: { reverse: true },
+})
+const { rotateZ } = useSpring({
+  // Works with `x` and `x.to(...)`
+  rotateZ: x.to([0, 100], [0, 180]),
+})
+```
+
+Try using `immediate: true` to make `rotateZ` stick to its `FluidValue` instead
+of animating toward it.
+
+The `from` prop can also be a `FluidValue`, but it only caches the `FluidValue`'s
+current value when first animated and when the `reset` prop is true. In other
+words, nothing will happen if the `from` value is changed during an animation.
+
+---
+
 # The `cancel` prop
 
 When `true`, the `cancel` prop stops the animation of every animated value
