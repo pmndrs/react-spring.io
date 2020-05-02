@@ -6,3 +6,10 @@ export const onServiceWorkerUpdateReady = () => {
     window.location.reload()
   }
 }
+
+export const onInitialClientRender = () => {
+  // TODO: sync with `config.gatsby.trailingSlash` value
+  if (!location.pathname.endsWith('/')) {
+    location.pathname += '/'
+  }
+}
