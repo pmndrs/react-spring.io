@@ -1,3 +1,0 @@
----
-title: Frequently Asked Questions
----
