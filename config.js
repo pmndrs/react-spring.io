@@ -6,8 +6,8 @@ const config = {
     },
   ],
   gatsby: {
-    pathPrefix: '/',
-    siteUrl: 'https://react-spring.io',
+    pathPrefix: '/react-spring',
+    siteUrl: 'https://aleclarson.github.io', // 'https://react-spring.io',
     gaTrackingId: null,
     trailingSlash: true,
   },
