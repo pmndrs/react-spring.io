@@ -96,14 +96,14 @@ useSpring({
 })
 ```
 
-Notice how the loop doesn't run more than once. That's because some props
+⚠️ Notice how the loop doesn't run more than once. That's because some props
 are **never** inherited. These props include `default`, `reset`, and `reverse`.
 
-To loop the animation, try adding `reset: true` to the `loop` prop in the above
+**To loop the animation,** try adding `reset: true` to the `loop` prop in the above
 example. Alternatively, you could add `from: { x: 0 }` to get the same effect.
 
-Before we move on, try overriding the inherited `config` prop by adding
-`config: { friction: 5 }` to the `loop` object in the example above.
+Lastly, try adding `config: { friction: 5 }` to the `loop` object. This overrides
+the inherited `config.duration` with a springy animation.
 
 ---
 
