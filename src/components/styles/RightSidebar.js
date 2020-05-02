@@ -34,14 +34,14 @@ export const RightSidebar = styled('aside')`
   }
 
   .rightSideBarUL li a {
-    display: block;
+    display: inline-flex;
     position: relative;
-    width: 100%;
     font-size: 12px;
     font-weight: 500;
     line-height: 1.5;
-    padding: 6px;
-    padding-left: 16px;
+    padding: 3px 8px;
+    margin: 3px 0;
+    margin-left: 8px;
 
     color: ${props => props.theme.colors.text};
   }
@@ -52,7 +52,8 @@ export const RightSidebar = styled('aside')`
   }
 
   .rightSideBarUL li a.active {
-    color: red;
+    background: hsla(216, 70%, 96%, 1);
+    border-radius: 6px;
   }
 
   @media only screen and (max-width: 50rem) {
