@@ -26,6 +26,27 @@ The `react-spring/universal` module has been replaced by `@react-spring/core`.
 
 ---
 
+# Unified API
+
+In the past two major versions, the "Render Props API" and "Hooks API" were
+provided by separate modules. In fact, each API had its own implementation of
+the internal `Controller` class, which was bad for maintenance.
+
+```js
+// v8
+import { useSpring } from 'react-spring'
+import { Spring } from 'react-spring/renderprops'
+```
+
+The new version unifies these APIs into a single module!
+
+```js
+// v9
+import { Spring, useSpring } from 'react-spring'
+```
+
+---
+
 # The `useTransition` rework
 
 Learn about the new `useTransition` on the [Breaking Changes](./breaking-changes) page.
