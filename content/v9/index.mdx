@@ -8,6 +8,24 @@ This page explains every feature introduced in v9.
 
 ---
 
+# Platform packages
+
+While you can still import `react-spring` for the web version, you can now use
+`@react-spring/web` if you'd prefer to avoid installing the wrapper package for
+every other supported platform. You can use Yarn aliases to make it seamless.
+
+```sh
+yarn add react-spring@npm:@react-spring/web@9.0.0-rc.1
+```
+
+Every supported platform has its own package, which depends on `@react-spring/core`.
+The `react-spring` package re-exports the package of every supported platform,
+which means you can import `react-spring/native` like you could in v8.
+
+The `react-spring/universal` module has been replaced by `@react-spring/core`.
+
+---
+
 # The `useTransition` rework
 
 Learn about the new `useTransition` on the [Breaking Changes](./breaking-changes) page.
