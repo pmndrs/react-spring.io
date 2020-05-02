@@ -98,6 +98,9 @@ When `> 0`, this prop is used in a `setTimeout` call that forces a
 rerender if the component that called `useTransition` doesn't rerender
 on its own after an item's `leave` animation is finished.
 
+Finally, the `expires` prop can be a function that receives an item and returns any of
+the values mentioned above.
+
 ### The `ref` prop
 
 Pass a ref as the `ref` prop for access to the ref API.
