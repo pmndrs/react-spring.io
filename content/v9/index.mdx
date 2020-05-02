@@ -2,15 +2,20 @@
 title: Introducing v9.0
 ---
 
-Behold! Every feature introduced in v9, on this page!
-
-Want to know the **breaking changes**? 👻 [Go here!](/v9/breaking-changes)
+This page explains every feature introduced in v9.
 
 🎨 _The examples with graphics are editable._
 
 ---
 
-# Dependency arrays {#dependency-arrays}
+# The `useTransition` rework
+
+Read the [Breaking Changes](./breaking-changes) page to learn about the new
+API for the `useTransition` hook.
+
+---
+
+# Dependency arrays
 
 Every hook except `useChain` now supports a `deps` argument, which is an
 array exactly like what `useEffect` takes.
@@ -28,13 +33,6 @@ useEffect(() => {
   animate({ x: 100, y: 100 })
 }, [])
 ```
-
----
-
-# The `useTransition` rework
-
-Read the [Breaking Changes](/v9/breaking-changes) page to learn about the new
-API for the `useTransition` hook.
 
 ---
 
@@ -331,7 +329,7 @@ useSpring({
 
 Any prop whose name starts with `on` is affected.
 
-### React to finished delays.
+### React to finished delays
 
 The `onDelayEnd` prop is called for every non-cancelled update, after its
 `delay` is finished. It receives a props object and the affected `SpringValue`
@@ -345,17 +343,16 @@ useSpring({
 })
 ```
 
-### Inspect your props.
+### Inspect your props
 
-The `onProps` prop is called for every update that wasn't prevented.
+The `onProps` prop is called for every update that isn't prevented.
+
 It receives a props object and the affected `SpringValue` object.
-
 It can be useful when debugging an animation.
 
-This prop is called immediately after all props have been merged into
-the `animation` object owned by the `SpringValue` passed to you.
-
-This prop is called before the first frame of the updated animation.
+The `onProps` prop is called immediately after all props have been merged into
+the `animation` of the affected `SpringValue` object, but before the first
+frame of an animation initiated by the props.
 
 ```jsx
 useSpring({

@@ -98,6 +98,26 @@ When `> 0`, this prop is used in a `setTimeout` call that forces a
 rerender if the component that called `useTransition` doesn't rerender
 on its own after an item's `leave` animation is finished.
 
+### The `ref` prop
+
+Pass a ref as the `ref` prop for access to the ref API.
+
+```jsx
+const ref = useRef()
+useTransition(items, {
+  ref,
+  from: { opacity: 0 },
+  enter: { opacity: 1 },
+  leave: { opacity: 0 },
+})
+useEffect(() => {
+  ref.current.start()
+})
+```
+
+The `TransitionHandle` object in `ref.current` has an almost identical
+API to what `useSprings` has.
+
 ### Other changes
 
 Here are the breaking changes in `useTransition` without their own section.
@@ -129,7 +149,8 @@ animated value.
 # The `from` prop
 
 The `from` prop behaves differently in imperative updates. When defined,
-it implies the `reset` prop is true.
+it implies the `reset` prop is true. Previously, the `from` prop would
+not affect the animation unless `reset: true` was explicitly defined.
 
 ```js react-live=true
 const { x } = useSpring({ x: 0 })
@@ -156,6 +177,30 @@ const { x, y } = useSpring({
 
 // Combine two animated values
 to([x, y], (x, y) => x / y)
+```
+
+---
+
+# Globals API
+
+Global configuration has been improved.
+
+```js
+import { colorNames, createStringInterpolator } from './globals'
+
+// v8
+import * as Globals from 'react-spring/animated/Globals'
+Globals.injectDefaultElement('div')
+Globals.injectStringInterpolator(createStringInterpolator)
+Globals.injectColorNames(colorNames)
+
+// v9
+import { Globals } from 'react-spring'
+Globals.assign({
+  defaultElement: 'div',
+  createStringInterpolator,
+  colorNames,
+})
 ```
 
 ---
