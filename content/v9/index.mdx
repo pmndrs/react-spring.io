@@ -371,6 +371,36 @@ useSpring({
 
 ---
 
+# The `skipAnimation` global
+
+When `true`, all animations are finished immediately. The `requestAnimationFrame`
+loop is skipped entirely. Any `onRest` callbacks are still invoked.
+
+```js
+import { Globals } from 'react-spring'
+
+Globals.assign({ skipAnimation: true })
+```
+
+Combine `skipAnimation` with [prefers-reduced-motion] to gracefully disable or
+reduce the motion of your animations. The `react-reduce-motion` package [can help with that.](https://github.com/infiniteluke/react-reduce-motion)
+
+[prefers-reduced-motion]: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+
+```js
+import { Globals } from 'react-spring'
+import { useReduceMotion } from 'react-reduce-motion'
+
+const prefersReducedMotion = useReduceMotion()
+useEffect(() => {
+  Globals.assign({
+    skipAnimation: prefersReducedMotion,
+  })
+}, [prefersReducedMotion])
+```
+
+---
+
 # The `SpringValue` class
 
 Imperative APIs are a great way of animating in response to events, without
