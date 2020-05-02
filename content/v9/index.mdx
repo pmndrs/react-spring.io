@@ -97,6 +97,39 @@ useEffect(() => {
 
 ---
 
+# Shorthand style props
+
+**In the web version only,** you can avoid the boilerplate of using the `to`
+function to combine multiple animated values into a `transform` string like you
+had to do in v8.
+
+Instead, you can try defining an animated value in the `style` object using one
+of the following shorthand props:
+
+- `x`, `y`, `z`
+- `translate`, `translateX`, `translateY`, `translate3d`
+- `rotate`, `rotateX`, `rotateY`, `rotate3d`
+- `scale`, `scaleX`, `scaleY`, `scale3d`
+- `skew`, `skewX`, `skewY`
+- `matrix`, `matrix3d`
+
+```jsx
+const { x, y } = useSpring({ x: 0, y: 0 })
+
+// v8
+import { to } from 'react-spring'
+const transform = to([x, y], (x, y) => `translate(${x}px, ${y}px)`)
+return <a.div style={{ transform }} />
+
+// v9
+return <a.div style={{ x, y }} />
+```
+
+These shorthand props will be added to `@react-spring/native` in the future.
+For now, they only exist in `@react-spring/web`.
+
+---
+
 # The `loop` prop
 
 Use `loop: true` to repeat an animation.
