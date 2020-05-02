@@ -57,9 +57,14 @@ const SidebarLayout = ({ location }) => (
         usedHeadings.current = headings
       })
 
+      const getHash =
+        typeof window !== 'undefined'
+          ? () => window.location.hash.slice(1)
+          : () => ''
+
       const [activeId, setActiveId] = React.useState(getActiveId)
       function getActiveId() {
-        let activeId = window.location.hash.slice(1)
+        let activeId = getHash()
 
         const headings = usedHeadings.current
         for (let i = 0; i < headings.length; i++) {
@@ -119,10 +124,12 @@ const SidebarLayout = ({ location }) => (
       }
 
       React.useEffect(() => {
-        const effect = () => setActiveId(getActiveId())
-        window.addEventListener('hashchange', effect)
-        return () => {
-          window.removeEventListener('hashchange', effect)
+        if (typeof window !== 'undefined') {
+          const effect = () => setActiveId(getActiveId())
+          window.addEventListener('hashchange', effect)
+          return () => {
+            window.removeEventListener('hashchange', effect)
+          }
         }
       }, [])
 
