@@ -57,12 +57,17 @@ export const StyledMainWrapper = styled.div`
 
   a {
     transition: color 0.15s;
-    color: ${props => props.theme.colors.link};
+    font-weight: 600;
+    color: hsl(216, 30%, 28%);
+    padding-bottom: 2px;
+    border-bottom: 1px solid hsl(216, 30%, 28%);
+    border-bottom-style: dashed;
   }
 
   .autolink {
     display: inline-block;
     transform: translateY(1px);
+    border: 0;
     padding: 0 8px;
   }
 

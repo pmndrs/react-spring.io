@@ -17,7 +17,6 @@ export const lightTheme = {
     heading: '#000',
     text: 'hsl(216, 30%, 28%)',
     preFormattedText: 'hsl(216, 35%, 98%)',
-    link: '#1000EE',
   },
 }
 
