@@ -327,7 +327,11 @@ useSpring({
 })
 ```
 
-Any prop whose name starts with `on` is affected.
+### `batchedUpdates` support
+
+Whenever an event prop is called, it's first wrapped with `unstable_batchedUpdates`
+(exported by React), which ensures multiple `setState` calls won't cause components
+to rerender more times than is necessary. This prevents several tricky edge cases.
 
 ### React to finished delays
 
