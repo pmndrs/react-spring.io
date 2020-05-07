@@ -290,6 +290,29 @@ The `reset` and `immediate` props support these same types.
 
 ---
 
+# The `pause` prop
+
+The `pause` prop literally freezes animations in time.
+
+When used in a declarative update, the declared animation is paused until the
+`pause` prop equals `false` again. Then the animation will continue from its
+current value.
+
+The following example will pause the animation while your mouse is over it.
+(Note: The `useHover` hook is theoretical)
+
+```jsx
+const isHovering = useHover()
+useSpring({
+  pause: isHovering,
+  from: { x: 0 },
+  to: { x: 100 },
+  loop: true,
+})
+```
+
+---
+
 # Config props
 
 The `config` prop existed in v8.x, but v9.x brings a few improvements.
