@@ -313,6 +313,22 @@ useSpring({
 
 ---
 
+# Animation results
+
+The `onRest` prop receives an `AnimationResult` object when called. It contains
+the following properties:
+
+- `value: any` The current value when the animation ended.
+- `target: object` The object being animated (either a `SpringValue` or `Controller`).
+- `finished?: boolean` Equals true when the animation finished before being stopped or cancelled.
+- `cancelled?: boolean` Equals true when the animation was cancelled.
+
+The promise returned by the ref API's `start` method is resolved with an
+`AnimationResult` object, as well as the `start` method of the `SpringValue`
+and `Controller` classes.
+
+---
+
 # Config props
 
 The `config` prop existed in v8.x, but v9.x brings a few improvements.
@@ -425,7 +441,7 @@ useSpring({
 ```
 
 Default props are inherited while an update is being processed by the internal
-diffing algorithm within [`SpringValue#_merge`][merge1].
+diffing algorithm within the `SpringValue#_merge` [method][merge1].
 
 [merge1]: https://github.com/react-spring/react-spring/blob/a2210466245b09f9686cd3b5172d61f1854a7e38/packages/core/src/SpringValue.ts#L521-L800
 
