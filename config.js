@@ -41,7 +41,7 @@ const config = {
       'Bring your components to life with simple spring animation primitives for React',
     ogImage: 'https://www.react-spring.io/share.jpg',
     docsLocation:
-      'https://github.com/react-spring/react-spring.io/tree/master/content',
+      'https://github.com/react-spring/react-spring.io/tree/v9/content',
     favicon: '',
   },
   pwa: {
