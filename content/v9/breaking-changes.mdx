@@ -168,6 +168,29 @@ animated value.
 
 ---
 
+# The `to` prop
+
+When using an async `to` function inside a component that renders frequently,
+you'll need to memoize your `to` function to prevent an unintended restart.
+
+One solution is to use the `useCallback` hook.
+
+```jsx
+useSpring({
+  to: useCallback(async animate => { ... }, []),
+})
+```
+
+Another solution is to pass a props function.
+
+```jsx
+useSpring(() => ({
+  to: async animate => { ... },
+}))
+```
+
+---
+
 # The `from` prop
 
 The `from` prop now behaves differently in imperative updates. When defined,
