@@ -479,6 +479,26 @@ The following props can have default values:
 - `onChange`
 - `onRest`
 
+### The `default` object
+
+In addition to passing `default: true`, you can also pass an object instead.
+Only the props defined in your `default` object will be saved for future updates.
+
+In this example, we are setting `true` as the default value of `immediate`. This
+affects all future animations owned by the `useSpring` call, whether or not they
+are declarative or imperative.
+
+```js
+const { x } = useSpring({
+  x: 0,
+  default: { immediate: true },
+})
+useEffect(() => {
+  // This will be immediate.
+  x.start(100)
+})
+```
+
 ---
 
 # Event props
