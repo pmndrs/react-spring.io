@@ -170,9 +170,11 @@ animated value.
 
 # The `from` prop
 
-The `from` prop behaves differently in imperative updates. When defined,
+The `from` prop now behaves differently in imperative updates. When defined,
 it implies the `reset` prop is true. Previously, the `from` prop would
 not affect the animation unless `reset: true` was explicitly defined.
+
+To prevent this behavior, you can define `reset: false`.
 
 ```js react-live=true
 const { x } = useSpring({ x: 0 })

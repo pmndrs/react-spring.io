@@ -4,6 +4,8 @@ title: Introducing v9.0
 
 This page explains every feature introduced in v9.
 
+For breaking changes, go [here](/v9/breaking-changes).
+
 🎨 _The examples with graphics are editable._
 
 ---
@@ -62,7 +64,9 @@ TypeScript support has undergone a facelift.
 - Most types have been renamed, modified, or removed.
 - Not yet 100% stable. Please report any rough edges! ✌️
 
-Any questions can be directed [here]().
+Any questions can be directed [here][qa].
+
+[qa]: https://github.com/react-spring/react-spring/issues/985
 
 🚧 _More type documentation coming soon._
 
@@ -443,7 +447,7 @@ useSpring({
 Default props are inherited while an update is being processed by the internal
 diffing algorithm within the `SpringValue#_merge` [method][merge1].
 
-[merge1]: https://github.com/react-spring/react-spring/blob/a2210466245b09f9686cd3b5172d61f1854a7e38/packages/core/src/SpringValue.ts#L521-L800
+[merge1]: https://github.com/react-spring/react-spring/blob/09f9a8aa34e73321d701c815b643576affd82a1c/packages/core/src/SpringValue.ts#L562-L824
 
 For example, both the `ref` prop and the `animate` function will inherit
 the default props defined below (in the `useSpring` props function).
@@ -526,8 +530,8 @@ to rerender more times than is necessary. This prevents several tricky edge case
 ### React to finished delays
 
 The `onDelayEnd` prop is called for every non-cancelled update, after its
-`delay` is finished. It receives a props object and the affected `SpringValue`
-object.
+`delay` is finished, but before the props are merged. It receives a props object
+and the affected `SpringValue` object.
 
 ```jsx
 useSpring({
