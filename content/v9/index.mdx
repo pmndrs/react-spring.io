@@ -583,11 +583,9 @@ useSpring({
 
 # The `SpringContext` component
 
-Stop, pause, or finish all animations created by the hook API or renderprops API
-within a specific subtree of your app.
-
-The next example is cancelling every animation in an app's entire component tree,
-but you can use `SpringContext` anywhere in your app.
+Modify animations within the given `children`, but only the animations created
+by the hook API (eg: `useSpring`) or renderprops API (eg: `<Spring>`) are affected.
+Animations created with `new SpringValue()` or `new Controller()` are unaffected.
 
 ```jsx
 <SpringContext cancel={true}>
@@ -595,27 +593,39 @@ but you can use `SpringContext` anywhere in your app.
 </SpringContext>
 ```
 
+The following props are supported:
+
+- `cancel?: boolean`
+- `config?: SpringConfig`
+- `immediate?: boolean`
+- `pause?: boolean`
+
+The `SpringContext` component can be used anywhere.
+
 The most common use case is pausing or finishing animations on a page while it
 is temporarily invisible to the user. For example, the user may navigate away
-from a modal with animated content that stays mounted when not in use.
+from a modal with animated content that stays mounted when hidden.
 
 ### Nested context
 
 Descendants of a `SpringContext` component can use `SpringContext` to selectively
-reverse any forced props. Here's an example where the `Page1` component has its
-animations cancelled, but the `Page2` component does not.
+override any props forced by another `SpringContext`.
+
+In the example below, only `Page2` can play its animations. Pretend this element
+tree is rendered more dynamically, and this code is a static representation.
 
 ```jsx
-<SpringContext cancel={true}>
+<SpringContext pause={true}>
   <Page1 />
-  <SpringContext cancel={false}>
+  <SpringContext pause={false}>
     <Page2 />
   </SpringContext>
+  <Page3 />
 </SpringContext>
 ```
 
-When using a nested `SpringContext`, it will inherit the values of the nearest
-`SpringContext` ancestor.
+Every nested `SpringContext` inherits the values of the nearest `SpringContext`
+ancestor.
 
 ---
 
