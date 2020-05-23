@@ -19,6 +19,7 @@ import Performance from './pages/Performance'
 import Keyframes from './pages/Keyframes'
 import Transition from './pages/Transition'
 import Log from './pages/log'
+import Accessibility from './pages/Accessibility'
 import Footer from './common/footer'
 import Nav from './common/nav'
 
@@ -49,6 +50,7 @@ export default function App() {
               <Performance path="/docs/props/performance" />
               <Keyframes path="/docs/props/keyframes" />
               <Transition path="/docs/props/transition" />
+              <Accessibility path="/docs/accessibility" />
               <Log path="/log" />
             </Router>
           </ContentColumn>

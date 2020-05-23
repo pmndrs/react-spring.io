@@ -123,6 +123,9 @@ export default function Nav({currentPath}) {
           </CollapsibleMenu>
         </li>
         <li>
+          <MenuLink to="/docs/accessibility" label="Accessibility" currentPath={currentPath} />
+        </li>
+        <li>
           <MenuLink to="/log" label="Changelog" currentPath={currentPath} />
         </li>
       </MainMenuUl>
