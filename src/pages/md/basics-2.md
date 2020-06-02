@@ -20,6 +20,8 @@ const props = useSpring({
   display: 'block',
   padding: 20,
   background: 'linear-gradient(to right, #009fff, #ec2f4b)',
+  // Note: you should use 0px, not translate3d(0,0,0).
+  // Or react-spring will not handle it.
   transform: 'translate3d(0px,0,0) scale(1) rotateX(0deg)',
   boxShadow: '0px 10px 20px 0px rgba(0,0,0,0.4)',
   borderBottom: '10px solid #2D3747',
