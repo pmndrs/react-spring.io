@@ -37,7 +37,7 @@ Or if you prefer to do it in `package.json`:
 
 ## React Native
 
-If you are using React Native and are importing `useSpring` and `useTranstion` from `react-spring/native`, then you'll also need to map this module to the CJS file.
+If you are using React Native and are importing from `react-spring/native`, then you'll also need to map this module to the CJS file.
 
 ```js
 module.exports = {
