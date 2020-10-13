@@ -35,6 +35,18 @@ Or if you prefer to do it in `package.json`:
 }
 ```
 
+## React Native
+
+If you are using React Native and are importing `useSpring` and `useTranstion` from `react-spring/native`, then you'll also need to map this module to the CJS file.
+
+```js
+module.exports = {
+  moduleNameMapper: {
+    'react-spring/native': '<rootDir>/node_modules/react-spring/native.cjs',
+  },
+}
+```
+
 ## Ok, let's try it out!
 
 In `Thing.test.js` copy the following (Notice we are using Enzyme for this example)
