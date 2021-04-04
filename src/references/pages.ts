@@ -6,12 +6,12 @@ export type Page = {
 
 export const PAGES: Page[] = [
   {
-    title: 'index',
+    title: 'Introduction',
     url: '/',
   },
   {
-    title: 'mypage',
-    url: '/mypage',
+    title: 'Basics',
+    url: '/basics',
   },
   {
     title: 'hooks',

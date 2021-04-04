@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import Prism from 'prismjs'
 
 import { Nav } from 'components/Navigation'
 
 interface PageContainerProps {}
 
 export const PageContainer: React.FC<PageContainerProps> = ({ children }) => {
-  useEffect(() => {
-    Prism.highlightAll()
-  }, [])
   return (
     <Wrapper id="router">
       <NavSpace>
         <Nav />
       </NavSpace>
-      <Content>{children}</Content>
+      <Content className="markdown-body">{children}</Content>
     </Wrapper>
   )
 }
