@@ -21,6 +21,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  max-width: 1440px;
+  margin: 0 auto;
 
   @media (max-width: 899px) {
     flex-direction: column;

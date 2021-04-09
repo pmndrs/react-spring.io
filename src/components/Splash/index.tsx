@@ -13,7 +13,9 @@ export const Splash = () => {
             primitives
           </Tagline>
           <QuickNav>
-            <a href="https://spectrum.chat/react-spring">community</a>
+            <a href="https://github.com/pmndrs/react-spring/discussions">
+              community
+            </a>
             <a href="https://github.com/pmndrs/react-spring">source</a>
             <a href="https://twitter.com/pmndrs">twitter</a>
           </QuickNav>

@@ -1,20 +1,20 @@
 # Basics
 
-There are 5 hooks in react-spring currently:
+<!-- There are 5 hooks in react-spring currently:
 
 - `useSpring` a single spring, moves data from a -> b
 - `useSprings` multiple springs, for lists, where each spring moves data from a -> b
 - `useTrail` multiple springs with a single dataset, one spring follows or trails behind the other
 - `useTransition` for mount/unmount transitions (lists where items are added/removed/updated)
-- `useChain` to queue or chain multiple animations together
+- `useChain` to queue or chain multiple animations together -->
 
-The easiest is [useSpring](/docs/hooks/use-spring), but the same concept applies to all animation primitives. Let's have a look ...
+The basic spring is [useSpring](/hooks/usespring), but the same concept applies to all animation primitives. Let's have a look...
 
 ```jsx
 import { useSpring, animated } from 'react-spring'
 
 function App() {
-  const props = useSpring({ opacity: 1, from: { opacity: 0 } })
+  const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } })
   return <animated.div style={props}>I will fade in</animated.div>
 }
 ```
@@ -30,7 +30,7 @@ You need the animation-primitive itself, and a special factory called `animated`
 ### Next, define your spring
 
 ```jsx
-const props = useSpring({ opacity: 1, from: { opacity: 0 } })
+const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } })
 ```
 
 A spring simply animates values from one state to another. Updates are accumulative, springs remember all the values you ever pass. You can use arbitrary names. There are a couple of reserved keywords like "from" (for base values). [You can learn about the api here](/docs/hooks/api). The received props are not static values! These props are self-updating, you cannot use them in regular divs and such.
@@ -57,6 +57,113 @@ const AnimatedHeader = styled(animated.h1)`
 ```
 
 ### Do not think of the values you pass as "styles" per se
+
+Although you can use them as such.
+
+```jsx render=true
+function Text() {
+  const [flip, set] = React.useState(false)
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    reset: true,
+    reverse: flip,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!flip),
+  })
+
+  return <animated.h1 style={props}>hello</animated.h1>
+}
+```
+
+Do with them whatever you like, animate attributes for instance,
+
+```jsx render=true
+function SVG() {
+  const [flip, set] = React.useState(false)
+  const { x } = useSpring({
+    reset: true,
+    reverse: flip,
+    from: { x: 0 },
+    x: 1,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!flip),
+  })
+
+  return (
+    <animated.svg
+      style={{ margin: 20, width: 80, height: 80 }}
+      viewBox="0 0 45 44"
+      strokeWidth="2"
+      fill="white"
+      stroke="rgb(45, 55, 71)"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray={156}
+      strokeDashoffset={x.to(x => (1 - x) * 156)}>
+      <polygon points={POINTS} />
+    </animated.svg>
+  )
+}
+```
+
+innerText,
+
+```jsx render=true
+function Number() {
+  const [flip, set] = React.useState(false)
+  const { number } = useSpring({
+    reset: true,
+    reverse: flip,
+    from: { number: 0 },
+    number: 1,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!flip),
+  })
+
+  return <animated.div>{number.to(n => n.toFixed(2))}</animated.div>
+}
+```
+
+scrollTop/scrollLeft,
+
+```jsx render=true
+function Scrolling() {
+  const [flip, set] = React.useState(false)
+  const { scroll } = useSpring({
+    scroll: 100,
+    from: { scroll: 0 },
+    reset: true,
+    reverse: flip,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!flip),
+  })
+
+  const words = ['We', 'came.', 'We', 'saw.', 'We', 'kicked', 'its', 'ass.']
+
+  return (
+    <animated.div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: 60,
+        overflow: 'auto',
+        fontSize: '0.5em',
+      }}
+      scrollTop={scroll}>
+      {words.map(word => (
+        <div style={{ width: '100%', height: 50, textAlign: 'center' }}>
+          {word}
+        </div>
+      ))}
+    </animated.div>
+  )
+}
+```
 
 ## Up-front interpolation
 
@@ -90,12 +197,12 @@ const props = useSpring({
 
 ## View interpolation
 
-In cases where you need to clamp or extrapolate, each animated value can `interpolate` inside the view, which is a powerful tool to have. The interpolate function either takes a function or an object which forms a range. Interpolations can also form chains which allows you to route one calculation into another or reuse them. [Look into the shared-api](/docs/hooks/api) for an object description.
+In cases where you need to clamp or extrapolate, each animated value can interpolate inside the view, which is a powerful tool to have. The interpolate function called `to` either takes a function or an object which forms a range. Interpolations can also form chains which allows you to route one calculation into another or reuse them. [Look into the shared-api](/docs/hooks/api) for an object description.
 
 You may wonder why you wouldn't always interpolate inside of the spring. View interpolation can be a little faster, and it takes up less space.
 
 ```jsx
-import { useSpring, animated, interpolate } from 'react-spring'
+import { useSpring, animated, to } from 'react-spring'
 
 const { o, xyz, color } = useSpring({
   from: { o: 0, xyz: [0, 0, 0], color: 'red' },
@@ -111,23 +218,21 @@ return (
       // You would do that in all cases where values "just fit"
       color,
       // Unless you need to interpolate them
-      background: o.interpolate(o => `rgba(210, 57, 77, ${o})`),
+      background: o.to(o => `rgba(210, 57, 77, ${o})`),
       // Which works with arrays as well
-      transform: xyz.interpolate(
-        (x, y, z) => `translate3d(${x}px, ${y}px, ${z}px)`
-      ),
+      transform: xyz.to((x, y, z) => `translate3d(${x}px, ${y}px, ${z}px)`),
       // If you want to combine multiple values use the "interpolate" helper
-      border: interpolate([o, color], (o, c) => `${o * 10}px solid ${c}`),
+      border: to([o, color], (o, c) => `${o * 10}px solid ${c}`),
       // You can also form ranges, even chain multiple interpolations
       padding: o
-        .interpolate({ range: [0, 0.5, 1], output: [0, 0, 10] })
-        .interpolate(o => `${o}%`),
+        .to({ range: [0, 0.5, 1], output: [0, 0, 10] })
+        .to(o => `${o}%`),
       // Interpolating strings (like up-front) through ranges is allowed ...
-      borderColor: o.interpolate({ range: [0, 1], output: ['red', '#ffaabb'] }),
+      borderColor: o.to({ range: [0, 1], output: ['red', '#ffaabb'] }),
       // There's also a shortcut for plain, optionless ranges ...
-      opacity: o.interpolate([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1]),
+      opacity: o.to([0.1, 0.2, 0.6, 1], [1, 0.1, 0.5, 1]),
     }}>
-    {o.interpolate(n => n.toFixed(2)) /* innerText interpolation ... */}
+    {o.to(n => n.toFixed(2)) /* innerText interpolation ... */}
   </animated.div>
 )
 ```
@@ -169,12 +274,50 @@ return (
   <animated.div
     style={{
       transform: props.x
-        .interpolate({
+        .to({
           range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
           output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1],
         })
-        .interpolate(x => `scale(${x})`),
+        .to(x => `scale(${x})`),
     }}
   />
 )
+```
+
+```jsx render=true code=false
+/*
+0 % { transform: scale(1); }
+25 % { transform: scale(.97); }
+35 % { transform: scale(.9); }
+45 % { transform: scale(1.1); }
+55 % { transform: scale(.9); }
+65 % { transform: scale(1.1); }
+75 % { transform: scale(1.03); }
+100 % { transform: scale(1); }
+`*/
+
+function Example() {
+  const [state, toggle] = React.useState(true)
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: state ? 1 : 0,
+    config: { duration: 1000 },
+  })
+  return (
+    <div onClick={() => toggle(!state)} style={{ cursor: 'pointer' }}>
+      <animated.div
+        style={{
+          opacity: x.to({ range: [0, 1], output: [0.3, 1] }),
+          transform: x
+            .to({
+              range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+              output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1],
+            })
+            .to(x => `scale(${x})`),
+        }}>
+        click
+      </animated.div>
+    </div>
+  )
+}
 ```

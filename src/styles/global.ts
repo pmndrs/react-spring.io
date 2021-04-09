@@ -56,13 +56,14 @@ html {
 .code-table {
   display: flex;
   width: 100% !important;
+  min-height: 10rem;
 }
-.code-table {
-  margin-bottom: 1em;
-}
+
 .code-table > pre:first-of-type {
-  flex: 1.5;
+  flex: 1.5 1 50%;
   margin: 0;
+  max-width: 50%;
+  overflow:scroll;
 }
 .code-table > div:last-of-type {
   flex: 1;

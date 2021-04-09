@@ -14,15 +14,15 @@ export const PAGES: Page[] = [
     url: '/basics',
   },
   {
+    title: 'Common API',
+    url: '/common-api',
+  },
+  {
     title: 'hooks',
     routes: [
       {
-        title: 'hook1',
-        url: '/hooks/hook1',
-      },
-      {
-        title: 'hook2',
-        url: '/hooks/hook2',
+        title: 'useSpring',
+        url: '/hooks/usespring',
       },
     ],
   },
