@@ -9,8 +9,8 @@ This page is all about breaking changes between v8.x and v9.x. Get ready to upgr
 The new `useTransition` is used like this:
 
 ```js
-// 1. Provide items and props
-const transition = useTransition(items, props)
+// 1. Provide items and props (and dependency array if required)
+const transition = useTransition(items, props, [])
 // 2. Map the items into a fragment
 const fragment = transition((style, item) => {
   // 3. Render each item
