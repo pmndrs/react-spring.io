@@ -133,8 +133,11 @@ scrollTop/scrollLeft,
 ```jsx render=true
 function Scrolling() {
   const [flip, set] = React.useState(false)
+
+  const words = ['We', 'came.', 'We', 'saw.', 'We', 'kicked', 'its', 'ass.']
+
   const { scroll } = useSpring({
-    scroll: 100,
+    scroll: (words.length - 1) * 50,
     from: { scroll: 0 },
     reset: true,
     reverse: flip,
@@ -142,8 +145,6 @@ function Scrolling() {
     config: config.molasses,
     onRest: () => set(!flip),
   })
-
-  const words = ['We', 'came.', 'We', 'saw.', 'We', 'kicked', 'its', 'ass.']
 
   return (
     <animated.div
@@ -155,8 +156,10 @@ function Scrolling() {
         fontSize: '0.5em',
       }}
       scrollTop={scroll}>
-      {words.map(word => (
-        <div style={{ width: '100%', height: 50, textAlign: 'center' }}>
+      {words.map((word, i) => (
+        <div
+          key={`${word}_${i}`}
+          style={{ width: '100%', height: 50, textAlign: 'center' }}>
           {word}
         </div>
       ))}
@@ -194,6 +197,37 @@ const props = useSpring({
   textShadow: '0px 5px 15px rgba(255,255,255,0.5)',
 })
 ```
+
+## Shorthand style props
+
+**In the web version only,** you can avoid the boilerplate of using the `to`
+function to combine multiple animated values into a `transform` string like you
+had to do in v8.
+
+Instead, you can try defining an animated value in the `style` object using one
+of the following shorthand props:
+
+- `x`, `y`, `z`
+- `translate`, `translateX`, `translateY`, `translate3d`
+- `rotate`, `rotateX`, `rotateY`, `rotate3d`
+- `scale`, `scaleX`, `scaleY`, `scale3d`
+- `skew`, `skewX`, `skewY`
+- `matrix`, `matrix3d`
+
+```jsx
+const { x, y } = useSpring({ x: 0, y: 0 })
+
+// v8
+import { to } from 'react-spring'
+const transform = to([x, y], (x, y) => `translate(${x}px, ${y}px)`)
+return <a.div style={{ transform }} />
+
+// v9
+return <a.div style={{ x, y }} />
+```
+
+These shorthand props will be added to `@react-spring/native` in the future.
+For now, they only exist in `@react-spring/web`. **Want them in native? Consider submitting a [PR](https://github.com/pmndrs/react-spring/issues/1408)**
 
 ## View interpolation
 
@@ -245,7 +279,9 @@ Hooks differ from renderprops in that they don't know the view. Therefore handli
 
 ```jsx
 const [bind, { height }] = useMeasure()
+
 const props = useSpring({ height })
+
 return (
   <animated.div style={{ overflow: 'hidden', ...props }}>
     <div {...bind}>content</div>
@@ -270,6 +306,7 @@ Sometimes you want to go through a series of states, like css keyframes, you can
 `*/
 
 const props = useSpring({ x: state ? 1 : 0 })
+
 return (
   <animated.div
     style={{

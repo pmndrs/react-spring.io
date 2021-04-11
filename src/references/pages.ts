@@ -26,4 +26,8 @@ export const PAGES: Page[] = [
       },
     ],
   },
+  {
+    title: 'Changelog',
+    url: '/changelog',
+  },
 ]
