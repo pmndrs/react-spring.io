@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from '@reach/router'
 import NavPage from '../common/nav-page'
 import ParseMD from '../utils/parse-md'
 import raw from 'raw.macro'

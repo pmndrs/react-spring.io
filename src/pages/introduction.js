@@ -36,7 +36,7 @@ export default function IntroductionPage({path}) {
       </Grid>
       <p>
         And{' '}
-        <a href="https://github.com/drcmda/react-spring/network/dependents" target="_blank">
+        <a href="https://github.com/drcmda/react-spring/network/dependents" target="_blank" rel="noreferrer">
           many others
         </a>
       </p>
@@ -46,7 +46,7 @@ export default function IntroductionPage({path}) {
 
       <p>
         If you like this project, please consider helping out. All contributions are welcome as well as donations to{' '}
-        <a href="https://opencollective.com/react-spring" target="_blank">
+        <a href="https://opencollective.com/react-spring" target="_blank" rel="noreferrer">
           Opencollective
         </a>
         , or in crypto:
@@ -65,48 +65,30 @@ export default function IntroductionPage({path}) {
       <h3>Gold sponsors</h3>
 
       <a href="https://aragon.org/">
-        <img width="300" src="https://wiki.aragon.org/design/logo/svg/imagetype.svg" />
+        <img alt="" width="300" src="https://wiki.aragon.org/design/logo/svg/imagetype.svg" />
       </a>
 
       <h3>Sponsors</h3>
 
-      <a href="https://opencollective.com/react-spring/sponsor/0/website" target="_blank">
-        <img src="https://opencollective.com/react-spring/sponsor/0/avatar.svg" />
+      <a href="https://opencollective.com/react-spring/sponsor/0/website" target="_blank" rel="noreferrer">
+        <img alt="" src="https://opencollective.com/react-spring/sponsor/0/avatar.svg" />
       </a>
-      <a href="https://opencollective.com/react-spring/sponsor/1/website" target="_blank">
-        <img src="https://opencollective.com/react-spring/sponsor/1/avatar.svg" />
+      <a href="https://opencollective.com/react-spring/sponsor/1/website" target="_blank" rel="noreferrer">
+        <img alt="" src="https://opencollective.com/react-spring/sponsor/1/avatar.svg" />
       </a>
 
       <h3>Backers</h3>
-      <a href="https://opencollective.com/react-spring#backers" target="_blank">
-        <img src="https://opencollective.com/react-spring/backers.svg?width=600" />
+      <a href="https://opencollective.com/react-spring#backers" target="_blank" rel="noreferrer">
+        <img alt="" src="https://opencollective.com/react-spring/backers.svg?width=600" />
       </a>
 
       <h3>Contributors</h3>
       <a href="https://github.com/drcmda/react-spring/graphs/contributors">
-        <img src="https://opencollective.com/react-spring/contributors.svg?width=1000" />
+        <img alt="" src="https://opencollective.com/react-spring/contributors.svg?width=1000" />
       </a>
     </NavPage>
   )
 }
-
-function Demos() {
-  return (
-    <DemosContainer>
-      <img src="https://i.imgur.com/tg1mN1F.gif" style={{width: '50%'}} />
-      <img src="https://i.imgur.com/OxGLHeT.gif" style={{width: '30%'}} />
-      <img src="https://i.imgur.com/ifdCBvG.gif" style={{width: '10%'}} />
-    </DemosContainer>
-  )
-}
-
-const DemosContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-items: center;
-  margin: 2em 0;
-`
 
 function TweetGrid() {
   const w = 400
@@ -150,7 +132,7 @@ const ResponsiveVideoContainer = styled.div`
 function YouTubeEmbed({src}) {
   return (
     <ResponsiveVideoContainer>
-      <iframe width="853" height="480" src={src} frameBorder="0" allowFullScreen />
+      <iframe title={`youtube - ${src}`} width="853" height="480" src={src} frameBorder="0" allowFullScreen />
     </ResponsiveVideoContainer>
   )
 }

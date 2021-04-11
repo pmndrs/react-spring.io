@@ -51,4 +51,6 @@ class ManageScrollImpl extends React.Component {
   }
 }
 
-export default () => <Location>{({location}) => <ManageScrollImpl location={location} />}</Location>
+const Loc = () => <Location>{({location}) => <ManageScrollImpl location={location} />}</Location>
+
+export default Loc

@@ -1,6 +1,5 @@
 import React from 'react'
 import NavPage from '../common/nav-page'
-import {Grid, Image} from '../common/components'
 import DemoGrid from '../examples/components/DemoGrid'
 import Demo from '../examples/components/Demo'
 import examples from '../examples/components/examples-hooks'

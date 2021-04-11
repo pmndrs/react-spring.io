@@ -2,7 +2,6 @@ import React from 'react'
 import NavPage from '../common/nav-page'
 import ParseMD from '../utils/parse-md'
 import raw from 'raw.macro'
-import {FencedCode} from '../common/components'
 import Demo from '../examples/components/Demo'
 
 const content1 = raw('./md/api-1.md')
