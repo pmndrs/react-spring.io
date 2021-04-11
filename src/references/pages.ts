@@ -40,6 +40,10 @@ export const PAGES: Page[] = [
     ],
   },
   {
+    title: 'Accessibility',
+    url: '/accessibility',
+  },
+  {
     title: 'Changelog',
     url: '/changelog',
   },
