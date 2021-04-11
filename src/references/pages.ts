@@ -14,8 +14,21 @@ export const PAGES: Page[] = [
     url: '/basics',
   },
   {
-    title: 'Common API',
-    url: '/common-api',
+    title: 'Common Api',
+    routes: [
+      {
+        title: 'Props',
+        url: '/common/props',
+      },
+      {
+        title: 'Configs',
+        url: '/common/configs',
+      },
+      {
+        title: 'Interpolations',
+        url: '/common/interpolation',
+      },
+    ],
   },
   {
     title: 'hooks',

@@ -1,0 +1,85 @@
+# Props
+
+## Overview
+
+```jsx
+useSpring({ from: { ... }, to: { ... }, delay: 100, onRest: () => ... })
+```
+
+All primitives inherit the following properties (though some of them may bring their own additionally):
+
+| Property           | Type              | Description                                                                                                                                                              |
+| ------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| from               | obj               | Base values, optional                                                                                                                                                    |
+| to                 | obj/fn/array(obj) | Animates to ...                                                                                                                                                          |
+| loop               | obj/fn/bool       | Looping settings, see [loop prop](#loop-prop) for more details                                                                                                           |
+| delay              | number/fn         | Delay in ms before the animation starts. Also valid as a function for individual keys: key => delay                                                                      |
+| immediate          | bool/fn           | Prevents animation if true. Also valid as a function for individual keys: key => immediate                                                                               |
+| [config](#configs) | obj/fn            | Spring config (contains mass, tension, friction, etc). Also valid as a function for individual keys: key => config                                                       |
+| reset              | bool              | The spring starts to animate from scratch (from -> to) if set true                                                                                                       |
+| reverse            | bool              | "from" and "to" are switched if set true, this will only make sense in combination with the "reset" flag                                                                 |
+| cancel             | bool/string/fn    | When `true`, the `cancel` prop stops the animation of every animated value owned by the `Controller` that receives it. See [cancel prop](/#cancel-prop) for more details |
+| pause              | bool              | The `pause` prop literally freezes animations in time.                                                                                                                   |
+| onStart            | fn                | Callback when a key is about to be animated (see [events](#events) for more information)                                                                                 |
+| onRest             | fn                | Callback when all animations come to a stand-still (see [events](#events) for more information)                                                                          |
+| onChange           | fn                | Frame by frame callback (see [events](#events) for more information)                                                                                                     |
+
+## Advanced Props
+
+### Loop Prop
+
+### Cancel Prop
+
+When `true`, the `cancel` prop stops the animation of every animated value
+owned by the `Controller` that receives it.
+
+The following example never animates, because `cancel` is always true.
+
+```js
+useSpring({
+  cancel: true,
+  from: { x: 0 },
+  to: { x: 100 },
+})
+```
+
+Once the `cancel` prop turns from `true` to `false`, the declared animation
+will resume or reset, depending on the given props.
+
+#### Delayed updates
+
+The `cancel` prop even prevents delayed updates. 😎
+
+```jsx
+const [style, animate] = useSpring(() => ({ x: 0 }))
+
+// Pass this to an element.
+const onClick = () => {
+  animate({ x: 100, delay: 500 })
+
+  // Prevent the previous update. 🤣
+  animate({ cancel: true })
+}
+```
+
+#### Specific keys
+
+To cancel the animation of specific keys, you can pass a single key, an array of
+keys, or a `(key: string) => boolean` function.
+
+```js
+// Using a single key
+cancel: 'x',
+
+// Using an array of keys
+cancel: ['x', 'y'],
+
+// Using a function
+cancel: key => key !== 'x',
+```
+
+The `reset` and `immediate` props support these same types.
+
+### Events
+
+Events are great. thanks

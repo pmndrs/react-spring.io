@@ -5,6 +5,7 @@ import { LiveProvider, LivePreview, LiveError } from 'react-live'
 import LazyLoad from 'react-lazyload'
 import { useSpring, animated, config } from '@react-spring/web'
 import { mdx } from '@mdx-js/react'
+import useMeasure from 'react-use-measure'
 
 interface CodeBlockProps {
   children: string
@@ -13,6 +14,7 @@ interface CodeBlockProps {
   render?: boolean | string
   url: string
   code?: boolean | string
+  center?: boolean | string
 }
 
 export const CodeBlock = ({
@@ -22,6 +24,7 @@ export const CodeBlock = ({
   render,
   url,
   code = true,
+  center = true,
 }: CodeBlockProps) => {
   const language = className.replace(/language-/, '')
 
@@ -47,6 +50,7 @@ export const CodeBlock = ({
       animated,
       config,
       mdx,
+      useMeasure,
       POINTS:
         '22.5 35.25 8.68704657 42.5118994 11.3250859 27.1309497 0.150171867 16.2381006 15.5935233 13.9940503 22.5 0 29.4064767 13.9940503 44.8498281 16.2381006 33.6749141 27.1309497 36.3129534 42.5118994',
     }
@@ -77,7 +81,13 @@ export const CodeBlock = ({
           code={children.trim()}
           transformCode={code => '/** @jsx mdx */' + code}>
           <LiveError />
-          <LivePreview style={{ color: 'rgb(45, 55, 71)' }} />
+          <LivePreview
+            style={{
+              justifyContent: center !== 'false' ? 'center' : 'flex-start',
+              color: 'rgb(45, 55, 71)',
+              padding: '0 16px',
+            }}
+          />
         </LiveProvider>
       </div>
     )
