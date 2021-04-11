@@ -974,4 +974,19 @@ export const MARKDOWN = /* css */ `
 .markdown-body .pl-12 {
   padding-left: 128px !important;
 }
+
+.markdown-body .icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-left: 8px;
+
+}
+
+.markdown-body .icon-link {
+  background-image: url("/icon-link.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
 `
