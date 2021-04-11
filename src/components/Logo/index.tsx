@@ -41,7 +41,7 @@ export const Logo = ({ width }: LogoProps) => {
       x: centerX,
       y: centerY,
     })
-  }, [])
+  }, [api])
 
   return (
     <animated.svg

@@ -1,5 +1,7 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useRouter } from 'next/router'
+
+import { useIsomorphicLayoutEffect } from 'helpers/isomorphicLayoutEffect'
 
 let scrollPositions = {}
 
@@ -13,7 +15,7 @@ export const useManageScroll = () => {
     } catch (e) {}
   }, [pathname])
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     try {
       let storage = JSON.parse(sessionStorage.getItem('scrollPositions'))
       if (storage) {
@@ -31,7 +33,7 @@ export const useManageScroll = () => {
     }
   }, [])
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!scrollPositions[pathname]) {
       // never seen this location before
       setTimeout(() => {
