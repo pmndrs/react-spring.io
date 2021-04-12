@@ -1,11 +1,10 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/palenight'
 import { LiveProvider, LivePreview, LiveError } from 'react-live'
 import LazyLoad from 'react-lazyload'
-import { useSpring, animated, config } from '@react-spring/web'
-import { mdx } from '@mdx-js/react'
-import useMeasure from 'react-use-measure'
+
+import { scope } from './reactLiveScope'
 
 interface CodeBlockProps {
   children: string
@@ -45,16 +44,6 @@ export const CodeBlock = ({
   }
 
   if (render) {
-    const scope = {
-      useSpring,
-      animated,
-      config,
-      mdx,
-      useMeasure,
-      POINTS:
-        '22.5 35.25 8.68704657 42.5118994 11.3250859 27.1309497 0.150171867 16.2381006 15.5935233 13.9940503 22.5 0 29.4064767 13.9940503 44.8498281 16.2381006 33.6749141 27.1309497 36.3129534 42.5118994',
-    }
-
     return (
       <div className="code-table">
         {code !== 'false' && (
@@ -76,19 +65,21 @@ export const CodeBlock = ({
             )}
           </Highlight>
         )}
-        <LiveProvider
-          scope={scope}
-          code={children.trim()}
-          transformCode={code => '/** @jsx mdx */' + code}>
-          <LiveError />
-          <LivePreview
-            style={{
-              justifyContent: center !== 'false' ? 'center' : 'flex-start',
-              color: 'rgb(45, 55, 71)',
-              padding: '0 16px',
-            }}
-          />
-        </LiveProvider>
+        <LazyLoad height={'100%'}>
+          <LiveProvider
+            scope={scope}
+            code={children.trim()}
+            transformCode={code => '/** @jsx mdx */' + code}>
+            <LiveError />
+            <LivePreview
+              style={{
+                justifyContent: center !== 'false' ? 'center' : 'flex-start',
+                color: 'rgb(45, 55, 71)',
+                padding: '0 16px',
+              }}
+            />
+          </LiveProvider>
+        </LazyLoad>
       </div>
     )
   }
