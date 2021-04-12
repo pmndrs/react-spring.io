@@ -58,16 +58,17 @@ export const PAGES: Page[] = [
     ],
   },
   {
-    title: 'Accessibility',
-    url: '/accessibility',
-  },
-  {
-    title: 'Testing',
-    url: '/testing',
-  },
-  {
     title: 'Guides',
-    url: '/guides',
+    routes: [
+      {
+        title: 'Accessibility',
+        url: '/guides/accessibility',
+      },
+      {
+        title: 'Testing',
+        url: '/guides/testing',
+      },
+    ],
   },
   {
     title: 'Changelog',
