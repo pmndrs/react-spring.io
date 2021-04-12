@@ -14,34 +14,60 @@ export const PAGES: Page[] = [
     url: '/basics',
   },
   {
-    title: 'Common Api',
+    title: 'API',
     routes: [
       {
-        title: 'Props',
-        url: '/common/props',
+        title: 'Common',
+        routes: [
+          {
+            title: 'Props',
+            url: '/common/props',
+          },
+          {
+            title: 'Configs',
+            url: '/common/configs',
+          },
+          {
+            title: 'Imperatives & Refs',
+            url: '/common/imperatives-and-refs',
+          },
+          {
+            title: 'Interpolations',
+            url: '/common/interpolation',
+          },
+        ],
       },
       {
-        title: 'Configs',
-        url: '/common/configs',
+        title: 'Hooks',
+        routes: [
+          {
+            title: 'useSpring',
+            url: '/hooks/usespring',
+          },
+        ],
       },
       {
-        title: 'Interpolations',
-        url: '/common/interpolation',
-      },
-    ],
-  },
-  {
-    title: 'hooks',
-    routes: [
-      {
-        title: 'useSpring',
-        url: '/hooks/usespring',
+        title: 'Render Props',
+        routes: [
+          // {
+          //   title: 'useSpring',
+          //   url: '/hooks/usespring',
+          // },
+        ],
       },
     ],
   },
   {
     title: 'Accessibility',
     url: '/accessibility',
+  },
+  {
+    title: 'Testing',
+    url: '/testing',
+  },
+  {
+    title: 'Guides',
+    url: '/guides',
   },
   {
     title: 'Changelog',
