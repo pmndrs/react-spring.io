@@ -15,6 +15,7 @@ export const useManageScroll = () => {
     } catch (e) {}
   }, [pathname])
 
+  // this shouldn't fire if a hash is present
   useIsomorphicLayoutEffect(() => {
     try {
       let storage = JSON.parse(sessionStorage.getItem('scrollPositions'))

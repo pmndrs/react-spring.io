@@ -213,7 +213,7 @@ export const MARKDOWN = /* css */ `
 
 .markdown-body h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 0;
 }
 
 .markdown-body img {
@@ -314,6 +314,18 @@ export const MARKDOWN = /* css */ `
   margin-top: 0;
 }
 
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+}
+
+
 .markdown-body h1 {
   font-size: 32px;
 }
@@ -325,6 +337,7 @@ export const MARKDOWN = /* css */ `
 
 .markdown-body h2 {
   font-size: 24px;
+  margin: 40px 0 ;
 }
 
 .markdown-body h3 {
@@ -334,6 +347,7 @@ export const MARKDOWN = /* css */ `
 .markdown-body h3,
 .markdown-body h4 {
   font-weight: 600;
+  margin: 32px 0 16px 0;
 }
 
 .markdown-body h4 {
@@ -570,18 +584,6 @@ export const MARKDOWN = /* css */ `
   vertical-align: middle;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 16px;
-  margin-top: 24px;
-}
-
 .markdown-body h1 {
   font-size: 2em;
 }
@@ -589,7 +591,6 @@ export const MARKDOWN = /* css */ `
 .markdown-body h1,
 .markdown-body h2 {
   /* border-bottom: 1px solid #eaecef; */
-  padding-bottom: 0.3em;
 }
 
 .markdown-body h2 {
