@@ -60,9 +60,9 @@ const AnimatedHeader = styled(animated.h1)`
 
 Although you can use them as such.
 
-```jsx render=true
+```jsx render=true edit=true
 function Text() {
-  const [flip, set] = React.useState(false)
+  const [flip, set] = useState(false)
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -79,9 +79,9 @@ function Text() {
 
 Do with them whatever you like, animate attributes for instance,
 
-```jsx render=true
+```jsx render=true edit=true
 function SVG() {
-  const [flip, set] = React.useState(false)
+  const [flip, set] = useState(false)
   const { x } = useSpring({
     reset: true,
     reverse: flip,
@@ -111,9 +111,9 @@ function SVG() {
 
 innerText,
 
-```jsx render=true
+```jsx render=true edit=true
 function Number() {
-  const [flip, set] = React.useState(false)
+  const [flip, set] = useState(false)
   const { number } = useSpring({
     reset: true,
     reverse: flip,
@@ -130,9 +130,9 @@ function Number() {
 
 scrollTop/scrollLeft,
 
-```jsx render=true
+```jsx render=true edit=true
 function Scrolling() {
-  const [flip, set] = React.useState(false)
+  const [flip, set] = useState(false)
 
   const words = ['We', 'came.', 'We', 'saw.', 'We', 'kicked', 'its', 'ass.']
 
@@ -334,7 +334,7 @@ return (
 `*/
 
 function Example() {
-  const [state, toggle] = React.useState(true)
+  const [state, toggle] = useState(true)
   const { x } = useSpring({
     from: { x: 0 },
     x: state ? 1 : 0,

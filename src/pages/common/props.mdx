@@ -28,7 +28,7 @@ All primitives inherit the following properties (though some of them may bring t
 
 Use `loop: true` to repeat an animation.
 
-```js render=true
+```js render=true edit=true
 function LoopTrue() {
   const styles = useSpring({
     loop: true,
@@ -55,7 +55,7 @@ function LoopTrue() {
 Pass a function to be called after each loop. Return `true` to continue
 looping, or `false` to stop.
 
-```js render=true
+```js render=true edit=true
 function LoopFunction() {
   const n = useRef(0)
   const styles = useSpring({
@@ -88,7 +88,7 @@ Define a `loop` object to customize the loop animation separately from the
 initial animation. It may contain any of the `useSpring` props. For example,
 if `reverse: true` is used, the loop animation will reverse on each loop.
 
-```js render=true
+```js render=true edit=true
 function LoopObject() {
   const styles = useSpring({
     loop: { reverse: true },
@@ -116,7 +116,7 @@ The `loop` object is always merged into a copy of the props object it was
 defined in. The following example shows a loop animation that inherits its
 `config` prop.
 
-```js render=true
+```js render=true edit=true
 function InheritedProps() {
   const n = useRef(0)
   const styles = useSpring({

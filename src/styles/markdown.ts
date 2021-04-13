@@ -330,6 +330,10 @@ export const MARKDOWN = /* css */ `
   font-size: 32px;
 }
 
+.markdown-body h1 + p {
+  margin-top: 1.2rem;
+}
+
 .markdown-body h1,
 .markdown-body h2 {
   font-weight: 600;
@@ -989,5 +993,18 @@ export const MARKDOWN = /* css */ `
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
+}
+
+.live-editor {
+  font-size: 12px;
+  line-height: 18.6px;
+  font-weight: 400;
+  flex: 1.5 1 50%;
+  max-width: 50%;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace !important;
+}
+
+.live-editor pre, .live-editor textarea {
+  padding: 20px !important;
 }
 `

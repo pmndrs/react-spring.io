@@ -1,4 +1,10 @@
-import { useRef, useEffect } from 'react'
+import {
+  useRef,
+  useEffect,
+  useState,
+  useLayoutEffect,
+  useCallback,
+} from 'react'
 import {
   useSpring,
   animated,
@@ -69,6 +75,9 @@ const springScope = {
 const reactScope = {
   useRef,
   useEffect,
+  useState,
+  useLayoutEffect,
+  useCallback,
 }
 
 const utilityScope = {
