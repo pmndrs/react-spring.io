@@ -42,7 +42,11 @@ export const PAGES: Page[] = [
         routes: [
           {
             title: 'useSpring',
-            url: '/hooks/usespring',
+            url: '/hooks/use-spring',
+          },
+          {
+            title: 'useSprings',
+            url: '/hooks/use-springs',
           },
         ],
       },
