@@ -15,13 +15,19 @@ cd react-spring.io
 yarn postinstall
 ```
 
-4. Start the next project: 
+4. Copy the examples out of `react-spring`:
+
+```sh
+yarn copy:spring-demos
+```
+
+5. Start the next project:
 
 ```sh
 yarn dev # it'll run on localhost:3000
 ```
 
-5. Let's get cooking! 👨🏻‍🍳🥓
+6. Let's get cooking! 👨🏻‍🍳🥓
 
 ## Guidelines
 
