@@ -20,3 +20,6 @@ dist/
 logs/
 out/
 tmp/
+
+# Spring demos from GITHUB
+src/demos

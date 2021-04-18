@@ -28,12 +28,16 @@
     "styled-components": "^5.2.3"
   },
   "scripts": {
+    "postinstall": "yarn submodule:init && yarn copy:spring-demos && yarn clean:submodule",
+    "copy:spring-demos": "recursive-copy ./src/demos/react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css'",
+    "clean:submodule": "rm -rf ./src/demos/react-spring",
     "dev": "next",
     "start": "next start",
     "build": "next build",
     "prettier:write": "prettier --write 'src/**/*'",
     "prettier:check": "prettier --check .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && yarn prettier:write",
+    "submodule:init": "git submodule init && git submodule update",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx && yarn check-types && yarn prettier:check"
   },
   "husky": {
@@ -64,6 +68,7 @@
     "prettier": "^1.18.2",
     "pretty-quick": "^1.10.0",
     "recrawl": "^2.0.1",
+    "recursive-copy-cli": "^1.0.16",
     "typescript": "^4.2.3"
   }
 }
