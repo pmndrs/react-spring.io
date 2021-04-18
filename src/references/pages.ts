@@ -70,6 +70,10 @@ export const PAGES: Page[] = [
             url: '/components/spring',
           },
           {
+            title: 'Spring Context',
+            url: '/components/spring-context',
+          },
+          {
             title: 'Trail',
             url: '/components/trail',
           },
