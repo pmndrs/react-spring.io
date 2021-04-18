@@ -32,7 +32,7 @@
   },
   "scripts": {
     "prebuild": "rm -rf react-spring",
-    "postinstall": "yarn submodule:init && yarn submodule:update && yarn copy:spring-demos",
+    "postinstall": "yarn submodule:init && yarn submodule:update && yarn copy:spring-demos && prettier:write",
     "copy:spring-demos": "rm -rf ./src/demos && cd ./src && mkdir demos && cd ../ && recursive-copy ./react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css' '**/*.ts' && rm -rf ./src/demos/react-spring",
     "dev": "next",
     "start": "next start",
