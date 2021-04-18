@@ -66,6 +66,10 @@ export const PAGES: Page[] = [
         title: 'Render Props',
         routes: [
           {
+            title: 'Parallax',
+            url: '/components/parallax',
+          },
+          {
             title: 'Spring',
             url: '/components/spring',
           },
