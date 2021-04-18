@@ -1,0 +1,3 @@
+[submodule "src/demos/react-spring"]
+	path = src/demos/react-spring
+	url = https://github.com/pmndrs/react-spring

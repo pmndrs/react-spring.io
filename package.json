@@ -28,7 +28,7 @@
     "styled-components": "^5.2.3"
   },
   "scripts": {
-    "postinstall": "cd ./src && mkdir demos && cd demos && git clone https://github.com/pmndrs/react-spring & cd ../../",
+    "postinstall": "rm -rf ./src/demos && cd ./src && mkdir demos && cd demos && git clone https://github.com/pmndrs/react-spring & cd ../../",
     "copy:spring-demos": "recursive-copy ./src/demos/react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css' '**/*.ts' && rm -rf ./src/demos/react-spring",
     "dev": "next",
     "start": "next start",

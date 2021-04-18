@@ -1,3 +1,14 @@
+import { DemoGrid } from 'components/Demo/DemoGrid'
+import { Demo } from 'components/Demo/Demo'
+
+import AnimatedAutoDemo from 'demos/animating-auto/src/App'
+import CardDemo from 'demos/card/src/App'
+import CSSDemo from 'demos/css-keyframes/src/App'
+import FlipCardDemo from 'demos/flip-card/src/App'
+import SlideDemo from 'demos/slide/src/App'
+import SVGFilterDemo from 'demos/svg-filter/src/App'
+import TreeDemo from 'demos/tree/src/App'
+
 # useSpring
 
 ## Overview
@@ -111,3 +122,27 @@ useSpring(() => ({
 ```
 
 ## Demos
+
+<DemoGrid>
+  <Demo title="Animating Auto">
+    <AnimatedAutoDemo />
+  </Demo>
+  <Demo title="Card">
+    <CardDemo />
+  </Demo>
+  <Demo title="CSS Keyframes">
+    <CSSDemo />
+  </Demo>
+  <Demo title="Flip Card">
+    <FlipCardDemo />
+  </Demo>
+  <Demo title="Slide">
+    <SlideDemo />
+  </Demo>
+  <Demo title="SVG Filter">
+    <SVGFilterDemo />
+  </Demo>
+  <Demo title="Tree">
+    <TreeDemo />
+  </Demo>
+</DemoGrid>

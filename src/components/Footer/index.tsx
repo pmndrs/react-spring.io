@@ -9,13 +9,26 @@ export default function Footer() {
         <h1>✌️</h1>
         <ul>
           <li>
-            <a href="https://github.com/react-spring/react-spring">github</a>
+            <a
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              href="https://github.com/react-spring/react-spring">
+              github
+            </a>
           </li>
           <li>
-            <a href="https://www.npmjs.com/package/react-spring">npm</a>
+            <a
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              href="https://www.npmjs.com/package/react-spring">
+              npm
+            </a>
           </li>
           <li>
-            <a href="https://github.com/react-spring/react-spring/issues">
+            <a
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              href="https://github.com/react-spring/react-spring/issues">
               contact
             </a>
           </li>
