@@ -1,3 +1,10 @@
+import { DemoGrid } from 'components/Demo/DemoGrid'
+import { Demo } from 'components/Demo/Demo'
+
+import CardStackDemo from 'demos/cards-stack/src/App'
+import DraggableListDemo from 'demos/draggable-list/src/App'
+import ViewpagerDemo from 'demos/viewpager/src/App'
+
 # useSprings
 
 ## Overview
@@ -45,3 +52,15 @@ return springs.map(styles => <animated.div style={styles} />)
 All properties documented in the [common props](/common/props) apply.
 
 ## Demos
+
+<DemoGrid>
+  <Demo title="Card Stack">
+    <CardStackDemo />
+  </Demo>
+  <Demo title="Draggable List">
+    <DraggableListDemo />
+  </Demo>
+  <Demo title="Viewpager">
+    <ViewpagerDemo />
+  </Demo>
+</DemoGrid>
