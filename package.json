@@ -9,11 +9,14 @@
     "@mdx-js/react": "^1.6.22",
     "@next/mdx": "^10.1.3",
     "clsx": "^1.1.1",
+    "lodash-es": "^4.17.21",
+    "lorem-ipsum": "^2.0.3",
     "next": "^10.1.3",
     "next-seo": "^4.23.0",
     "prism-react-renderer": "^1.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
     "react-lazyload": "^3.2.0",
     "react-live": "^2.2.3",
     "react-scroll-percentage": "^4.2.0",
@@ -28,7 +31,8 @@
     "styled-components": "^5.2.3"
   },
   "scripts": {
-    "postinstall": "yarn submodule:init && yarn copy:spring-demos",
+    "prebuild": "rm -rf react-spring",
+    "postinstall": "yarn submodule:init && yarn submodule:update && yarn copy:spring-demos",
     "copy:spring-demos": "rm -rf ./src/demos && cd ./src && mkdir demos && cd ../ && recursive-copy ./react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css' '**/*.ts' && rm -rf ./src/demos/react-spring",
     "dev": "next",
     "start": "next start",
@@ -36,6 +40,7 @@
     "prettier:write": "prettier --write 'src/**/*'",
     "prettier:check": "prettier --check .",
     "submodule:init": "git submodule init && git submodule update",
+    "submodule:update": "git submodule foreach git pull origin master",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && yarn prettier:write",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx && yarn check-types && yarn prettier:check"
   },
