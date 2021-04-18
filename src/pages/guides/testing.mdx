@@ -25,8 +25,6 @@ To make sure Jest picks up the CJS file instead of the ESM file, add this the th
 module.exports = {
   moduleNameMapper: {
     'react-spring': '<rootDir>/node_modules/react-spring/web.cjs',
-    'react-spring/renderprops':
-      '<rootDir>/node_modules/react-spring/renderprops.cjs',
   },
 }
 ```
@@ -37,8 +35,19 @@ Or if you prefer to do it in `package.json`:
 "jest": {
   "moduleNameMapper": {
     "react-spring": "<rootDir>/node_modules/react-spring/web.cjs",
-    "react-spring/renderprops": "<rootDir>/node_modules/react-spring/renderprops.cjs"
   }
+}
+```
+
+#### React Native
+
+If you are using React Native and are importing from `@react-spring/native`, then you'll also need to map this module to the CJS file.
+
+```js
+module.exports = {
+  moduleNameMapper: {
+    '@react-spring/native': '<rootDir>/node_modules/react-spring/native.cjs',
+  },
 }
 ```
 
@@ -49,7 +58,7 @@ In `Thing.test.js` copy the following (Notice we are using Enzyme for this examp
 ```js
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Spring, animated } from 'react-spring/renderprops'
+import { Spring, animated } from 'react-spring'
 
 const Thing = () => (
   <Spring native from={{ opacity: 0 }} to={{ opacity: 1 }}>
