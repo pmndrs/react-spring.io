@@ -28,13 +28,14 @@
     "styled-components": "^5.2.3"
   },
   "scripts": {
-    "postinstall": "rm -rf ./src/demos && cd ./src && mkdir demos && cd demos && git clone https://github.com/pmndrs/react-spring & cd ../../",
-    "copy:spring-demos": "recursive-copy ./src/demos/react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css' '**/*.ts' && rm -rf ./src/demos/react-spring",
+    "postinstall": "yarn submodule:init && yarn copy:spring-demos",
+    "copy:spring-demos": "rm -rf ./src/demos && cd ./src && mkdir demos && cd ../ && recursive-copy ./react-spring/demo/src/sandboxes ./src/demos -f '**/*.tsx' '**/*.css' '**/*.ts' && rm -rf ./src/demos/react-spring",
     "dev": "next",
     "start": "next start",
     "build": "next build",
     "prettier:write": "prettier --write 'src/**/*'",
     "prettier:check": "prettier --check .",
+    "submodule:init": "git submodule init && git submodule update",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && yarn prettier:write",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx && yarn check-types && yarn prettier:check"
   },
