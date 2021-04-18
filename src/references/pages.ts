@@ -52,6 +52,10 @@ export const PAGES: Page[] = [
             title: 'useSprings',
             url: '/hooks/use-springs',
           },
+          {
+            title: 'useTrail',
+            url: '/hooks/use-trail',
+          },
         ],
       },
       {
