@@ -1,15 +1,9 @@
-import { DemoGrid } from 'components/Demo/DemoGrid'
-import { Demo } from 'components/Demo/Demo'
-
-import GooBobsDemo from 'demos/goo-blobs/src/App'
-import TrailDemo from 'demos/trail/src/App'
-
-# useTrail
+# Trail
 
 ## Overview
 
 ```js
-import { useTrail, animated } from 'react-spring'
+import { Trail, animated } from 'react-spring'
 ```
 
 Creates multiple springs with a single config, each spring will follow the previous one. Use it for staggered animations.
@@ -19,7 +13,9 @@ Creates multiple springs with a single config, each spring will follow the previ
 If you re-render the component with changed props, the animation will update.
 
 ```jsx
-const trail = useTrail(amount, { opacity: 1 })
+<Trail items={items} opacity={1}>
+    {...}
+</Trail>
 ```
 
 ### Or: pass a function that returns values, and update using "set"
@@ -27,12 +23,16 @@ const trail = useTrail(amount, { opacity: 1 })
 You will get an API object back. It will not cause the component to render like an overwrite would (the animation still executes of course). Handling updates like this is useful for fast-occurring updates, and you should generally prefer it as it's more powerful. Further documentation can be found in [Imperatives & Refs](http://localhost:3000/common/imperatives-and-refs#api-methods)
 
 ```jsx
-const [trail, api] = useTrail(amount, () => ({ opacity: 1 }))
+const springRef = new SpringRef()
+
+<Trail ref={springRef} items={items} opacity={1}>
+    {...}
+</Trail>
 
 // Update trail
-api.start({ opacity: 0 })
+springRef.start({ opacity: 0 })
 // Stop trail
-api.stop()
+springRef.stop()
 ```
 
 ### Finally: distribute animated props among the view
@@ -40,20 +40,9 @@ api.stop()
 The return value is an array containing animated props.
 
 ```jsx
-return trail.map(styles => <animated.div style={styles} />)
+item => styles => <animated.div style={styles}>{item.text}</animated.div>
 ```
 
 ## Properties
 
 All properties of the [shared-api](/docs/hooks/api) apply.
-
-## Demos
-
-<DemoGrid>
-  <Demo title="Goo Blobs">
-    <GooBobsDemo />
-  </Demo>
-  <Demo title="Trail">
-    <TrailDemo />
-  </Demo>
-</DemoGrid>

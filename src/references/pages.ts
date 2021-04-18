@@ -56,15 +56,23 @@ export const PAGES: Page[] = [
             title: 'useTrail',
             url: '/hooks/use-trail',
           },
+          {
+            title: 'useTransition',
+            url: '/hooks/use-transition',
+          },
         ],
       },
       {
         title: 'Render Props',
         routes: [
-          // {
-          //   title: 'useSpring',
-          //   url: '/hooks/usespring',
-          // },
+          {
+            title: 'Spring',
+            url: '/components/spring',
+          },
+          {
+            title: 'Trail',
+            url: '/components/trail',
+          },
         ],
       },
     ],

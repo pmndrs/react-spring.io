@@ -4,6 +4,7 @@ import {
   useState,
   useLayoutEffect,
   useCallback,
+  PureComponent,
 } from 'react'
 import {
   useSpring,
@@ -12,6 +13,8 @@ import {
   useChain,
   useSpringRef,
   useTransition,
+  Spring,
+  SpringRef,
 } from '@react-spring/web'
 import { mdx } from '@mdx-js/react'
 import useMeasure from 'react-use-measure'
@@ -70,6 +73,8 @@ const springScope = {
   useTransition,
   config,
   animated,
+  Spring,
+  SpringRef,
 }
 
 const reactScope = {
@@ -78,6 +83,7 @@ const reactScope = {
   useState,
   useLayoutEffect,
   useCallback,
+  PureComponent,
 }
 
 const utilityScope = {

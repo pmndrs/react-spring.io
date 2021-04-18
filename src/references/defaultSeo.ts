@@ -2,7 +2,6 @@ export const DEFAULT_SEO = {
   title: 'react-spring',
   description:
     'Bring your components to life with simple spring animation primitives for React',
-  titleTemplate: '%s - react-spring',
   openGraph: {
     type: 'website',
     locale: 'en_GB',
