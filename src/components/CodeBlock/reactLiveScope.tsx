@@ -92,6 +92,28 @@ const utilityScope = {
 }
 
 const dataScope = {
+  NUM_TRANS: [
+    {
+      fig: 1,
+      op: { range: [0.75, 1.0], output: [0, 1] },
+      trans: { range: [0.75, 1.0], output: [-40, 0], extrapolate: 'clamp' },
+    },
+    {
+      fig: 2,
+      op: { range: [0.25, 0.5], output: [0, 1] },
+      trans: { range: [0.25, 0.5], output: [-40, 0], extrapolate: 'clamp' },
+    },
+    {
+      fig: 3,
+      op: { range: [0.0, 0.25], output: [0, 1] },
+      trans: { range: [0.0, 0.25], output: [-40, 0], extrapolate: 'clamp' },
+    },
+    {
+      fig: 4,
+      op: { range: [0.5, 0.75], output: [0, 1] },
+      trans: { range: [0.5, 0.75], output: [-40, 0], extrapolate: 'clamp' },
+    },
+  ],
   POINTS:
     '22.5 35.25 8.68704657 42.5118994 11.3250859 27.1309497 0.150171867 16.2381006 15.5935233 13.9940503 22.5 0 29.4064767 13.9940503 44.8498281 16.2381006 33.6749141 27.1309497 36.3129534 42.5118994',
 }

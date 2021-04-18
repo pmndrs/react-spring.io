@@ -1,0 +1,192 @@
+import { DemoGrid } from 'components/Demo/DemoGrid'
+import { Demo } from 'components/Demo/Demo'
+
+import ImageFadeDemo from 'demos/image-fade/src/App'
+import ListReorderingDemo from 'demos/list-reordering/src/App'
+import MasonryDemo from 'demos/masonry/src/App'
+import MultistageTransitionDemo from 'demos/multistage-transition/src/App'
+import NotificationHubDemo from 'demos/notification-hub/src/App'
+import SimpleTransitionDemo from 'demos/simple-transition/src/App'
+
+# useTransition
+
+## Overview
+
+```js
+import { useTransition, animated } from 'react-spring'
+```
+
+An animated TransitionGroup. Feed it your items, keys (which can be `null` if items are atomic), and lifecycles. Whenever items are added or removed, it will animate these changes.
+
+### You can transition arrays
+
+```jsx render=true edit=true
+function TransitionArray() {
+  const [items, setItems] = useState(NUM_TRANS)
+
+  const transitions = useTransition(items, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    delay: 200,
+    config: config.molasses,
+    onRest: () => setItems([]),
+  })
+
+  useEffect(() => {
+    if (items.length === 0) {
+      setTimeout(() => {
+        setItems(NUM_TRANS)
+      }, 2000)
+    }
+  }, [items])
+
+  return (
+    <div style={{ display: 'flex' }}>
+      {transitions(({ opacity }, item) => (
+        <animated.div
+          style={{
+            opacity: opacity.to(item.op),
+            transform: opacity
+              .to(item.trans)
+              .to(y => `translate3d(0,${y}px,0)`),
+          }}>
+          {item.fig}
+        </animated.div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Toggle between components
+
+```jsx render=true edit=true
+function Toggle() {
+  const [toggle, set] = useState(false)
+  const transitions = useTransition(toggle, {
+    from: { position: 'absolute', opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    reverse: toggle,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!toggle),
+  })
+  return transitions(({ opacity }, item) =>
+    item ? (
+      <animated.div
+        style={{
+          position: 'absolute',
+          opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }),
+        }}>
+        😄
+      </animated.div>
+    ) : (
+      <animated.div
+        style={{
+          position: 'absolute',
+          opacity: opacity.to({ range: [1.0, 0.0], output: [0, 1] }),
+        }}>
+        🤪
+      </animated.div>
+    )
+  )
+}
+```
+
+### Mount/Unmount single-component reveals
+
+```jsx render=true edit=true
+function Mount() {
+  const [show, set] = useState(false)
+  const transitions = useTransition(show, {
+    from: { position: 'absolute', opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    reverse: show,
+    delay: 200,
+    config: config.molasses,
+    onRest: () => set(!show),
+  })
+  return transitions(
+    (styles, item) => item && <animated.div style={styles}>✌️</animated.div>
+  )
+}
+```
+
+## Properties
+
+All properties of the [shared-api](/common/props) apply.
+
+| Property    | Type              | Description                                                                         |
+| ----------- | ----------------- | ----------------------------------------------------------------------------------- |
+| initial     | obj/fn            | Initial (first time) base values, optional (can be null)                            |
+| from        | obj/fn            | Base values, optional                                                               |
+| enter       | obj/fn/array(obj) | Styles apply for entering elements                                                  |
+| update      | obj/fn/array(obj) | Styles apply for updating elements (you can update the hook itself with new values) |
+| leave       | obj/fn/array(obj) | Styles apply for leaving elements                                                   |
+| trail       | number            | Delay in ms before the animation starts, adds up for each enter/update and leave    |
+| unique      | bool/fn           | If this is true, items going in and out with the same key will be re-used           |
+| reset       | bool/fn           | Used in combination with "unique" and makes entering items start from scratch       |
+| onDestroyed | fn                | Called when objects have disappeared for good                                       |
+
+## Additional notes
+
+### Multi-stage transitions
+
+The initial/from/enter/update/leave lifecycles can be objects, arrays or functions. When you provide a function you have access to individual items. The function is allowed to return plain objects, or either an array or a function for multi-stage transitions. When you provide a plain array you also can form a basic multi-stage transition (without access to the item).
+
+```jsx
+useTransition(items, {
+  enter: item => [
+    { opacity: item.opacity, height: item.height },
+    { life: '100%' },
+  ],
+  leave: item => async (next, cancel) => {
+    await next({ life: '0%' })
+    await next({ opacity: 0 })
+    await next({ height: 0 })
+  },
+  from: { life: '0%', opacity: 0, height: 0 },
+})
+```
+
+### Transitioning between routes
+
+```jsx
+const location = useLocation()
+const transitions = useTransition(location, { ... })
+return transitions((props, item) => (
+  <animated.div style={props}>
+    <Switch location={item}>
+      <Route path="/a" component={A} />
+      <Route path="/b" component={B} />
+      <Route path="/c" component={C} />
+    </Switch>
+  </animated.div>
+))
+```
+
+## Demos
+
+<DemoGrid>
+  <Demo title="Image Fade">
+    <ImageFadeDemo />
+  </Demo>
+  <Demo title="List Reordering">
+    <ListReorderingDemo />
+  </Demo>
+  <Demo title="Masonry">
+    <MasonryDemo />
+  </Demo>
+  <Demo title="Multistage Transition">
+    <MultistageTransitionDemo />
+  </Demo>
+  <Demo title="Notification Hub">
+    <NotificationHubDemo />
+  </Demo>
+  <Demo title="Simple Transition">
+    <SimpleTransitionDemo />
+  </Demo>
+</DemoGrid>
