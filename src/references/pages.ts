@@ -81,10 +81,14 @@ export const PAGES: Page[] = [
             title: 'Trail',
             url: '/components/trail',
           },
+          {
+            title: 'Transition',
+            url: '/components/transition',
+          },
         ],
       },
       {
-        title: 'Classes',
+        title: 'Additional Classes',
         routes: [{ title: 'Spring Value', url: '/classes/spring-value' }],
       },
     ],

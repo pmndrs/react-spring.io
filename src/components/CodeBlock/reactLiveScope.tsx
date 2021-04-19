@@ -15,6 +15,7 @@ import {
   useTransition,
   Spring,
   SpringRef,
+  Transition,
 } from '@react-spring/web'
 import { mdx } from '@mdx-js/react'
 import useMeasure from 'react-use-measure'
@@ -75,6 +76,7 @@ const springScope = {
   animated,
   Spring,
   SpringRef,
+  Transition,
 }
 
 const reactScope = {

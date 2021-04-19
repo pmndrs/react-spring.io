@@ -1,19 +1,9 @@
-import { DemoGrid } from 'components/Demo/DemoGrid'
-import { Demo } from 'components/Demo/Demo'
-
-import ImageFadeDemo from 'demos/image-fade/src/App'
-import ListReorderingDemo from 'demos/list-reordering/src/App'
-import MasonryDemo from 'demos/masonry/src/App'
-import MultistageTransitionDemo from 'demos/multistage-transition/src/App'
-import NotificationHubDemo from 'demos/notification-hub/src/App'
-import SimpleTransitionDemo from 'demos/simple-transition/src/App'
-
-# useTransition
+# Transition
 
 ## Overview
 
 ```js
-import { useTransition, animated } from 'react-spring'
+import { Transition, animated } from 'react-spring'
 ```
 
 An animated TransitionGroup. Feed it your items and lifecycles. Whenever items are added or removed, it will animate these changes.
@@ -21,97 +11,145 @@ An animated TransitionGroup. Feed it your items and lifecycles. Whenever items a
 ### You can transition arrays
 
 ```jsx render=true edit=true
-function TransitionArray() {
-  const [items, setItems] = useState(NUM_TRANS)
+class TransitionArray extends PureComponent {
+  constructor() {
+    super()
 
-  const transitions = useTransition(items, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    delay: 200,
-    config: config.molasses,
-    onRest: () => setItems([]),
-  })
+    this.state = {
+      items: NUM_TRANS,
+    }
+  }
 
-  useEffect(() => {
-    if (items.length === 0) {
+  componentDidUpdate(_, prevState) {
+    const { items: currItems } = this.state
+    const { items: prevItems } = prevState
+
+    if (currItems.length === 0 && prevItems.length !== currItems.length) {
       setTimeout(() => {
-        setItems(NUM_TRANS)
+        this.setState({
+          items: NUM_TRANS,
+        })
       }, 2000)
     }
-  }, [items])
+  }
 
-  return (
-    <div style={{ display: 'flex' }}>
-      {transitions(({ opacity }, item) => (
-        <animated.div
-          style={{
-            opacity: opacity.to(item.op),
-            transform: opacity
-              .to(item.trans)
-              .to(y => `translate3d(0,${y}px,0)`),
-          }}>
-          {item.fig}
-        </animated.div>
-      ))}
-    </div>
-  )
+  render() {
+    return (
+      <div style={{ display: 'flex' }}>
+        <Transition
+          items={this.state.items}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}
+          delay={200}
+          config={config.molasses}
+          onRest={() => this.setState({ items: [] })}>
+          {({ opacity }, item) => (
+            <animated.div
+              style={{
+                opacity: opacity.to(item.op),
+                transform: opacity
+                  .to(item.trans)
+                  .to(y => `translate3d(0,${y}px,0)`),
+              }}>
+              {item.fig}
+            </animated.div>
+          )}
+        </Transition>
+      </div>
+    )
+  }
 }
 ```
 
 ### Toggle between components
 
 ```jsx render=true edit=true
-function Toggle() {
-  const [toggle, set] = useState(false)
-  const transitions = useTransition(toggle, {
-    from: { position: 'absolute', opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    reverse: toggle,
-    delay: 200,
-    config: config.molasses,
-    onRest: () => set(!toggle),
-  })
-  return transitions(({ opacity }, item) =>
-    item ? (
-      <animated.div
-        style={{
-          position: 'absolute',
-          opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }),
-        }}>
-        😄
-      </animated.div>
-    ) : (
-      <animated.div
-        style={{
-          position: 'absolute',
-          opacity: opacity.to({ range: [1.0, 0.0], output: [0, 1] }),
-        }}>
-        🤪
-      </animated.div>
+class Toggle extends PureComponent {
+  constructor() {
+    super()
+
+    this.state = {
+      toggle: false,
+    }
+  }
+
+  render() {
+    const { toggle } = this.state
+    return (
+      <Transition
+        items={toggle}
+        from={{ opacity: 0 }}
+        enter={{ opacity: 1 }}
+        leave={{ opacity: 0 }}
+        reverse={toggle}
+        delay={200}
+        config={config.molasses}
+        onRest={() =>
+          this.setState({
+            toggle: !toggle,
+          })
+        }>
+        {({ opacity }, item) =>
+          item ? (
+            <animated.div
+              style={{
+                position: 'absolute',
+                opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }),
+              }}>
+              😄
+            </animated.div>
+          ) : (
+            <animated.div
+              style={{
+                position: 'absolute',
+                opacity: opacity.to({ range: [1.0, 0.0], output: [0, 1] }),
+              }}>
+              🤪
+            </animated.div>
+          )
+        }
+      </Transition>
     )
-  )
+  }
 }
 ```
 
 ### Mount/Unmount single-component reveals
 
 ```jsx render=true edit=true
-function Mount() {
-  const [show, set] = useState(false)
-  const transitions = useTransition(show, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    reverse: show,
-    delay: 200,
-    config: config.molasses,
-    onRest: () => set(!show),
-  })
-  return transitions(
-    (styles, item) => item && <animated.div style={styles}>✌️</animated.div>
-  )
+class Mount extends PureComponent {
+  constructor() {
+    super()
+
+    this.state = {
+      show: false,
+    }
+  }
+
+  render() {
+    const { show } = this.state
+
+    return (
+      <Transition
+        items={show}
+        from={{ opacity: 0 }}
+        enter={{ opacity: 1 }}
+        leave={{ opacity: 0 }}
+        reverse={show}
+        delay={200}
+        config={config.molasses}
+        onRest={() =>
+          this.setState({
+            show: !show,
+          })
+        }>
+        {(styles, item) =>
+          item && <animated.div style={styles}>✌️</animated.div>
+        }
+      </Transition>
+    )
+  }
 }
 ```
 
@@ -262,26 +300,3 @@ return transitions((props, item) => (
   </animated.div>
 ))
 ```
-
-## Demos
-
-<DemoGrid>
-  <Demo title="Image Fade">
-    <ImageFadeDemo />
-  </Demo>
-  <Demo title="List Reordering">
-    <ListReorderingDemo />
-  </Demo>
-  <Demo title="Masonry">
-    <MasonryDemo />
-  </Demo>
-  <Demo title="Multistage Transition">
-    <MultistageTransitionDemo />
-  </Demo>
-  <Demo title="Notification Hub">
-    <NotificationHubDemo />
-  </Demo>
-  <Demo title="Simple Transition">
-    <SimpleTransitionDemo />
-  </Demo>
-</DemoGrid>
