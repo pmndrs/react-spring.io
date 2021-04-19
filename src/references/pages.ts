@@ -89,7 +89,10 @@ export const PAGES: Page[] = [
       },
       {
         title: 'Additional Classes',
-        routes: [{ title: 'Spring Value', url: '/classes/spring-value' }],
+        routes: [
+          { title: 'Controller', url: '/classes/controller' },
+          { title: 'Spring Value', url: '/classes/spring-value' },
+        ],
       },
     ],
   },
