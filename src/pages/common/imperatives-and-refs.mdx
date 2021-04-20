@@ -94,7 +94,7 @@ Introducting `useSpringRef`! The library version of `useRef` to be used instead 
 const springRef = useSpringRef()
 
 const { size, ...rest } = useSpring({
-  ref: springApi,
+  ref: springRef,
   config: config.stiff,
   from: { size: '20%', background: 'hotpink' },
   to: {
