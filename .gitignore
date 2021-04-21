@@ -1,25 +1,24 @@
-# editor settings
-.vscode/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-.pnp
+/node_modules
+/src/examples
+/.pnp
 .pnp.js
-node_modules/
 
-# dependency lock files
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
+# testing
+/coverage
 
-# other
-.next/
+# production
+/build
+
+# misc
 .DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-build/
-dist/
-logs/
-out/
-tmp/
-
-# Spring demos from GITHUB
-src/demos
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
