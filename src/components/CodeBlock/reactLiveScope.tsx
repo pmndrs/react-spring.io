@@ -17,6 +17,7 @@ import {
   SpringRef,
   Transition,
 } from '@react-spring/web'
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { mdx } from '@mdx-js/react'
 import useMeasure from 'react-use-measure'
 // import VisibilitySensor from 'react-visibility-sensor'
@@ -77,6 +78,8 @@ const springScope = {
   Spring,
   SpringRef,
   Transition,
+  Parallax,
+  ParallaxLayer,
 }
 
 const reactScope = {
