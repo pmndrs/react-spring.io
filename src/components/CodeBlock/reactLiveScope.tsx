@@ -79,7 +79,7 @@ const springScope = {
   SpringRef,
   Transition,
   Parallax,
-  ParallaxLayer
+  ParallaxLayer,
 }
 
 const reactScope = {

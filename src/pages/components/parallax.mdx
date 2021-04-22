@@ -1,3 +1,9 @@
+import { DemoGrid } from 'components/Demo/DemoGrid'
+import { Demo } from 'components/Demo/Demo'
+
+import ParallaxVert from 'demos/parallax-vert/src/App'
+import Parallax from 'demos/parallax/src/App'
+
 # Parallax
 
 ## Overview
@@ -11,30 +17,28 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 **NOTE**: Currently, only `@react-spring/web` is supported.
 
 ```jsx render=true edit=true
-<Parallax pages={2} style={{top: "0", left: "0"}}>
-  <ParallaxLayer 
-    offset={0} 
-    speed={2.5} 
-    style={{display: "flex", justifyContent: "center", alignItems: "center"}}
-  >
+<Parallax pages={2} style={{ top: '0', left: '0' }}>
+  <ParallaxLayer
+    offset={0}
+    speed={2.5}
+    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
     <p>Scroll down</p>
   </ParallaxLayer>
 
-  <ParallaxLayer 
-    offset={1} 
-    speed={2} 
-    style={{backgroundColor: "#ff6d6d"}}
-  />
+  <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#ff6d6d' }} />
 
-  <ParallaxLayer 
-    offset={1} 
-    speed={0.5} 
-    style={{display: "flex", justifyContent: "center", alignItems: "center", color: "white"}}
-  >
+  <ParallaxLayer
+    offset={1}
+    speed={0.5}
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: 'white',
+    }}>
     <p>Scroll up</p>
   </ParallaxLayer>
 </Parallax>
-
 ```
 
 ## Parallax
@@ -64,4 +68,13 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 - The `offset` prop is where the layer will end up, not where it begins. For example, if a layer has an offset of `1.5`, it will be halfway down the second page (zero-indexed) when the second page completely fills the viewport.
 - The `speed` prop will affect the initial starting position of a layer, but not it's final `offset` position.
 
-## Demo
+## Demos
+
+<DemoGrid>
+  <Demo title="Parallax">
+    <Parallax />
+  </Demo>
+  <Demo title="Parallax Vert">
+    <ParallaxVert />
+  </Demo>
+</DemoGrid>
