@@ -43,12 +43,13 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 ## Parallax
 
-| Property    | Type         | Description                                                                      |
-| ----------- | ------------ | -------------------------------------------------------------------------------- |
-| pages       | number       | Total space of the container. Each page takes up 100% of the viewport.           |
-| config?     | SpringConfig | The spring behavior. Defaults to `config.slow` (see [configs](/common/configs)). |
-| scrolling?  | boolean      | Whether or not the content can be scrolled. Defaults to `true`.                  |
-| horizontal? | boolean      | Whether or not the content scrolls horizontally. Defaults to `false`.            |
+| Property    | Type          | Description                                                                      |
+| ----------- | ------------- | -------------------------------------------------------------------------------- |
+| pages       | number        | Total space of the container. Each page takes up 100% of the viewport.           |
+| config?     | SpringConfig  | The spring behavior. Defaults to `config.slow` (see [configs](/common/configs)). |
+| enabled?    | boolean       | Whether or not the content can be scrolled. Defaults to `true`.                  |
+| horizontal? | boolean       | Whether or not the container scrolls horizontally. Defaults to `false`.          |
+| innerStyle? | CSSProperties | CSS object to style the inner `Parallax` wrapper (not the scrollable container)  |
 
 ### `scrollTo`
 
@@ -57,11 +58,12 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 ## ParallaxLayer
 
-| Property | Type   | Description                                                                                                                                       |
-| -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| factor?  | number | Size of the layer relative to page size (eg: `1` => 100%, `1.5` => 150%, etc). Defaults to `1`                                                    |
-| offset?  | number | The offset of the layer when it's corresponding page is fully in view (eg: `0` => top of 1st page, `1` => top of 2nd page, etc ). Defaults to `0` |
-| speed?   | number | Rate at which the layer moves in relation to scroll. Can be positive or negative. Defaults to `0`                                                 |
+| Property    | Type    | Description                                                                                                                                        |
+| ----------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| factor?     | number  | Size of the layer relative to page size (eg: `1` => 100%, `1.5` => 150%, etc). Defaults to `1`.                                                    |
+| offset?     | number  | The offset of the layer when it's corresponding page is fully in view (eg: `0` => top of 1st page, `1` => top of 2nd page, etc ). Defaults to `0`. |
+| speed?      | number  | Rate at which the layer moves in relation to scroll. Can be positive or negative. Defaults to `0`.                                                 |
+| horizontal? | boolean | Whether or not the layer moves horizontally. Defaults to the `horizontal` value of `Parallax` (whose default is `false`).                          |
 
 ### Usage Notes
 
