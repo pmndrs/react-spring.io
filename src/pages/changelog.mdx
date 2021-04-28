@@ -343,6 +343,34 @@ spring.stop('opacity', 'width')
 spring.destroy()
 ```
 
+### Changes in `config.velocity`
+
+The calculation with `velocity` in `config` has been changed. Coming from v8,
+you need to multiply the value of `velocity` with `0.001` to keep the same
+behavior.
+
+So in v8 if the config was
+
+```js
+import { config } from 'react-spring'
+
+const modifiedConfig = {
+  ...config.stiff,
+  velocity: 5,
+}
+```
+
+then it needs to be changed into
+
+```js
+import { config } from 'react-spring'
+
+const modifiedConfig = {
+  ...config.stiff,
+  velocity: 0.005, // 5 * 0.001
+}
+```
+
 ## react-spring 8.0
 
 ### Breaking changes
