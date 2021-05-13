@@ -407,6 +407,7 @@ export const MARKDOWN = /* css */ `
 .markdown-body pre {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
   font-size: 12px;
+  overflow: auto;
 }
 
 .markdown-body pre {
