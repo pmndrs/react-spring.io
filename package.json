@@ -31,7 +31,8 @@
     "remark-autolink-headings": "^6.0.1",
     "remark-slug": "^6.0.0",
     "resize-observer-polyfill": "^1.5.1",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "vec-la": "^1.5.0"
   },
   "scripts": {
     "prebuild": "rm -rf react-spring",

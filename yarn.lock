@@ -465,7 +465,7 @@
     "@react-spring/shared" "~9.2.0"
     "@react-spring/types" "~9.2.0"
 
-"@react-spring/parallax@^9.2.1":
+"@react-spring/parallax@*":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@react-spring/parallax/-/parallax-9.2.1.tgz#cdea18872bcf90856fe76b7426bf51ed2156ba2a"
   integrity sha512-MCY8dw3YTjyIsHV0D4wsUQv5ZRPIvn+DGDdQB5xavrCIM1CQMGERAIVJBoYXoc87A9obSZACs45oReukK3vwUw==
@@ -4800,6 +4800,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+vec-la@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/vec-la/-/vec-la-1.5.0.tgz#cfedcac1028dad156c373dbb87e114b072d05cd8"
+  integrity sha512-XKjE9qYtOgpAS1xRMTqeII7oFdolanVqrzl2KngiH8xiExCdWDLOYDwSLKHkmXadbU+JSP9Poy0v+xmYlkxUAg==
 
 vfile-location@^3.0.0, vfile-location@^3.2.0:
   version "3.2.0"

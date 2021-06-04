@@ -1,3 +1,5 @@
 .next
 node_modules
 react-spring
+*.lock
+.DS_Store
