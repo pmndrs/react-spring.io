@@ -3,6 +3,7 @@ import { Demo } from 'components/Demo/Demo'
 
 import ParallaxVert from 'demos/parallax-vert/src/App'
 import Parallax from 'demos/parallax/src/App'
+import ParallaxSticky from 'demos/parallax-sticky/src/App'
 
 # Parallax
 
@@ -71,7 +72,6 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 | horizontal? | boolean      | Whether or not the layer moves horizontally. Defaults to the `horizontal` value of `Parallax` (whose default is `false`).                          |
 | sticky?     | StickyConfig | If set, the layer will be 'sticky' between the two offsets. All other props are ignored. Default: `{start?: number = 0, end?: number = start + 1}` |
 
-
 ### Usage Notes
 
 - The `offset` prop is where the layer will end up, not where it begins. For example, if a layer has an offset of `1.5`, it will be halfway down the second page (zero-indexed) when the second page completely fills the viewport.
@@ -86,5 +86,8 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
   </Demo>
   <Demo title="Parallax Vert">
     <ParallaxVert />
+  </Demo>
+  <Demo title="Parallax Sticky">
+    <ParallaxSticky />
   </Demo>
 </DemoGrid>
