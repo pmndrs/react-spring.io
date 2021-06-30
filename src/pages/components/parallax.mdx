@@ -56,6 +56,11 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 `Parallax` also has a `scrollTo` function for click-to-scroll. It takes one paramater: the number of the page to scroll to
 (Pages are zero-indexed so `scrollTo(0)` will scroll to the first page, etc).
 
+### Usage Notes
+
+- `Parallax` is a scrollable container so all scroll events are fired from the container itself -- listening for scroll on `window` won't work.
+- `scrollTo` is a method on `Parallax` -- you access it with a `ref` and then `ref.current.scrollTo(pageNumber)`.
+
 ## ParallaxLayer
 
 | Property    | Type         | Description                                                                                                                                        |
